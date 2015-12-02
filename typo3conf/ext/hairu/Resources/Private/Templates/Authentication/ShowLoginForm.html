@@ -1,0 +1,48 @@
+{namespace h=PAGEmachine\Hairu\ViewHelpers}
+
+<f:layout name="Default"/>
+<f:section name="main">
+
+<f:flashMessages renderMode="div"/>
+
+<h:loginForm
+  userStoragePageUid="{storagePid}"
+  pageUid="{settings.login.page}"
+  method="post"
+  class="login form-inline">
+
+  <input type="hidden" name="redirect_url" value="{formData.redirect_url}"/>
+
+  <f:render partial="Form/TextField" arguments="{
+    fieldName: 'user',
+    fieldType: 'text',
+    fieldValue: formData.user,
+    translationKey: 'username',
+    defaultLabel: 'Username'
+  }"/>
+
+  <f:render partial="Form/TextField" arguments="{
+    fieldName: 'pass',
+    fieldType: 'password',
+    translationKey: 'password',
+    defaultLabel: 'Password',
+    additionalAttributes: {data-rsa-encryption: ''}
+  }"/>
+
+  <f:render partial="Form/SubmitButton" arguments="{
+    translationKey: 'action.login',
+    defaultLabel: 'Log in'
+  }"/>
+
+  <p>
+    <f:link.action
+      action="showPasswordResetForm"
+      arguments="{start: 1}"
+      pageUid="{settings.passwordReset.page}">
+      <f:translate key="action.resetPassword">Reset password</f:translate>
+    </f:link.action>
+  </p>
+
+</h:loginForm>
+
+</f:section>

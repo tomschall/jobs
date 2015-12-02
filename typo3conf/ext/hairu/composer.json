@@ -1,0 +1,35 @@
+{
+  "name": "pagemachine/hairu",
+  "description": "Flexible login/logout form based on Extbase/Fluid",
+  "keywords": ["typo3", "felogin", "extbase", "fluid"],
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Mathias Brodala",
+      "email": "mbrodala@pagemachine.de"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/pagemachine/hairu/issues",
+    "source": "https://github.com/pagemachine/hairu"
+  },
+  "type": "typo3-cms-extension",
+  "require": {
+    "php": ">=5.3"
+  },
+  "require-dev": {
+    "namelesscoder/typo3-repository-client": "~1.0.2"
+  },
+  "replace": {
+    "hairu": "self.version",
+    "typo3-ter/hairu": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "PAGEmachine\\Hairu\\": "Classes/"
+    }
+  }
+}

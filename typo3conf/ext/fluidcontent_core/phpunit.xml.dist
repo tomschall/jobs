@@ -1,0 +1,12 @@
+<phpunit bootstrap="Tests/bootstrap.php">
+        <testsuites>
+                <testsuite name="EXT:fluidcontent_core">
+                        <directory>Tests/</directory>
+                </testsuite>
+        </testsuites>
+		<filter>
+				<whitelist>
+						<directory>Classes/</directory>
+				</whitelist>
+		</filter>
+</phpunit>

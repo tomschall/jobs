@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-11-24T09:48:09Z" product-name="jobs">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="short_cut_advertisement_type.description">
+				<source>shortCutAdvertisementType</source>
+			</trans-unit>
+			<trans-unit id="price_member.description">
+				<source>priceMember</source>
+			</trans-unit>
+			<trans-unit id="price_non_member.description">
+				<source>priceNonMember</source>
+			</trans-unit>
+			<trans-unit id="price_insos_member.description">
+				<source>priceInsosMember</source>
+			</trans-unit>
+			<trans-unit id="day_to_renew.description">
+				<source>dayToRenew</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,21 @@
+<div id="headerAndBody">
+  <div id="header">
+    <div id="headerInner">
+      <f:format.html parseFuncTSPath="">{headerLogo}</f:format.html>
+      <f:format.html parseFuncTSPath="">{headerNavi}</f:format.html>
+      <f:format.html parseFuncTSPath="">{mainNavi}</f:format.html>
+    </div>
+  </div>
+  <div id="printHeader" style="display:none;">
+    <f:format.html parseFuncTSPath="">{printHeader}</f:format.html>
+  </div>
+  <div id="body">
+    <f:render section="body" />	
+  </div>
+</div>
+<div id="footer">
+  <div id="footerInner">
+    <f:format.html parseFuncTSPath="">{footerText}</f:format.html>
+    <f:format.html parseFuncTSPath="">{footerNavi}</f:format.html>
+  </div>
+</div>

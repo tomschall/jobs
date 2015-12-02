@@ -1,0 +1,47 @@
+
+<table class="tx-jobs" >
+	<tr>
+		<td>
+			<f:translate key="tx_jobs_domain_model_frontenduser.additive" />
+		</td>
+		<td>
+		{frontendUser.additive}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_jobs_domain_model_frontenduser.department" />
+		</td>
+		<td>
+		{frontendUser.department}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_jobs_domain_model_frontenduser.po_box" />
+		</td>
+		<td>
+		{frontendUser.poBox}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_jobs_domain_model_frontenduser.corporate" />
+		</td>
+		<td>
+				<f:image src="{frontendUser.corporate.originalResource.publicUrl}" width="200"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_jobs_domain_model_frontenduser.documents" />
+		</td>
+		<td>
+				<f:for each="{frontendUser.documents}" as="file" >
+					<a href="{file.originalResource.publicUrl}">
+						{file.originalResource.name}
+					</a>
+				</f:for>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,178 @@
+
+plugin.tx_jobs_jobregistration {
+	view {
+		templateRootPaths.0 = {$plugin.tx_jobs_jobregistration.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_jobs_jobregistration.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_jobs_jobregistration.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_jobs_jobregistration.persistence.storagePid}
+		storagePid = 111
+		recursive = 1
+		classes {
+			Sozialinfo\Jobs\Domain\Model\AdvertisementType {
+				newRecordStoragePid = 118
+			}
+			Sozialinfo\Jobs\Domain\Model\AreasOfWork {
+				newRecordStoragePid = 114
+			}
+			Sozialinfo\Jobs\Domain\Model\Canton {
+				newRecordStoragePid = 119
+			}
+			Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser {
+				newRecordStoragePid = 125
+			}
+			Sozialinfo\Jobs\Domain\Model\Country {
+				newRecordStoragePid = 121
+			}
+			Sozialinfo\Jobs\Domain\Model\EmploymentRelationship {
+				newRecordStoragePid = 115
+			}
+			Sozialinfo\Jobs\Domain\Model\FrontendUser {
+				newRecordStoragePid = 126
+				mapping {
+					tableName = fe_users
+				}
+			}
+			Sozialinfo\Jobs\Domain\Model\InsosMember {
+				newRecordStoragePid = 113
+			}
+			Sozialinfo\Jobs\Domain\Model\JobOffer {
+				newRecordStoragePid = 123
+			}
+			Sozialinfo\Jobs\Domain\Model\JobRequest {
+				newRecordStoragePid = 124
+			}
+			Sozialinfo\Jobs\Domain\Model\Position {
+				newRecordStoragePid = 116
+			}
+			Sozialinfo\Jobs\Domain\Model\Qualification {
+				newRecordStoragePid = 117
+			}
+			Sozialinfo\Jobs\Domain\Model\Region {
+				newRecordStoragePid = 120
+			}
+			Sozialinfo\Jobs\Domain\Model\SozialinfoMember {
+				newRecordStoragePid = 112
+			}
+			Sozialinfo\Jobs\Domain\Model\TypeOfInstitution {
+				newRecordStoragePid = 122
+			}
+		}
+	}
+}
+
+plugin.tx_jobs_jobuseradmin {
+	view {
+		templateRootPaths.0 = {$plugin.tx_jobs_jobuseradmin.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_jobs_jobuseradmin.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_jobs_jobuseradmin.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_jobs_jobuseradmin.persistence.storagePid}
+	}
+}
+
+plugin.tx_jobs_joboffers {
+	view {
+		templateRootPaths.0 = {$plugin.tx_jobs_joboffers.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_jobs_joboffers.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_jobs_joboffers.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_jobs_joboffers.persistence.storagePid}
+	}
+}
+
+plugin.tx_jobs_jobrequests {
+	view {
+		templateRootPaths.0 = {$plugin.tx_jobs_jobrequests.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_jobs_jobrequests.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_jobs_jobrequests.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_jobs_jobrequests.persistence.storagePid}
+	}
+}
+
+plugin.tx_jobs._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-jobs table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-jobs table th {
+		font-weight:bold;
+	}
+
+	.tx-jobs table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+
+)
+
+ # Module configuration
+module.tx_jobs_web_jobsadminjoboffers {
+	persistence {
+		storagePid = {$module.tx_jobs_adminjoboffers.persistence.storagePid}
+	}
+	view {
+		templateRootPaths.0 = {$module.tx_jobs_adminjoboffers.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_jobs_adminjoboffers.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_jobs_adminjoboffers.view.layoutRootPath}
+	}
+}
+
+ # Module configuration
+module.tx_jobs_web_jobsadminjobrequests {
+	persistence {
+		storagePid = {$module.tx_jobs_adminjobrequests.persistence.storagePid}
+	}
+	view {
+		templateRootPaths.0 = {$module.tx_jobs_adminjobrequests.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_jobs_adminjobrequests.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_jobs_adminjobrequests.view.layoutRootPath}
+	}
+}
+
+ # Module configuration
+module.tx_jobs_web_jobsadminfrontendusers {
+	persistence {
+		storagePid = {$module.tx_jobs_adminfrontendusers.persistence.storagePid}
+	}
+	view {
+		templateRootPaths.0 = {$module.tx_jobs_adminfrontendusers.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_jobs_adminfrontendusers.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_jobs_adminfrontendusers.view.layoutRootPath}
+	}
+}
+
+ # Module configuration
+module.tx_jobs_web_jobsadmincompanyfrontendusers {
+	persistence {
+		storagePid = {$module.tx_jobs_admincompanyfrontendusers.persistence.storagePid}
+	}
+	view {
+		templateRootPaths.0 = {$module.tx_jobs_admincompanyfrontendusers.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_jobs_admincompanyfrontendusers.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_jobs_admincompanyfrontendusers.view.layoutRootPath}
+	}
+}

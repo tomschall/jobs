@@ -1,0 +1,48 @@
+# customsubcategory=login=Login
+# customsubcategory=reset=Password reset
+
+plugin.tx_hairu {
+  view {
+    // cat=plugin.tx_hairu/file; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:hairu/Resources/Private/Templates/
+    // cat=plugin.tx_hairu/file; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:hairu/Resources/Private/Partials/
+    // cat=plugin.tx_hairu/file; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:hairu/Resources/Private/Layouts/
+  }
+
+  persistence {
+    // cat=plugin.tx_hairu//storagePid; type=int+; label=Default storage PID
+    storagePid =
+  }
+
+  settings {
+    // cat=plugin.tx_hairu//dateFormat; type=string; label=Date format: Format for date output (PHP date/strftime), value of TYPO3_CONF_VARS/SYS/ddmmyy if empty
+    dateFormat = 
+
+    login {
+      // cat=plugin.tx_hairu/login/page; type=int+; label=Login page ID: Page where visitors can log in, current page if empty
+      page = 
+    }
+
+    passwordReset {
+      // cat=plugin.tx_hairu/reset/page; type=int+; label=Password reset page ID: Page where a password reset can be performed, current page if empty
+      page =
+
+      token {
+        // cat=plugin.tx_hairu/reset/token.lifetime; type=int+; label=Reset token lifetime: Number of seconds a password reset token is valid
+        lifetime = 86400
+      }
+
+      mail {
+        // cat=plugin.tx_hairu/reset/mail.subject; type=string; label=Mail subject: Subject for the password reset mail
+        subject = Password reset request
+        // cat=plugin.tx_hairu/reset/mail.subject; type=string; label=Mail from: Sender for the password reset mail, system from address if empty
+        from = 
+      }
+
+      // cat=plugin.tx_hairu/reset/loginOnSuccess; type=boolean; label=Login on success: Whether to automatically log in users after successful password reset
+      loginOnSuccess = 0
+    }
+  }
+}

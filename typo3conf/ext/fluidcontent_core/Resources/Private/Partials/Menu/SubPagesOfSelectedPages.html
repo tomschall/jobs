@@ -1,0 +1,10 @@
+<div xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+
+	<f:section name="Main">
+		<f:for each="{record.pages -> v:iterator.explode()}" as="menuPage">
+			<v:page.menu pageUid="{menuPage}" />
+		</f:for>
+	</f:section>
+
+</div>

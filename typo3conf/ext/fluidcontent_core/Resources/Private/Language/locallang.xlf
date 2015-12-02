@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="fluidcontent_core" date="2014-01-04T16:56:53+01:00">
+		<header/>
+		<body>
+			<trans-unit id="from">
+				<source>from</source>
+			</trans-unit>
+			<trans-unit id="or">
+				<source>or</source>
+			</trans-unit>
+			<trans-unit id="value">
+				<source>value</source>
+			</trans-unit>
+			<trans-unit id="anchorLink">
+				<source>Current anchor name</source>
+			</trans-unit>
+			<trans-unit id="tt_content.noneFoundLabel">
+				<source>No options found</source>
+			</trans-unit>
+			<trans-unit id="tt_content.nativeLabel">
+				<source>Standard</source>
+			</trans-unit>
+			<trans-unit id="tt_content.content_variant">
+				<source>Variant</source>
+			</trans-unit>
+			<trans-unit id="tt_content.content_version">
+				<source>Version</source>
+			</trans-unit>
+			<trans-unit id="sheets.header">
+				<source>Header</source>
+			</trans-unit>
+			<trans-unit id="sheets.container">
+				<source>Container</source>
+			</trans-unit>
+			<trans-unit id="sheets.menu">
+				<source>Menu</source>
+			</trans-unit>
+			<trans-unit id="sheets.image" xml:space="preserve">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="sheets.table" xml:space="preserve">
+				<source>Table</source>
+			</trans-unit>
+			<trans-unit id="fields.classNames">
+				<source>CSS class names</source>
+			</trans-unit>
+			<trans-unit id="fields.additionalClassNames">
+				<source>Optional, additional CSS class names</source>
+			</trans-unit>
+			<trans-unit id="fields.tagName">
+				<source>HTML element type</source>
+			</trans-unit>
+			<trans-unit id="fields.addAnchor">
+				<source>Add link anchor</source>
+			</trans-unit>
+			<trans-unit id="fields.headerLevel">
+				<source>Header level</source>
+			</trans-unit>
+			<trans-unit id="fields.titleAttribute">
+				<source>Title (crawlers, indexers; some browsers as mouseover text)</source>
+			</trans-unit>
+			<trans-unit id="fields.menuLimit">
+				<source>Maximum number of page links to display</source>
+			</trans-unit>
+			<trans-unit id="fields.tableHeadPosition">
+				<source>Table Header Position</source>
+			</trans-unit>
+			<trans-unit id="tableHead.none">
+				<source>No header</source>
+			</trans-unit>
+			<trans-unit id="tableHead.top">
+				<source>Top</source>
+			</trans-unit>
+			<trans-unit id="tableHead.left">
+				<source>Left</source>
+			</trans-unit>
+			<trans-unit id="list.ol">
+				<source>Ordered list</source>
+			</trans-unit>
+			<trans-unit id="list.ul">
+				<source>Unordered list</source>
+			</trans-unit>
+			<trans-unit id="flux.text" xml:space="preserve">
+				<source>Text element</source>
+			</trans-unit>
+			<trans-unit id="flux.bullets" xml:space="preserve">
+				<source>Bullet list</source>
+			</trans-unit>
+			<trans-unit id="flux.div" xml:space="preserve">
+				<source>Divider</source>
+			</trans-unit>
+			<trans-unit id="flux.image" xml:space="preserve">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="flux.bullets.sheets.bullets" xml:space="preserve">
+				<source>Bullet types</source>
+			</trans-unit>
+			<trans-unit id="flux.bullets.fields.settings.tagName" xml:space="preserve">
+				<source>List type</source>
+			</trans-unit>
+			<trans-unit id="flux.bullets.fields.settings.start" xml:space="preserve">
+				<source>Starting list number</source>
+			</trans-unit>
+			<trans-unit id="flux.image.fields.settings.scaleMode" xml:space="preserve">
+				<source>Scaling mode (c)rop, (m)aximum or normal (applies stretching if both width and height are given)</source>
+			</trans-unit>
+			<trans-unit id="flux.image.fields.settings.extendedCaptions" xml:space="preserve">
+				<source>Create content containers for image captions</source>
+			</trans-unit>
+			<trans-unit id="flux.image.fields.settings.directInclusion" xml:space="preserve">
+				<source>Include image directly, only assign "src", "alt" and CSS class names (nice for responsive images)</source>
+			</trans-unit>
+			<trans-unit id="flux.html" xml:space="preserve">
+				<source>Custom HTML</source>
+			</trans-unit>
+			<trans-unit id="default" xml:space="preserve">
+				<source>default</source>
+			</trans-unit>
+			<trans-unit id="caption">
+				<source>Caption, %s</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

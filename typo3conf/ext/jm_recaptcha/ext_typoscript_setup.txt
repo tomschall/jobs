@@ -1,0 +1,18 @@
+plugin.tx_jmrecaptcha {
+
+	captcha_type = {$plugin.tx_jmrecaptcha.captcha_type}
+
+	api_server = {$plugin.tx_jmrecaptcha.api_server}
+	api_server_secure = {$plugin.tx_jmrecaptcha.api_server_secure}
+	verify_server = {$plugin.tx_jmrecaptcha.verify_server}
+
+	public_key = {$plugin.tx_jmrecaptcha.public_key}
+	private_key = {$plugin.tx_jmrecaptcha.private_key}
+
+	use_ssl = {$plugin.tx_jmrecaptcha.use_ssl}
+
+	theme = {$plugin.tx_jmrecaptcha.theme}
+	tabindex = {$plugin.tx_jmrecaptcha.tabindex}
+	lang = {$plugin.tx_jmrecaptcha.lang}
+
+}

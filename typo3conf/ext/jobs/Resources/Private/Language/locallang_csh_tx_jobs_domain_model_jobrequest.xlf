@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-11-24T09:48:09Z" product-name="jobs">
+		<header/>
+		<body>
+			<trans-unit id="start_date.description">
+				<source>startDate</source>
+			</trans-unit>
+			<trans-unit id="end_date.description">
+				<source>endDate</source>
+			</trans-unit>
+			<trans-unit id="percent_of.description">
+				<source>percentOf</source>
+			</trans-unit>
+			<trans-unit id="percent_up.description">
+				<source>percentUp</source>
+			</trans-unit>
+			<trans-unit id="job_title.description">
+				<source>jobTitle</source>
+			</trans-unit>
+			<trans-unit id="entry_date.description">
+				<source>entryDate</source>
+			</trans-unit>
+			<trans-unit id="entry_agreement.description">
+				<source>entryAgreement</source>
+			</trans-unit>
+			<trans-unit id="entry_immediately.description">
+				<source>entryImmediately</source>
+			</trans-unit>
+			<trans-unit id="job_location.description">
+				<source>jobLocation</source>
+			</trans-unit>
+			<trans-unit id="job_description.description">
+				<source>jobDescription</source>
+			</trans-unit>
+			<trans-unit id="contact_to.description">
+				<source>contactTo</source>
+			</trans-unit>
+			<trans-unit id="email_to.description">
+				<source>emailTo</source>
+			</trans-unit>
+			<trans-unit id="postal_addres_equal_to_registration_address.description">
+				<source>postalAddresEqualToRegistrationAddress</source>
+			</trans-unit>
+			<trans-unit id="postal_address_title.description">
+				<source>postalAddressTitle</source>
+			</trans-unit>
+			<trans-unit id="postal_address_first_name.description">
+				<source>postalAddressFirstName</source>
+			</trans-unit>
+			<trans-unit id="postal_address_name.description">
+				<source>postalAddressName</source>
+			</trans-unit>
+			<trans-unit id="postal_address_additive.description">
+				<source>postalAddressAdditive</source>
+			</trans-unit>
+			<trans-unit id="postal_address_street_nr.description">
+				<source>postalAddressStreetNr</source>
+			</trans-unit>
+			<trans-unit id="postal_address_po_box.description">
+				<source>postalAddressPoBox</source>
+			</trans-unit>
+			<trans-unit id="postal_address_zip.description">
+				<source>postalAddressZip</source>
+			</trans-unit>
+			<trans-unit id="postal_address_city.description">
+				<source>postalAddressCity</source>
+			</trans-unit>
+			<trans-unit id="number_days_publication.description">
+				<source>numberDaysPublication</source>
+			</trans-unit>
+			<trans-unit id="publication_date.description">
+				<source>publicationDate</source>
+			</trans-unit>
+			<trans-unit id="comments.description">
+				<source>comments</source>
+			</trans-unit>
+			<trans-unit id="delete_date.description">
+				<source>deleteDate</source>
+			</trans-unit>
+			<trans-unit id="deleted_how.description">
+				<source>deletedHow</source>
+			</trans-unit>
+			<trans-unit id="use_agreements.description">
+				<source>useAgreements</source>
+			</trans-unit>
+			<trans-unit id="request_is_german.description">
+				<source>requestIsGerman</source>
+			</trans-unit>
+			<trans-unit id="request_is_french.description">
+				<source>requestIsFrench</source>
+			</trans-unit>
+			<trans-unit id="request_is_italian.description">
+				<source>requestIsItalian</source>
+			</trans-unit>
+			<trans-unit id="employment_relationship.description">
+				<source>employmentRelationship</source>
+			</trans-unit>
+			<trans-unit id="position.description">
+				<source>position</source>
+			</trans-unit>
+			<trans-unit id="qualification.description">
+				<source>qualification</source>
+			</trans-unit>
+			<trans-unit id="areas_of_work.description">
+				<source>areasOfWork</source>
+			</trans-unit>
+			<trans-unit id="advertisement_type.description">
+				<source>advertisementType</source>
+			</trans-unit>
+			<trans-unit id="canton.description">
+				<source>canton</source>
+			</trans-unit>
+			<trans-unit id="region.description">
+				<source>region</source>
+			</trans-unit>
+			<trans-unit id="postal_address_country.description">
+				<source>postalAddressCountry</source>
+			</trans-unit>
+			<trans-unit id="type_of_institution.description">
+				<source>typeOfInstitution</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

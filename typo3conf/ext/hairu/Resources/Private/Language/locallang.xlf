@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" product-name="hairu">
+    <header/>
+    <body>
+
+      <trans-unit id="username">
+        <source>Username</source>
+      </trans-unit>
+
+      <trans-unit id="password">
+        <source>Password</source>
+      </trans-unit>
+
+      <trans-unit id="passwordRepeat">
+        <source>Repeat password</source>
+      </trans-unit>
+
+      <trans-unit id="action.login">
+        <source>Log in</source>
+      </trans-unit>
+
+      <trans-unit id="action.backToLogin">
+        <source>Back to login</source>
+      </trans-unit>
+
+      <trans-unit id="action.logout">
+        <source>Log out</source>
+      </trans-unit>
+
+      <trans-unit id="action.resetPassword">
+        <source>Reset password</source>
+      </trans-unit>
+
+      <trans-unit id="action.changePassword">
+        <source>Change password</source>
+      </trans-unit>
+
+      <trans-unit id="login.failed">
+        <source><![CDATA[<b>Login failure</b><br>
+Most likely you didn't enter the username or password correctly. Be certain that you enter them precisely as they are, including upper/lower case. Another possibility is that cookies might be disabled in your web browser.]]></source>
+      </trans-unit>
+
+      <trans-unit id="login.successful">
+        <source><![CDATA[You are now logged in as <b>%s</b>.]]></source>
+      </trans-unit>
+
+      <trans-unit id="login.status">
+        <source>Currently logged in as:</source>
+      </trans-unit>
+
+      <trans-unit id="logout.successful">
+        <source>You just logged out from your session on this website.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.start">
+        <source>Please enter the username of your account, a mail for resetting your password will be sent immediately to your email address.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.hints">
+        <source>Please enter your password twice.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.errors">
+        <source>There where some errors with your input:</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.failed.nopassword">
+        <source>This account currently has no password, you have most likely not completed registration yet or are supposed to authenticate in some other way.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.failed.noemail">
+        <source>This account currently has no email address, please make sure to set it in your account.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.failed.sending">
+        <source><![CDATA[The password reset mail could not be sent, please try again later.]]></source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.failed.invalid">
+        <source>Invalid password reset request, please try again. Make sure you follow the steps from the password reset mail or start the reset process again.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.failed.expired">
+        <source>Your password reset request has expired, please start the reset process again.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.started">
+        <source><![CDATA[A mail has been sent, please check the inbox of your mail account to complete the password reset process.]]></source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.completed">
+        <source>You have successfully changed your password and may login now with your new password.</source>
+      </trans-unit>
+
+      <trans-unit id="resetPassword.completed.login">
+        <source>You have successfully changed your password and have been logged in automatically.</source>
+      </trans-unit>
+
+      <trans-unit id="validator.validFrontendUser.invalid">
+        <source>There is no user "%s".</source>
+      </trans-unit>
+
+      <trans-unit id="validator.equal.invalid">
+        <source>The given values are not equal.</source>
+      </trans-unit>
+
+      <trans-unit id="validator.equal.negate.invalid">
+        <source>The given values are equal.</source>
+      </trans-unit>
+
+    </body>
+  </file>
+</xliff>

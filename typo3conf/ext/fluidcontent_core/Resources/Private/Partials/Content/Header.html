@@ -1,0 +1,6 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<v:tag name="h{settings.content.settings.header.type -> v:or(alternative: record.header_layout) -> v:or(alternative: settings.header.type)}"
+         class="{settings.content.settings.header.className}" hideIfEmpty="{settings.content.settings.header.hideIfEmpty -> v:or(alternative: 1)}">
+	{record.header -> f:format.raw()}
+</v:tag>

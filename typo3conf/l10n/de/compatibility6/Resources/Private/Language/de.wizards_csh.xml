@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3locallangExt>
+  <data type="array">
+    <languageKey index="de" type="array">
+			<label index="tx_funcwizards.alttitle">Seitenassistenten</label>
+			<label index="tx_funcwizards.description">Dieses Modul stellt ein Framework zur Verfügung, zu dem Assistenten hinzugefügt werden können. Momentan sind Assistenten zum Erstellen von Seiten, zum Sortieren nach Seitentitel usw. verfügbar.</label>
+			<label index="_tx_funcwizards.seeAlso">_MOD_web_func:tx_wizardcrpages,
+_MOD_web_func:tx_wizardsortpages</label>
+		</languageKey>
+  </data>
+</T3locallangExt>

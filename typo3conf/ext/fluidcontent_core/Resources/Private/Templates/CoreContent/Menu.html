@@ -1,0 +1,23 @@
+<div xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+
+<f:layout name="Default" />
+
+<f:section name="Configuration">
+	<flux:form id="menu">
+		<f:render partial="Properties/Header" arguments="{_all}" />
+		<f:render partial="Properties/Container" arguments="{_all}" />
+		<f:if condition="{menuPartialTemplateName}">
+			<f:render partial="Properties/Menu/{menuPartialTemplateName}" arguments="{_all}" />
+		</f:if>
+	</flux:form>
+</f:section>
+
+<f:section name="Preview" />
+
+<f:section name="Main">
+	<f:render partial="Menu/{menuPartialTemplateName}" section="Main" arguments="{_all}" />
+</f:section>
+
+</div>

@@ -1,0 +1,95 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<h1>Listing for JobRequest</h1>
+
+<f:flashMessages />
+
+<table  class="tx_jobs" >
+	<tr>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.start_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.end_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.percent_of" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.percent_up" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.job_title" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.entry_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.entry_agreement" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.entry_immediately" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.job_location" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.job_description" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.contact_to" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.email_to" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_addres_equal_to_registration_address" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_title" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_first_name" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_name" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_additive" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_street_nr" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_po_box" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_zip" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.postal_address_city" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.number_days_publication" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.publication_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.comments" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.delete_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.deleted_how" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.use_agreements" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.request_is_german" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.request_is_french" /></th>
+		<th><f:translate key="tx_jobs_domain_model_jobrequest.request_is_italian" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{jobRequests}" as="jobRequest">
+		<tr>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.startDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.endDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.percentOf}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.percentUp}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.jobTitle}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryAgreement}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryImmediately}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.jobLocation}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.jobDescription}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.contactTo}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.emailTo}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddresEqualToRegistrationAddress}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressTitle}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressFirstName}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressName}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressAdditive}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressStreetNr}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressPoBox}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressZip}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressCity}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.numberDaysPublication}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.publicationDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.comments}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.deleteDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.deletedHow}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.useAgreements}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.requestIsGerman}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.requestIsFrench}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.requestIsItalian}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{jobRequest : jobRequest}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{jobRequest : jobRequest}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New JobRequest</f:link.action>
+</f:section>

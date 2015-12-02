@@ -1,0 +1,123 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<h1>Listing for JobOffer</h1>
+
+<f:flashMessages />
+
+<table  class="tx_jobs" >
+	<tr>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.start_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.end_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.number_days_publication" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.publication_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.job_title" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.company" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.corporate" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.documents" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.percent_of" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.percent_up" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.on_call" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.employer" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.employer_addition" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.link_to_website" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_agreement" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_immediately" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.job_location" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.zip_job_location" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.job_description" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.application_to" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.email_to" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.further_information" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.application_deadline" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.assignment_reference" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_addres_equal_to_registration_address" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_title" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_first_name" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_name" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_company" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_additive" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_department" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_street_nr" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_po_box" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_zip" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.postal_address_city" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.comments" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.delete_date" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.deleted_how" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.use_agreements" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_german" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_french" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_italian" /></th>
+		<th><f:translate key="tx_jobs_domain_model_joboffer.start_date_renew" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{jobOffers}" as="jobOffer">
+		<tr>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.startDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.endDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.numberDaysPublication}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.publicationDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.jobTitle}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.company}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.corporate.originalResource.name}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.documents}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.percentOf}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.percentUp}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.onCall}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.employer}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.employerAddition}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.linkToWebsite}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryAgreement}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryImmediately}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.jobLocation}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.zipJobLocation}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.jobDescription}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.applicationTo}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.emailTo}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.furtherInformation}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.applicationDeadline -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.assignmentReference}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddresEqualToRegistrationAddress}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressTitle}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressFirstName}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressName}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressCompany}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressAdditive}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressDepartment}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressStreetNr}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressPoBox}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressZip}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.postalAddressCity}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.comments}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.deleteDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.deletedHow}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.useAgreements}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsGerman}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsFrench}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsItalian}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.startDateRenew -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{jobOffer : jobOffer}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{jobOffer : jobOffer}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New JobOffer</f:link.action>
+</f:section>

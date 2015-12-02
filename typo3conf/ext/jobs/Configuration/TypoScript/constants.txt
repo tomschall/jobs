@@ -1,0 +1,120 @@
+
+plugin.tx_jobs_jobregistration {
+	view {
+		# cat=plugin.tx_jobs_jobregistration/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:jobs/Resources/Private/Templates/
+		# cat=plugin.tx_jobs_jobregistration/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:jobs/Resources/Private/Partials/
+		# cat=plugin.tx_jobs_jobregistration/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:jobs/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_jobs_jobregistration//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+plugin.tx_jobs_jobuseradmin {
+	view {
+		# cat=plugin.tx_jobs_jobuseradmin/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:jobs/Resources/Private/Templates/
+		# cat=plugin.tx_jobs_jobuseradmin/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:jobs/Resources/Private/Partials/
+		# cat=plugin.tx_jobs_jobuseradmin/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:jobs/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_jobs_jobuseradmin//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+plugin.tx_jobs_joboffers {
+	view {
+		# cat=plugin.tx_jobs_joboffers/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:jobs/Resources/Private/Templates/
+		# cat=plugin.tx_jobs_joboffers/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:jobs/Resources/Private/Partials/
+		# cat=plugin.tx_jobs_joboffers/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:jobs/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_jobs_joboffers//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+plugin.tx_jobs_jobrequests {
+	view {
+		# cat=plugin.tx_jobs_jobrequests/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:jobs/Resources/Private/Templates/
+		# cat=plugin.tx_jobs_jobrequests/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:jobs/Resources/Private/Partials/
+		# cat=plugin.tx_jobs_jobrequests/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:jobs/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_jobs_jobrequests//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+module.tx_jobs_adminjoboffers {
+	view {
+		# cat=module.tx_jobs_adminjoboffers/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:jobs/Resources/Private/Backend/Templates/
+		# cat=module.tx_jobs_adminjoboffers/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:jobs/Resources/Private/Backend/Partials/
+		# cat=module.tx_jobs_adminjoboffers/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:jobs/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_jobs_adminjoboffers//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+module.tx_jobs_adminjobrequests {
+	view {
+		# cat=module.tx_jobs_adminjobrequests/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:jobs/Resources/Private/Backend/Templates/
+		# cat=module.tx_jobs_adminjobrequests/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:jobs/Resources/Private/Backend/Partials/
+		# cat=module.tx_jobs_adminjobrequests/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:jobs/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_jobs_adminjobrequests//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+module.tx_jobs_adminfrontendusers {
+	view {
+		# cat=module.tx_jobs_adminfrontendusers/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:jobs/Resources/Private/Backend/Templates/
+		# cat=module.tx_jobs_adminfrontendusers/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:jobs/Resources/Private/Backend/Partials/
+		# cat=module.tx_jobs_adminfrontendusers/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:jobs/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_jobs_adminfrontendusers//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}
+
+module.tx_jobs_admincompanyfrontendusers {
+	view {
+		# cat=module.tx_jobs_admincompanyfrontendusers/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:jobs/Resources/Private/Backend/Templates/
+		# cat=module.tx_jobs_admincompanyfrontendusers/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:jobs/Resources/Private/Backend/Partials/
+		# cat=module.tx_jobs_admincompanyfrontendusers/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:jobs/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_jobs_admincompanyfrontendusers//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

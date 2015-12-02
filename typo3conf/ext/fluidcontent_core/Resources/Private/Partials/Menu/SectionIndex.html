@@ -1,0 +1,18 @@
+<div xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+
+	<f:section name="Main">
+		<ul>
+			<f:for each="{record.pages -> v:iterator.explode()}" as="menuPage">
+				<li>
+					<v:tag name="h{settings.content.settings.header.type -> v:or(alternative: record.header_layout)
+						-> v:or(alternative: settings.header.type) -> v:math.sum(b: 1)}">
+						<f:link.page pageUid="{menuPageData.uid}">{menuPageData.linktext}</f:link.page>
+					</v:tag>
+					<f:render partial="Content/SectionIndex" arguments="{menuPage: menuPage}" />
+				</li>
+		</f:for>
+		</ul>
+	</f:section>
+
+</div>

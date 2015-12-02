@@ -1,0 +1,29 @@
+
+config.tx_extbase{
+    persistence{
+        classes{
+
+            TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+                subclasses {
+                    Tx_Jobs_FrontendUser = Sozialinfo\Jobs\Domain\Model\FrontendUser
+					Tx_Jobs_CompanyFrontendUser = Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser
+					
+          		}
+            }
+            Sozialinfo\Jobs\Domain\Model\FrontendUser {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_Jobs_FrontendUser
+                }
+            }
+            
+            Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_Jobs_CompanyFrontendUser
+                }
+            }
+            
+    	}
+    }
+}

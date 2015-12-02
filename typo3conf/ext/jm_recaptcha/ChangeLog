@@ -1,0 +1,35 @@
+(add new changes on top of this file)
+
+2011-01-24 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Fixed use of deprecated methods (Thanks to Alexander Reetz)
+	* Fixed XHTML issue (Thanks to Michael Zangerle)
+
+2010-12-17 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Implemented new fetching method, based on TYPO3 API (Thanks to Adrian Föder <a.foeder@andersundsehr.com>)
+
+2010-01-15 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Added non-js version of reCAPTCHA (thanks to Felix Nagel <info@felixnagel.com> for the patch)
+
+2009-09-20 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Fixed a quoting bug (thx to Reinhard Fuehricht)
+
+2009-07-01 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Fixed public/private-key constants (stupid typo)
+	* Added default public/private-keys
+	* Updated status to "stable"
+
+2009-06-18 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* PHP5 Changes
+	* Smaller Bugfixes
+
+2009-06-16 Markus Blaschke (TEQneers GmbH & Co. KG) <blaschke@teqneers.de>
+	* Added all possible reCAPTCHA-Parameters (including lang and custom_translations)
+	* Cleaned up code-base
+	* Fixed some issues
+	* Added constants
+	* Added icon
+	* PHP 5.x Support only!
+
+
+2007-05-24 Jens Mittag  <jens.mittag@prime23.de>
+	* Initial release

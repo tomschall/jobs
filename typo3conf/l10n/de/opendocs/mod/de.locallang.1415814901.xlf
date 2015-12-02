@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff xmlns:t3="http://typo3.org/schemas/xliff" version="1.0">
+	<file t3:id="1415814901" source-language="en" datatype="plaintext" original="messages" date="2015-07-28T05:18:12Z" product-name="opendocs" target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="toolbaritem" approved="yes">
+				<source>Open and Recently Used Documents</source>
+			<target state="translated">Geöffnete und kürzlich verwendete Dokumente</target></trans-unit>
+			<trans-unit id="open_docs" approved="yes">
+				<source>Open Documents</source>
+			<target state="translated">Geöffnete Dokumente</target></trans-unit>
+			<trans-unit id="recent_docs" approved="yes">
+				<source>Recently Used Documents</source>
+			<target state="translated">Kürzlich verwendete Dokumente</target></trans-unit>
+			<trans-unit id="no_docs" approved="yes">
+				<source>There are no open documents at this time.</source>
+			<target state="translated">Derzeit sind keine Dokumente geöffnet.</target></trans-unit>
+		</body>
+	</file>
+</xliff>

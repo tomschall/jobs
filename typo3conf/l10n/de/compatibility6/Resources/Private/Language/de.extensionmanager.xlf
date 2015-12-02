@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-07-29T22:50:51Z" product-name="compatibility6">
+		<header/>
+		<body>
+			<trans-unit id="setPageTSconfig" approved="yes">
+				<source>Set PageTSconfig by default: If you are going to use this extension by default in this database then set this flag. In that case you don't need to set specific PageTSconfig for each page, which you have to do otherwise!</source>
+				<target state="translated">Seiten-TSconfig standardmäßig setzen: Wenn Sie diese Erweiterung in dieser Datenbank standardmäßig nutzen, aktivieren Sie diese Option. Sie müssen dann kein spezielles Seiten-TSconfig für jede Seite setzen, was Sie sonst tun müssten!</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

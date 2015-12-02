@@ -1,0 +1,26 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:section name="image">
+	<f:if condition="{settings.directInclusion}">
+		<f:then>
+			<img src="{image.url}" alt="{f:if(condition: image.alternative, then: image.alternative, else: image.name)}"
+			     class="{settings.image.className -> v:format.replace(substring: ',', replacement: ' ')}" />
+		</f:then>
+		<f:else>
+			<v:media.image src="{image.uid}" treatIdAsReference="TRUE" alt="{f:if(condition: image.alternative, then: image.alternative, else: image.name)}" class="{settings.image.className -> v:format.replace(substring: ',', replacement: ' ')}"
+			         width="{record.imagewidth -> v:or(alternative: '-1')}{f:if(condition: record.imagewidth, then: settings.scaleMode)}"
+			         height="{record.imageheight -> v:or(alternative: '-1')}{f:if(condition: record.imageheight, then: settings.scaleMode)}" />
+		</f:else>
+	</f:if>
+</f:section>
+
+<f:if condition="{image.link}">
+	<f:then>
+		<v:link.typolink configuration="{parameter: image.link}">
+			<f:render section="image" arguments="{_all}" />
+		</v:link.typolink>
+	</f:then>
+	<f:else>
+		<f:render section="image" arguments="{_all}" />
+	</f:else>
+</f:if>

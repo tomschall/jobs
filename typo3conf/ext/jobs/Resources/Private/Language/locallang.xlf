@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-11-24T09:48:09Z" product-name="jobs">
+		<header/>
+		<body>
+			<trans-unit id="tx_jobs_domain_model_frontenduser">
+				<source>Frontend User</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.username">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.additive">
+				<source>Additive</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.po_box">
+				<source>Po Box</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.corporate">
+				<source>Corporate</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.documents">
+				<source>Documents</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.job_offers">
+				<source>Job Offers</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.job_requests">
+				<source>Job Requests</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.company_frontend_user">
+				<source>Company Frontend User</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.insos_member">
+				<source>Insos Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member">
+				<source>Sozialinfo Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer">
+				<source>Job Offer</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.start_date">
+				<source>Start Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.end_date">
+				<source>End Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.number_days_publication">
+				<source>Number Days Publication</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.publication_date">
+				<source>Publication Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.job_title">
+				<source>Job Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.corporate">
+				<source>Corporate</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.documents">
+				<source>Documents</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.percent_of">
+				<source>Percent Of</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.percent_up">
+				<source>Percent Up</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.on_call">
+				<source>On Call</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.employer">
+				<source>Employer</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.employer_addition">
+				<source>Employer Addition</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.link_to_website">
+				<source>Link To Website</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.entry_date">
+				<source>Entry Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.entry_agreement">
+				<source>Entry Agreement</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.entry_immediately">
+				<source>Entry Immediately</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.job_location">
+				<source>Job Location</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.zip_job_location">
+				<source>Zip Job Location</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.job_description">
+				<source>Job Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.application_to">
+				<source>Application To</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.email_to">
+				<source>Email To</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.further_information">
+				<source>Further Information</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.application_deadline">
+				<source>Application Deadline</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.assignment_reference">
+				<source>Assignment Reference</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_addres_equal_to_registration_address">
+				<source>Postal Addres Equal To Registration Address</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_title">
+				<source>Postal Address Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_first_name">
+				<source>Postal Address First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_name">
+				<source>Postal Address Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_company">
+				<source>Postal Address Company</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_additive">
+				<source>Postal Address Additive</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_department">
+				<source>Postal Address Department</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_street_nr">
+				<source>Postal Address Street Nr</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_po_box">
+				<source>Postal Address Po Box</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_zip">
+				<source>Postal Address Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_city">
+				<source>Postal Address City</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.delete_date">
+				<source>Delete Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.deleted_how">
+				<source>Deleted How</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.use_agreements">
+				<source>Use Agreements</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.offer_is_german">
+				<source>Offer Is German</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.offer_is_french">
+				<source>Offer Is French</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.offer_is_italian">
+				<source>Offer Is Italian</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.start_date_renew">
+				<source>Start Date Renew</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.employment_relationships">
+				<source>Employment Relationships</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.position">
+				<source>Position</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.qualification">
+				<source>Qualification</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.areas_of_work">
+				<source>Areas Of Work</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.advertisement_type">
+				<source>Advertisement Type</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.canton">
+				<source>Canton</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.region">
+				<source>Region</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.postal_address_country">
+				<source>Postal Address Country</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.type_of_institution">
+				<source>Type Of Institution</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest">
+				<source>Job Request</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.start_date">
+				<source>Start Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.end_date">
+				<source>End Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.percent_of">
+				<source>Percent Of</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.percent_up">
+				<source>Percent Up</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.job_title">
+				<source>Job Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.entry_date">
+				<source>Entry Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.entry_agreement">
+				<source>Entry Agreement</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.entry_immediately">
+				<source>Entry Immediately</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.job_location">
+				<source>Job Location</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.job_description">
+				<source>Job Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.contact_to">
+				<source>Contact To</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.email_to">
+				<source>Email To</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_addres_equal_to_registration_address">
+				<source>Postal Addres Equal To Registration Address</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_title">
+				<source>Postal Address Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_first_name">
+				<source>Postal Address First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_name">
+				<source>Postal Address Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_additive">
+				<source>Postal Address Additive</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_street_nr">
+				<source>Postal Address Street Nr</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_po_box">
+				<source>Postal Address Po Box</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_zip">
+				<source>Postal Address Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_city">
+				<source>Postal Address City</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.number_days_publication">
+				<source>Number Days Publication</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.publication_date">
+				<source>Publication Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.delete_date">
+				<source>Delete Date</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.deleted_how">
+				<source>Deleted How</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.use_agreements">
+				<source>Use Agreements</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.request_is_german">
+				<source>Request Is German</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.request_is_french">
+				<source>Request Is French</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.request_is_italian">
+				<source>Request Is Italian</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.employment_relationship">
+				<source>Employment Relationship</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.position">
+				<source>Position</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.qualification">
+				<source>Qualification</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.areas_of_work">
+				<source>Areas Of Work</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.advertisement_type">
+				<source>Advertisement Type</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.canton">
+				<source>Canton</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.region">
+				<source>Region</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.postal_address_country">
+				<source>Postal Address Country</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_jobrequest.type_of_institution">
+				<source>Type Of Institution</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_employmentrelationship">
+				<source>Employment Relationship</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_employmentrelationship.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_employmentrelationship.is_set_job_request">
+				<source>Is Set Job Request</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_position">
+				<source>Position</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_position.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_position.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_position.is_set_job_request">
+				<source>Is Set Job Request</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_qualification">
+				<source>Qualification</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_qualification.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_qualification.shortcut">
+				<source>Shortcut</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_qualification.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_qualification.is_set_job_request">
+				<source>Is Set Job Request</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_areasofwork">
+				<source>Areas Of Work</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_areasofwork.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_areasofwork.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype">
+				<source>Advertisement Type</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.short_cut_advertisement_type">
+				<source>Short Cut Advertisement Type</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.price_member">
+				<source>Price Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.price_non_member">
+				<source>Price Non Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.price_insos_member">
+				<source>Price Insos Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_advertisementtype.day_to_renew">
+				<source>Day To Renew</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_canton">
+				<source>Canton</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_canton.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_country.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser">
+				<source>Company Frontend User</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.is_frontend_admin">
+				<source>Is Frontend Admin</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.additive">
+				<source>Additive</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.po_box">
+				<source>Po Box</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.corporate">
+				<source>Corporate</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.documents">
+				<source>Documents</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.insos_member">
+				<source>Insos Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_companyfrontenduser.sozialinfo_member">
+				<source>Sozialinfo Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_region">
+				<source>Region</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_region.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_insosmember">
+				<source>Insos Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_insosmember.member_id">
+				<source>Member Id</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_typeofinstitution">
+				<source>Type Of Institution</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_typeofinstitution.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_typeofinstitution.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_sozialinfomember">
+				<source>Sozialinfo Member</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_sozialinfomember.member_id">
+				<source>Member Id</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

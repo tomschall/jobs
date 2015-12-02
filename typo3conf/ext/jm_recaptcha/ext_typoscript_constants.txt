@@ -1,0 +1,32 @@
+plugin.tx_jmrecaptcha {
+
+	# cat=plugin.recaptcha//01; type=options[NoCaptcha=nocaptcha,Old ReCaptcha (Legacy)=recaptcha]; label=Type of used captcha
+	captcha_type = nocaptcha
+
+	# cat=plugin.recaptcha//02; type=string; label= reCAPTCHA public key: Public key of your reCAPTCHA-account
+	public_key = 6LdpJAcAAAAAAHLKPrFt1Ip6gu7tDkh6o9jKRs44
+
+	# cat=plugin.recaptcha//03; type=string; label= reCAPTCHA private key: Private key of your reCAPTCHA-account
+	private_key = 6LdpJAcAAAAAALos-0IzJAc8Eo4PqrSj0msG9s93
+
+	# cat=plugin.recaptcha//04; type=string; label= reCAPTCHA API-server adress: Non-SSL-Address of API-server
+	api_server = http://www.google.com/recaptcha/api
+
+	# cat=plugin.recaptcha//05; type=string; label= reCAPTCHA API-server adress: SSL-Address of API-server
+	api_server_secure = https://www.google.com/recaptcha/api
+
+	# cat=plugin.recaptcha//06; type=string; label= reCAPTCHA VERIFY-server adress: VERIFY-Address of API-server
+	verify_server = https://www.google.com/recaptcha/api/siteverify
+
+	# cat=plugin.recaptcha/enable/07; type=boolean; label= Force SSL: Force use of SSL (api_server_secure)
+	use_ssl = 0
+
+	# cat=plugin.recaptcha//08; type=options[,red,white,blackglass,clean,custom]; label= reCAPTCHA Theme: Predefined reCAPTCHA themes
+	theme = red
+
+	# cat=plugin.recaptcha//09; type=int+; label= reCAPTCHA TabIndex: TabIndex of reCAPTCHA field
+	tabindex = 0
+
+	# cat=plugin.recaptcha//10; type=string; label= reCAPTCHA language: Language of reCAPTCHA frontend (autodetected if empty)
+	lang =
+}

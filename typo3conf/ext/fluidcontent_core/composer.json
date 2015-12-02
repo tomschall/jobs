@@ -1,0 +1,36 @@
+{
+    "name": "fluidtypo3/fluidcontent_core",
+    "config": {
+        "preferred-install": "dist"
+    },
+    "description": "Replace css_styled_content with your own templates",
+    "require": {
+        "fluidtypo3/flux": "*",
+        "fluidtypo3/vhs": "*"
+    },
+    "require-dev": {
+        "fluidtypo3/flux": "dev-development",
+        "fluidtypo3/vhs": "dev-development",
+        "fluidtypo3/development": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FluidTYPO3\\FluidcontentCore\\": "Classes/"
+        }
+    },
+    "preferred-install": "dist",
+    "type": "typo3-cms-extension",
+    "keywords": ["TYPO3 CMS", "templating", "bootstrap", "flux", "fluidcontent", "fedext", "fluid"],
+    "homepage": "http://fluidtypo3.org/",
+    "license": "GPL-2.0+",
+    "version": "1.2.0",
+    "support": {
+        "irc": "irc://irc.freenode.org/fedext",
+        "issues": "https://github.com/FluidTYPO3/fluidcontent_core/issues"
+    },
+    "suggest": {
+        "fluidtypo3/fluidcontent": "Gives the ability to render Content Templates with pure fluid.",
+        "fluidtypo3/fluidpages": "Gives the ability to render Page Templates with pure fluid.",
+        "fluidbt/fluidbootstraptheme": "Provides Twitter Bootstrap templates for fluidcontent and fluidpages"
+    }
+}

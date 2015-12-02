@@ -1,0 +1,10 @@
+<div xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers" flux:schemaLocation="http://fluidtypo3.org/schemas/flux-development.xsd"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers" flux:schemaLocation="http://fluidtypo3.org/schemas/vhs-development.xsd"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers" f:schemaLocation="http://fluidtypo3.org/schemas/fluid-master.xsd">
+
+<flux:form.sheet name="Table" label="LLL:sheets.table" extensionName="FluidTYPO3.FluidcontentCore">
+	<flux:field.select name="settings.table.className" renderMode="checkbox" size="3" minItems="0" maxItems="100" items="{settings.table.classNames}" label="LLL:fields.classNames" />
+	<flux:field.select name="settings.table.tableHeadPosition" items="{tableHeadPositions}" default="none" label="LLL:fields.tableHeadPosition" />
+</flux:form.sheet>
+
+</div>

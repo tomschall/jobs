@@ -1,0 +1,25 @@
+<div xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers" flux:schemaLocation="http://fluidtypo3.org/schemas/flux-development.xsd"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers" flux:schemaLocation="http://fluidtypo3.org/schemas/vhs-development.xsd"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers" f:schemaLocation="http://fluidtypo3.org/schemas/fluid-master.xsd">
+
+<flux:form.sheet name="container" label="LLL:sheets.container" extensionName="FluidTYPO3.FluidcontentCore">
+	{v:variable.get(name: 'settings.container.types.{record.CType}') -> v:or(alternative: settings.container.types.default) -> v:variable.set(name: 'appliedContainerType')}
+	<f:if condition="{appliedContainerType} != {settings.constants.none}">
+		<flux:field.checkbox name="settings.container.addAnchor" label="LLL:fields.addAnchor" requestUpdate="TRUE" />
+		<f:if condition="{settings.container.addAnchor}">
+			<flux:field.custom name="void">
+				<f:translate key="anchorLink" />:
+				<h4>{parameters.row.header -> v:or(alternative: 'content {parameters.row.uid}') -> v:format.url.sanitizeString()}</h4>
+				<em>
+					{f:translate(key: 'value') -> v:format.case(case: 'ucfirst')}
+					<f:translate key="from" />
+					<strong>{f:translate(key: 'LLL:EXT:cms/locallang_ttc.xlf:header') -> v:format.substring(length: '-1')}</strong>
+					<f:translate key="or" /> <f:translate key="value" /> <strong>content-$UID</strong>
+				</em>
+			</flux:field.custom>
+		</f:if>
+	</f:if>
+	<flux:field.select name="settings.container.className" renderMode="checkbox" minItems="0" maxItems="100" items="{settings.container.classNames}" label="LLL:fields.classNames" />
+</flux:form.sheet>
+
+</div>

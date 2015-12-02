@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-07-29T22:50:51Z" product-name="compatibility6">
+		<header/>
+		<body>
+			<trans-unit id="mod_wizards" approved="yes">
+				<source>Wizards</source>
+				<target state="translated">Assistent</target>
+			</trans-unit>
+			<trans-unit id="wiz_lWizards" approved="yes">
+				<source>Select Wizard</source>
+				<target state="translated">Assistent auswählen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

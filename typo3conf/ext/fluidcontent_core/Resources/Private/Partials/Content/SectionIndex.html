@@ -1,0 +1,10 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<f:for each="{v:content.get(sectionIndexOnly: 1, pageUid: menuPage)}" as="contentElementRecord">
+	<f:link.page pageUid="{menuPage}" section="{contentElementRecord.header
+							-> v:or(alternative: contentElementRecord.titleAttribute)
+							-> v:or(alternative: 'content-{record.uid}') -> v:format.url.sanitizeString()}">
+		{contentElementRecord.header -> v:or(alternative: contentElementRecord.titleAttribute)
+		-> v:or(alternative: '{contentElementRecord.bodyText -> f:format.html()}')
+		-> f:format.crop(maxCharacters: content.settings.preview.maxCharacters)}
+	</f:link.page>
+</f:for>

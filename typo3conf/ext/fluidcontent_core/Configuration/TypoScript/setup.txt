@@ -1,0 +1,182 @@
+[global]
+plugin.tx_fluidcontentcore {
+	view {
+		templateRootPaths.0 = {$plugin.tx_fluidcontentcore.view.templateRootPaths.default}
+		partialRootPaths.0 = {$plugin.tx_fluidcontentcore.view.partialRootPaths.default}
+		layoutRootPaths.0 = {$plugin.tx_fluidcontentcore.view.layoutRootPaths.default}
+	}
+	settings {
+		defaults {
+			template = {$plugin.tx_fluidcontentcore.settings.defaults.template}
+			variant =
+			version =
+			# mode of defaults usage. Possible values: "record", "preselect" or empty. When set to "record", default values will be saved in records when they are saved, but only if no variant or version was chosen. If set to "preselect" the values entered in defaults will be the initially selected values when creating or editing records. If set to anything else, defaults are used only when the record has empty values in variant or version but the defaults will not be saved to the database.
+			mode = {$plugin.tx_fluidcontentcore.settings.defaults.mode}
+		}
+		constants {
+			auto = auto
+			none = none
+		}
+		header {
+			type = {$plugin.tx_fluidcontentcore.settings.header.type}
+			types = {$plugin.tx_fluidcontentcore.settings.header.types}
+			autoType = {$plugin.tx_fluidcontentcore.settings.header.autoType}
+			classNames = {$plugin.tx_fluidcontentcore.settings.header.classNames}
+			hideIfEmpty = {$plugin.tx_fluidcontentcore.settings.header.hideIfEmpty}
+		}
+		container {
+			types {
+				default = div
+				text = div
+				header = none
+				image = div
+				bullets = div
+				uploads = div
+				table = none
+				media = div
+				menu = nav
+				html = none
+				list = div
+			}
+			classNames = {$plugin.tx_fluidcontentcore.settings.container.classNames}
+			addAnchor = {$plugin.tx_fluidcontentcore.settings.container.addAnchor}
+		}
+		image {
+			classNames = {$plugin.tx_fluidcontentcore.settings.image.classNames}
+		}
+		table {
+			classNames = {$plugin.tx_fluidcontentcore.settings.table.classNames}
+		}
+		caption {
+			types = {$plugin.tx_fluidcontentcore.settings.caption.types}
+		}
+		preview {
+			maxCharacters = {$plugin.tx_fluidcontentcore.settings.preview.maxCharacters}
+		}
+	}
+}
+
+plugin.tx_fluidcontentcore.bootstrap = USER
+plugin.tx_fluidcontentcore.bootstrap {
+	userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    vendorName = FluidTYPO3
+    extensionName = FluidcontentCore
+}
+
+lib.stdheader = COA
+
+tt_content >
+tt_content = CASE
+tt_content.key.field = CType
+tt_content.text < plugin.tx_fluidcontentcore.bootstrap
+tt_content.text.pluginName = Text
+tt_content.header < plugin.tx_fluidcontentcore.bootstrap
+tt_content.header.pluginName = Header
+tt_content.image < plugin.tx_fluidcontentcore.bootstrap
+tt_content.image.pluginName = Image
+tt_content.bullets < plugin.tx_fluidcontentcore.bootstrap
+tt_content.bullets.pluginName = Bullets
+tt_content.uploads < plugin.tx_fluidcontentcore.bootstrap
+tt_content.uploads.pluginName = Uploads
+tt_content.table < plugin.tx_fluidcontentcore.bootstrap
+tt_content.table.pluginName = Table
+tt_content.media < plugin.tx_fluidcontentcore.bootstrap
+tt_content.media.pluginName = Media
+tt_content.mailform < plugin.tx_fluidcontentcore.bootstrap
+tt_content.mailform.pluginName = Mailform
+tt_content.search < plugin.tx_fluidcontentcore.bootstrap
+tt_content.search.pluginName = Search
+tt_content.menu < plugin.tx_fluidcontentcore.bootstrap
+tt_content.menu.pluginName = Menu
+tt_content.shortcut < plugin.tx_fluidcontentcore.bootstrap
+tt_content.shortcut.pluginName = Shortcut
+tt_content.div < plugin.tx_fluidcontentcore.bootstrap
+tt_content.div.pluginName = Div
+tt_content.html < plugin.tx_fluidcontentcore.bootstrap
+tt_content.html.pluginName = Html
+tt_content.list = COA
+tt_content.list {
+	20 = CASE
+	20.key.field = list_type
+}
+tt_content.default < plugin.tx_fluidcontentcore.bootstrap
+tt_content.default.pluginName = Default
+
+lib.parseTarget {
+	override =
+}
+
+lib.parseFunc {
+	makelinks = 1
+	makelinks.mailto.keep = path
+	tags {
+		link = TEXT
+		link {
+			current = 1
+			typolink.parameter.data = parameters : allParams
+		}
+	}
+	nonTypoTagStdWrap.HTMLparser = 1
+	nonTypoTagStdWrap.HTMLparser {
+		keepNonMatchedTags = 1
+	}
+}
+
+lib.parseFunc_RTE < lib.parseFunc
+lib.parseFunc_RTE {
+	externalBlocks = article,aside,blockquote,div,dd,dl,footer,header,nav,ol,section,table,ul
+	externalBlocks {
+		# The blockquote content is passed into parseFunc again...
+		blockquote.stripNL=1
+		blockquote.callRecursive=1
+		blockquote.callRecursive.tagStdWrap.HTMLparser = 1
+
+		ol.stripNL=1
+		ol.stdWrap.parseFunc = < lib.parseFunc
+
+		ul.stripNL=1
+		ul.stdWrap.parseFunc = < lib.parseFunc
+
+		table.stripNL=1
+		table.stdWrap.HTMLparser = 1
+		table.stdWrap.HTMLparser.tags.table.fixAttrib.class {
+			default = contenttable
+			always = 1
+			list = contenttable
+		}
+		table.stdWrap.HTMLparser.keepNonMatchedTags = 1
+		table.HTMLtableCells=1
+		table.HTMLtableCells {
+			# Recursive call to self but without wrapping non-wrapped cell content
+			default.stdWrap {
+				parseFunc =< lib.parseFunc_RTE
+				parseFunc.nonTypoTagStdWrap.encapsLines.nonWrappedTag =
+			}
+			addChr10BetweenParagraphs=1
+		}
+		div.stripNL = 1
+		div.callRecursive = 1
+
+		article < .div
+		aside < .div
+		footer < .div
+		header < .div
+		nav < .div
+		section < .div
+
+		# Definition list processing
+		dl < .div
+		dd < .div
+	}
+	nonTypoTagStdWrap.encapsLines {
+		encapsTagList = p,pre,h1,h2,h3,h4,h5,h6,hr,dt : externalBlocks
+		remapTag.DIV = P
+		nonWrappedTag = P
+		innerStdWrap_all.ifBlank = &nbsp;
+	}
+	nonTypoTagStdWrap.HTMLparser = 1
+	nonTypoTagStdWrap.HTMLparser {
+		keepNonMatchedTags = 1
+		htmlSpecialChars = 2
+	}
+}

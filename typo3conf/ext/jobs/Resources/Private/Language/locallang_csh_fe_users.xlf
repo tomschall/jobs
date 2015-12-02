@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-11-24T09:48:09Z" product-name="jobs">
+		<header/>
+		<body>
+			<trans-unit id="is_frontend_admin.description">
+				<source>isFrontendAdmin</source>
+			</trans-unit>
+			<trans-unit id="additive.description">
+				<source>additive</source>
+			</trans-unit>
+			<trans-unit id="department.description">
+				<source>department</source>
+			</trans-unit>
+			<trans-unit id="po_box.description">
+				<source>poBox</source>
+			</trans-unit>
+			<trans-unit id="corporate.description">
+				<source>corporate</source>
+			</trans-unit>
+			<trans-unit id="documents.description">
+				<source>documents</source>
+			</trans-unit>
+			<trans-unit id="country.description">
+				<source>country</source>
+			</trans-unit>
+			<trans-unit id="insos_member.description">
+				<source>insosMember</source>
+			</trans-unit>
+			<trans-unit id="sozialinfo_member.description">
+				<source>sozialinfoMember</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
