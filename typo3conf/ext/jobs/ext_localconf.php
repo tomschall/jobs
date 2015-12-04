@@ -35,12 +35,12 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Joboffers',
 	array(
-		'JobOffer' => 'list, new, create',
+		'JobOffer' => 'list, new, create, delete',
 		
 	),
 	// non-cacheable actions
 	array(
-		'JobOffer' => 'list, new, create',
+		'JobOffer' => 'list, new, create, delete',
 		
 	)
 );

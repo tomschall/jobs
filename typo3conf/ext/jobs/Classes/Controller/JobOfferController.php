@@ -46,6 +46,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function listAction() {
 		$jobOffers = $this->jobOfferRepository->findAll();
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffers);
 		$this->view->assign('jobOffers', $jobOffers);
 	}
 
@@ -61,11 +62,31 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 	/**
 	 * action new
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer
 	 *
 	 * @return void
 	 */
-	public function newAction() {
+	public function newAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer = NULL) {
 		
+	}
+
+	public function initializeCreateAction() {
+		if(isset($this->arguments['newJobOffer'])) {
+			$this->arguments[$newJobOffer]
+			->getPropertyMappingConfiguration()
+			->forProperty('startDate')
+			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+			$this->arguments[$newActivity]
+			->getPropertyMappingConfiguration()
+			->forProperty('endDate')
+			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+			$this->arguments[$newActivity]
+			->getPropertyMappingConfiguration()
+			->forProperty('entryDate')
+			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+		}
 	}
 
 	/**
@@ -75,6 +96,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer) {
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newJobOffer);
 		$this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$this->jobOfferRepository->add($newJobOffer);
 		$this->redirect('list');
@@ -107,6 +129,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * action delete
 	 *
 	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @ignorevalidation $jobOffer
 	 * @return void
 	 */
 	public function deleteAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {

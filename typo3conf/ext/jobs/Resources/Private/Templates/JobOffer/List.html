@@ -26,7 +26,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_jobs_domain_model_joboffer.job_title" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.company" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.corporate" /></th>
-		<th><f:translate key="tx_jobs_domain_model_joboffer.documents" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.percent_of" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.percent_up" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.on_call" /></th>
@@ -35,6 +34,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_jobs_domain_model_joboffer.link_to_website" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_date" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_agreement" /></th>
+		<f:comment>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.entry_immediately" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.job_location" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.zip_job_location" /></th>
@@ -62,29 +62,29 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_german" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_french" /></th>
 		<th><f:translate key="tx_jobs_domain_model_joboffer.offer_is_italian" /></th>
-		<th><f:translate key="tx_jobs_domain_model_joboffer.start_date_renew" /></th>
+		</f:comment>
 		<th> </th>
 		<th> </th>
 	</tr>
 
 	<f:for each="{jobOffers}" as="jobOffer">
 		<tr>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.startDate -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.endDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"><f:format.date format="d.m.Y">{jobOffer.startDate}</f:format.date></f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"><f:format.date format="d.m.Y">{jobOffer.endDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.numberDaysPublication}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.publicationDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"><f:format.date format="d.m.Y">{jobOffer.publicationDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.jobTitle}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.company}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.corporate.originalResource.name}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.documents}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.percentOf}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.percentUp}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.onCall}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.employer}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.employerAddition}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.linkToWebsite}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"><f:format.date format="d.m.Y">{jobOffer.entryDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryAgreement}</f:link.action></td>
+			<f:comment>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.entryImmediately}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.jobLocation}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.zipJobLocation}</f:link.action></td>
@@ -112,7 +112,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsGerman}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsFrench}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.offerIsItalian}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobOffer : jobOffer}"> {jobOffer.startDateRenew -> f:format.date()}</f:link.action></td>
+			</f:comment>
 			<td><f:link.action action="edit" arguments="{jobOffer : jobOffer}">Edit</f:link.action></td>
 			<td><f:link.action action="delete" arguments="{jobOffer : jobOffer}">Delete</f:link.action></td>
 		</tr>

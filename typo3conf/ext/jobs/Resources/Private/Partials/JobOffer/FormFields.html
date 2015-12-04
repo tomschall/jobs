@@ -1,12 +1,19 @@
-
 <label for="startDate">
 	<f:translate key="tx_jobs_domain_model_joboffer.start_date" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="startDate"  value="{jobOffer.startDate->f:format.date()}" /><br />
+	<f:form.textfield property="startDate" /><br />
 <label for="endDate">
 	<f:translate key="tx_jobs_domain_model_joboffer.end_date" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="endDate"  value="{jobOffer.endDate->f:format.date()}" /><br />
+	<f:form.textfield property="endDate" /><br />
+<label for="jobTitle">
+	<f:translate key="tx_jobs_domain_model_joboffer.job_title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="jobTitle" /><br />
+
+<f:comment>
+
+
 <label for="numberDaysPublication">
 	<f:translate key="tx_jobs_domain_model_joboffer.number_days_publication" /> <span class="required">(required)</span>
 </label><br />
@@ -14,23 +21,11 @@
 <label for="publicationDate">
 	<f:translate key="tx_jobs_domain_model_joboffer.publication_date" />
 </label><br />
-	<f:form.textfield property="publicationDate"  value="{jobOffer.publicationDate->f:format.date()}" /><br />
-<label for="jobTitle">
-	<f:translate key="tx_jobs_domain_model_joboffer.job_title" /> <span class="required">(required)</span>
-</label><br />
-	<f:form.textfield property="jobTitle" /><br />
+	<f:form.textfield property="publicationDate" /><br />
 <label for="company">
 	<f:translate key="tx_jobs_domain_model_joboffer.company" /> <span class="required">(required)</span>
 </label><br />
 	<f:form.textfield property="company" /><br />
-<label for="corporate">
-	<f:translate key="tx_jobs_domain_model_joboffer.corporate" />
-</label><br />
-	<span>File upload is not implemented!</span><br  /><br />
-<label for="documents">
-	<f:translate key="tx_jobs_domain_model_joboffer.documents" />
-</label><br />
-	<span>File upload is not implemented!</span><br /><br />
 <label for="percentOf">
 	<f:translate key="tx_jobs_domain_model_joboffer.percent_of" /> <span class="required">(required)</span>
 </label><br />
@@ -55,10 +50,6 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.link_to_website" />
 </label><br />
 	<f:form.textfield property="linkToWebsite" /><br />
-<label for="entryDate">
-	<f:translate key="tx_jobs_domain_model_joboffer.entry_date" /> <span class="required">(required)</span>
-</label><br />
-	<f:form.textfield property="entryDate"  value="{jobOffer.entryDate->f:format.date()}" /><br />
 <label for="entryAgreement">
 	<f:translate key="tx_jobs_domain_model_joboffer.entry_agreement" />
 </label><br />
@@ -91,10 +82,6 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.further_information" />
 </label><br />
 	<f:form.textfield property="furtherInformation" /><br />
-<label for="applicationDeadline">
-	<f:translate key="tx_jobs_domain_model_joboffer.application_deadline" />
-</label><br />
-	<f:form.textfield property="applicationDeadline"  value="{jobOffer.applicationDeadline->f:format.date()}" /><br />
 <label for="assignmentReference">
 	<f:translate key="tx_jobs_domain_model_joboffer.assignment_reference" />
 </label><br />
@@ -147,31 +134,7 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.comments" />
 </label><br />
 	<f:form.textfield property="comments" /><br />
-<label for="deleteDate">
-	<f:translate key="tx_jobs_domain_model_joboffer.delete_date" />
-</label><br />
-	<f:form.textfield property="deleteDate"  value="{jobOffer.deleteDate->f:format.date()}" /><br />
-<label for="deletedHow">
-	<f:translate key="tx_jobs_domain_model_joboffer.deleted_how" />
-</label><br />
-	<f:form.textfield property="deletedHow" /><br />
-<label for="useAgreements">
-	<f:translate key="tx_jobs_domain_model_joboffer.use_agreements" />
-</label><br />
-	<f:form.checkbox property="useAgreements" value="1" /><br />
-<label for="offerIsGerman">
-	<f:translate key="tx_jobs_domain_model_joboffer.offer_is_german" />
-</label><br />
-	<f:form.checkbox property="offerIsGerman" value="1" /><br />
-<label for="offerIsFrench">
-	<f:translate key="tx_jobs_domain_model_joboffer.offer_is_french" />
-</label><br />
-	<f:form.checkbox property="offerIsFrench" value="1" /><br />
-<label for="offerIsItalian">
-	<f:translate key="tx_jobs_domain_model_joboffer.offer_is_italian" />
-</label><br />
-	<f:form.checkbox property="offerIsItalian" value="1" /><br />
-<label for="startDateRenew">
-	<f:translate key="tx_jobs_domain_model_joboffer.start_date_renew" />
-</label><br />
-	<f:form.textfield property="startDateRenew"  value="{jobOffer.startDateRenew->f:format.date()}" /><br />
+
+
+
+</f:comment>

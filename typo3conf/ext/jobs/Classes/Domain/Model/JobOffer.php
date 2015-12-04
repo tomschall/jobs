@@ -36,6 +36,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var \DateTime
 	 * @validate NotEmpty
+	 * 
 	 */
 	protected $startDate = NULL;
 
@@ -43,7 +44,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * endDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $endDate = NULL;
 
@@ -51,7 +52,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * numberDaysPublication
 	 *
 	 * @var int
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $numberDaysPublication = 0;
 
@@ -74,7 +75,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * company
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $company = '';
 
@@ -97,7 +98,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * percentOf
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $percentOf = '';
 
@@ -119,7 +120,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * employer
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $employer = '';
 
@@ -141,7 +142,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * entryDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
+	 * 
 	 */
 	protected $entryDate = NULL;
 
@@ -451,7 +452,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $startDate
 	 * @return void
 	 */
-	public function setStartDate(\DateTime $startDate) {
+	public function setStartDate($startDate) {
 		$this->startDate = $startDate;
 	}
 
@@ -470,7 +471,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $endDate
 	 * @return void
 	 */
-	public function setEndDate(\DateTime $endDate) {
+	public function setEndDate($endDate) {
 		$this->endDate = $endDate;
 	}
 
@@ -508,7 +509,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $publicationDate
 	 * @return void
 	 */
-	public function setPublicationDate(\DateTime $publicationDate) {
+	public function setPublicationDate($publicationDate) {
 		$this->publicationDate = $publicationDate;
 	}
 
@@ -746,7 +747,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $entryDate
 	 * @return void
 	 */
-	public function setEntryDate(\DateTime $entryDate) {
+	public function setEntryDate($entryDate) {
 		$this->entryDate = $entryDate;
 	}
 
@@ -935,7 +936,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $applicationDeadline
 	 * @return void
 	 */
-	public function setApplicationDeadline(\DateTime $applicationDeadline) {
+	public function setApplicationDeadline($applicationDeadline) {
 		$this->applicationDeadline = $applicationDeadline;
 	}
 
@@ -1219,7 +1220,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $deleteDate
 	 * @return void
 	 */
-	public function setDeleteDate(\DateTime $deleteDate) {
+	public function setDeleteDate($deleteDate) {
 		$this->deleteDate = $deleteDate;
 	}
 
@@ -1369,7 +1370,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $startDateRenew
 	 * @return void
 	 */
-	public function setStartDateRenew(\DateTime $startDateRenew) {
+	public function setStartDateRenew($startDateRenew) {
 		$this->startDateRenew = $startDateRenew;
 	}
 
