@@ -34,10 +34,25 @@ class FrontendUserDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\Abstr
 	const PROCESS_STEP_MAXIMUM = 3;
 
 	/**
+	 * username
+	 *
+	 * @var string
+	 */
+	protected $username = '';
+
+	/**
+	 * password
+	 *
+	 * @var string
+	 * @validate NotEmpty, StringLength(minimum=8,maximum=16)
+	 */
+	protected $password = '';
+
+	/**
 	 * email
 	 *
 	 * @var string
-	 * @validate notEmpty
+	 * @validate NotEmpty, EmailAddress
 	 */
 	protected $email = '';
 
@@ -155,6 +170,44 @@ class FrontendUserDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\Abstr
 		$this->documents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->jobOffers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->jobRequests = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
+	 * Returns the username
+	 *
+	 * @return string $username
+	 */
+	public function getUsername() {
+		return $this->username;
+	}
+
+	/**
+	 * Sets the username
+	 *
+	 * @param string $username
+	 * @return void
+	 */
+	public function setUsername($username) {
+		$this->username = $username;
+	}
+
+	/**
+	 * Returns the password
+	 *
+	 * @return string $password
+	 */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	/**
+	 * Sets the password
+	 *
+	 * @param string $password
+	 * @return void
+	 */
+	public function setPassword($password) {
+		$this->password = $password;
 	}
 
 	/**

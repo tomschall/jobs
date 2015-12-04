@@ -57,80 +57,58 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	  */
 	public function newAction($frontendUser = NULL) {
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser,'frontendUser new begin action',8);
 		$this->hydrateFromSession($frontendUser);
 		$this->view->assign('frontendUser', $frontendUser);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_SESSION,'session new action',8);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser,'frontendUser new action',8);
 	}
 
 	public function initializeContinueAction() {
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertyMappingConfiguration,'propertyMappingConfiguration');
 		$propertyMappingConfiguration->allowProperties('documents','jobOffers','jobRequests');
 		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
 		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
 		$propertyMappingConfiguration->skipProperties('step');
 
 		if($this->arguments->hasArgument('frontendUser')){
-			
 			$arguments = $this->request->getArguments();
-			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments,'arguments');
-			
 			if($arguments['frontendUser']['step'] == 0){
-
 				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-
 	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation0');
-
 	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
 	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-
 	            // Alle alten Validatoren entfernen
 	            foreach ($conjunctionValidator->getValidators() as $validator) {
 	                $conjunctionValidator->removeValidator($validator);
 	            }
-	            
 	            // Validatoren des Models ItemDynamicValidation hinzufuegen
 	            $conjunctionValidator->addValidator($extendedValidator);
-	            
 	        }elseif($arguments['frontendUser']['step'] == 1){
-
 	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
 	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation1');
-	 
 	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
 	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-
 	            // Alle alten Validatoren entfernen
 	            foreach ($conjunctionValidator->getValidators() as $validator) {
 	                $conjunctionValidator->removeValidator($validator);
 	            }
-	            
 	            // Validatoren des Models ItemDynamicValidation hinzufuegen
 	            $conjunctionValidator->addValidator($extendedValidator);
 	        }elseif($arguments['frontendUser']['step'] == 2){
-
 	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation2');
-	 
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation2');
 	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
 	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-
 	            // Alle alten Validatoren entfernen
 	            foreach ($conjunctionValidator->getValidators() as $validator) {
 	                $conjunctionValidator->removeValidator($validator);
 	            }
-	            
 	            // Validatoren des Models ItemDynamicValidation hinzufuegen
 	            $conjunctionValidator->addValidator($extendedValidator);
 	        }
 	    }
-
 	}
 	
 	/**
@@ -148,46 +126,35 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$this->hydrateFromSession($frontendUser);
 		$frontendUser->increaseProcessStep();
 		$this->session->setSerialized('frontendUser', $frontendUser);
-		
 		if ($frontendUser->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\FrontendUser::PROCESS_STEP_MAXIMUM) {
 			$this->forward('create');
-		} else {
+		}else{
 			$this->redirect('new');
 		}
 	}
 
 	public function initializeCreateAction() {
-
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertyMappingConfiguration,'propertyMappingConfiguration');
 		$propertyMappingConfiguration->allowProperties('documents','jobOffers','jobRequests');
 		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
 		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
 		$propertyMappingConfiguration->skipProperties('step');
 		
 		if($this->arguments->hasArgument('frontendUser')){
-			
 			$arguments = $this->request->getArguments();
-			
 			if($arguments['frontendUser']['step'] == 2){
-
 				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-
 	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser');
-
 	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
 	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-
 	            // Alle alten Validatoren entfernen
 	            foreach ($conjunctionValidator->getValidators() as $validator) {
 	                $conjunctionValidator->removeValidator($validator);
 	            }
-	            
 	            // Validatoren des Models ItemDynamicValidation hinzufuegen
 	            $conjunctionValidator->addValidator($extendedValidator);
-	            
 	        }
 	    }
 	}
@@ -202,9 +169,11 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$this->hydrateFromSession($frontendUser);
+		$frontendUser->setUsername($frontendUser->getEmail());
 		$this->frontendUserRepository->add($frontendUser);
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
 		$this->persistenceManager->persistAll();
+		$this->session->remove('frontendUser');
 		$this->redirect('list', NULL, NULL, NULL);
 		//$this->redirect('createConfirm', NULL, NULL, array('frontendUser' => $frontendUser));
 	}
@@ -235,12 +204,10 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		if (!$frontendUser) {
 			$frontendUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\FrontendUser');
 			$newFrontendUser = TRUE;
-			echo "TRUE";
 		}
 		$currentFrontendUser = $this->session->getUnserialized('frontendUser');
 		
 		if ($currentFrontendUser) {
-			echo "currentFrontendUser <br/>";
 			if ($newFrontendUser) {
 				// Do not process properties on a plain new object,
 				// as no new properties are given. If you do process it,
@@ -267,13 +234,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			}			
 			$frontendUser->_setProperties($properties);
 		}
-		
 	}	
-
-
-
-
-
 
 	/**
 	 * action list

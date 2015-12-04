@@ -553,15 +553,6 @@ return array (
       array (
       ),
     ),
-    'lw_enet_multiple_action_forms' => 
-    array (
-      'composerName' => 'lw_enet_multiple_action_forms',
-      'state' => 'inactive',
-      'packagePath' => 'typo3conf/ext/lw_enet_multiple_action_forms/',
-      'suggestions' => 
-      array (
-      ),
-    ),
     'opendocs' => 
     array (
       'composerName' => 'typo3/cms-opendocs',

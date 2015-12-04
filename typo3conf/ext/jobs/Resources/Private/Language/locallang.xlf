@@ -9,6 +9,9 @@
 			<trans-unit id="tx_jobs_domain_model_frontenduser.username">
 				<source>Username</source>
 			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.password">
+				<source>Password</source>
+			</trans-unit>
 			<trans-unit id="tx_jobs_domain_model_frontenduser.email">
 				<source>Email</source>
 			</trans-unit>
