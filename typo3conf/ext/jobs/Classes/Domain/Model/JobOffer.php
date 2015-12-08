@@ -566,7 +566,7 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $corporate
 	 * @return void
 	 */
-	public function setCorporate(\TYPO3\CMS\Extbase\Domain\Model\FileReference $corporate) {
+	public function setCorporate($corporate) {
 		$this->corporate = $corporate;
 	}
 

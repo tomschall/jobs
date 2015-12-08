@@ -1,4 +1,3 @@
-
 config.tx_extbase{
     persistence{
         classes{
@@ -10,6 +9,7 @@ config.tx_extbase{
 					
           		}
             }
+            
             Sozialinfo\Jobs\Domain\Model\FrontendUser {
                 mapping {
                     tableName = fe_users
@@ -23,7 +23,18 @@ config.tx_extbase{
                     recordType = Tx_Jobs_CompanyFrontendUser
                 }
             }
-            
-    	}
+
+            Sozialinfo\Jobs\Domain\Model\FileReference {
+                mapping {
+                    tableName = sys_file_reference
+                    columns {
+                        uid_local.mapOnProperty = originalFileIdentifier
+                    }
+                }
+            }
+        }
+    }
+    objects {
+        TYPO3\CMS\Extbase\Domain\Model\FileReference.className = Sozialinfo\Jobs\Domain\Model\FileReference
     }
 }

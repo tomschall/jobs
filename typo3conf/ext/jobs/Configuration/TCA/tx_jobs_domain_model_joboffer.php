@@ -184,10 +184,17 @@ return array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_joboffer.corporate',
 			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-				'corporate',
-				array('maxitems' => 1,
+				'corporate', array(
+					'maxitems' => 1,
 					'appearance' => array(
 						'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+					),
+					// custom configuration for displaying fields in the overlay/reference table
+					// to use the imageoverlayPalette instead of the basicoverlayPalette
+					'foreign_match_fields' => array(
+						'fieldname' => 'corporate',
+						'tablenames' => 'tx_jobs_domain_model_joboffer',
+						'table_local' => 'sys_file',
 					),
 					'foreign_types' => array(
 						'0' => array(
@@ -230,10 +237,17 @@ return array(
 			'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_joboffer.documents',
 			'config' => 
 			\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-				'documents',
-				array('maxitems' => 3,
+				'documents',array(
+					'maxitems' => 3,
 					'appearance' => array(
 						'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+					),
+					// custom configuration for displaying fields in the overlay/reference table
+					// to use the imageoverlayPalette instead of the basicoverlayPalette
+					'foreign_match_fields' => array(
+						'fieldname' => 'documents',
+						'tablenames' => 'tx_jobs_domain_model_joboffer',
+						'table_local' => 'sys_file',
 					),
 					'foreign_types' => array(
 						'0' => array(

@@ -1,5 +1,16 @@
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
 <label for="poBox">
 	<f:translate key="tx_jobs_domain_model_frontenduser.po_box" />
 </label><br />
 	<f:form.textfield property="poBox" /><br />
+<label for="corporate">
+	<f:translate key="tx_jobs_domain_model_joboffer.corporate" />
+</label><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
 	<f:form.hidden property="step" value="2" />

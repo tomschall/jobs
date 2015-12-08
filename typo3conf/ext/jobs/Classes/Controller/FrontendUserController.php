@@ -25,6 +25,8 @@ namespace Sozialinfo\Jobs\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Sozialinfo\Jobs\Property\TypeConverter\UploadedFileReferenceConverter;
+use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 
 /**
  * FrontendUserController
@@ -58,6 +60,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	  */
 	public function newAction($frontendUser = NULL) {
 		$this->hydrateFromSession($frontendUser);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser);
 		$this->view->assign('frontendUser', $frontendUser);
 	}
 
@@ -68,6 +71,8 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
 		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
 		$propertyMappingConfiguration->skipProperties('step');
+
+		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
 
 		if($this->arguments->hasArgument('frontendUser')){
 			$arguments = $this->request->getArguments();
@@ -140,6 +145,8 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
 		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
 		$propertyMappingConfiguration->skipProperties('step');
+
+		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
 		
 		if($this->arguments->hasArgument('frontendUser')){
 			$arguments = $this->request->getArguments();
@@ -308,6 +315,34 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function deleteConfirmAction() {
 		
+	}
+
+	/**
+	 *
+	 */
+	protected function setTypeConverterConfigurationForImageUpload($argumentName) {
+
+		$uploadConfiguration = array(
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/'
+		);
+
+		// \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($uploadConfiguration);
+
+		/** @var PropertyMappingConfiguration $newFrontendUserConfiguration */
+		$newFrontendUserConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
+
+		$newFrontendUserConfiguration->forProperty('corporate')
+			->setTypeConverterOptions(
+				'Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$uploadConfiguration
+			);
+
+		$newFrontendUserConfiguration->forProperty('documents.0')
+			->setTypeConverterOptions(
+				'Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$uploadConfiguration
+			);
 	}
 
 }

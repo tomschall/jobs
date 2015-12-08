@@ -1,3 +1,4 @@
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
 <label for="startDate">
 	<f:translate key="tx_jobs_domain_model_joboffer.start_date" /> <span class="required">(required)</span>
 </label><br />
@@ -11,8 +12,30 @@
 </label><br />
 	<f:form.textfield property="jobTitle" /><br />
 
-<f:comment>
+<label for="corporate">
+	<f:translate key="tx_jobs_domain_model_joboffer.corporate" />
+</label><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
 
+<label for="documents">
+	<f:translate key="tx_jobs_domain_model_joboffer.documents" />
+</label><br />
+	<h:form.upload property="documents.0">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
+
+
+<f:comment>
 
 <label for="numberDaysPublication">
 	<f:translate key="tx_jobs_domain_model_joboffer.number_days_publication" /> <span class="required">(required)</span>
@@ -134,7 +157,5 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.comments" />
 </label><br />
 	<f:form.textfield property="comments" /><br />
-
-
 
 </f:comment>

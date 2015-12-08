@@ -608,6 +608,15 @@ return array (
         0 => 'sys_action',
       ),
     ),
+    'upload_example' => 
+    array (
+      'composerName' => 'upload_example',
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/upload_example/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'version' => 
     array (
       'composerName' => 'typo3/cms-version',

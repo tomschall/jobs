@@ -25,6 +25,8 @@ namespace Sozialinfo\Jobs\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Sozialinfo\Jobs\Property\TypeConverter\UploadedFileReferenceConverter;
+use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 
 /**
  * JobOfferController
@@ -71,6 +73,8 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	}
 
 	public function initializeCreateAction() {
+		$this->setTypeConverterConfigurationForImageUpload('newJobOffer');
+
 		if(isset($this->arguments['newJobOffer'])) {
 			$this->arguments[$newJobOffer]
 			->getPropertyMappingConfiguration()
@@ -96,7 +100,6 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer) {
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newJobOffer);
 		$this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$this->jobOfferRepository->add($newJobOffer);
 		$this->redirect('list');
@@ -154,6 +157,37 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function previewAction() {
 		
+	}
+
+	/**
+	 *
+	 */
+	protected function setTypeConverterConfigurationForImageUpload($argumentName) {
+
+		$uploadConfiguration = array(
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/'
+		);
+
+		$uploadConfigurationVideo = array(
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/'
+		);
+
+		/** @var PropertyMappingConfiguration $newJobOfferConfiguration */
+		$newJobOfferConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
+
+		$newJobOfferConfiguration->forProperty('corporate')
+			->setTypeConverterOptions(
+				'Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$uploadConfiguration
+			);
+
+		$newJobOfferConfiguration->forProperty('documents.0')
+			->setTypeConverterOptions(
+				'Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$uploadConfigurationVideo
+			);
 	}
 
 }

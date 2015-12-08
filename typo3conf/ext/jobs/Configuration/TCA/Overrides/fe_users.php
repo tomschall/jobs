@@ -31,6 +31,10 @@ if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
 	'after:' . $GLOBALS['TCA']['fe_users']['ctrl']['label']
 );
 
+/***************************
+ ** Company Frontend User **
+ ***************************/
+
 $tmp_jobs_columns = array(
 
 	'is_frontend_admin' => array(
@@ -72,10 +76,17 @@ $tmp_jobs_columns = array(
 		'exclude' => 0,
 		'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_companyfrontenduser.corporate',
 		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-			'corporate',
-			array('maxitems' => 1,
+			'corporate',array(
+				'maxitems' => 1,
 				'appearance' => array(
 					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				// custom configuration for displaying fields in the overlay/reference table
+				// to use the imageoverlayPalette instead of the basicoverlayPalette
+				'foreign_match_fields' => array(
+					'fieldname' => 'corporate',
+					'tablenames' => 'fe_users',
+					'table_local' => 'sys_file',
 				),
 				'foreign_types' => array(
 					'0' => array(
@@ -122,6 +133,13 @@ $tmp_jobs_columns = array(
 			array('maxitems' => 3,
 				'appearance' => array(
 					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+				),
+				// custom configuration for displaying fields in the overlay/reference table
+				// to use the imageoverlayPalette instead of the basicoverlayPalette
+				'foreign_match_fields' => array(
+					'fieldname' => 'documents',
+					'tablenames' => 'fe_users',
+					'table_local' => 'sys_file',
 				),
 				'foreign_types' => array(
 					'0' => array(
@@ -212,6 +230,13 @@ $GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_CompanyFrontendUser']['showitem'] 
 
 $GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = array('LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Tx_Jobs_CompanyFrontendUser','Tx_Jobs_CompanyFrontendUser');
 
+
+
+/***************************
+ ****** Frontend User ******
+ ***************************/
+
+
 $tmp_jobs_columns = array(
 
 	'additive' => array(
@@ -249,6 +274,13 @@ $tmp_jobs_columns = array(
 			array('maxitems' => 1,
 				'appearance' => array(
 					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				// custom configuration for displaying fields in the overlay/reference table
+				// to use the imageoverlayPalette instead of the basicoverlayPalette
+				'foreign_match_fields' => array(
+					'fieldname' => 'corporate',
+					'tablenames' => 'fe_users',
+					'table_local' => 'sys_file',
 				),
 				'foreign_types' => array(
 					'0' => array(
@@ -295,6 +327,13 @@ $tmp_jobs_columns = array(
 			array('maxitems' => 3,
 				'appearance' => array(
 					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+				),
+				// custom configuration for displaying fields in the overlay/reference table
+				// to use the imageoverlayPalette instead of the basicoverlayPalette
+				'foreign_match_fields' => array(
+					'fieldname' => 'documents',
+					'tablenames' => 'fe_users',
+					'table_local' => 'sys_file',
 				),
 				'foreign_types' => array(
 					'0' => array(

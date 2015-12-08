@@ -35,12 +35,12 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Joboffers',
 	array(
-		'JobOffer' => 'list, new, create, delete',
+		'JobOffer' => 'list, new, create, delete, edit, show',
 		
 	),
 	// non-cacheable actions
 	array(
-		'JobOffer' => 'list, new, create, delete',
+		'JobOffer' => 'list, new, create, delete, edit, show',
 		
 	)
 );
@@ -58,3 +58,6 @@ if (!defined('TYPO3_MODE')) {
 		
 	)
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter('Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter');
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter('Sozialinfo\\Jobs\\Property\\TypeConverter\\ObjectStorageConverter');
