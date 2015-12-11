@@ -1,0 +1,23 @@
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
+<label for="corporate">
+	<f:translate key="tx_jobs_domain_model_joboffer.corporate" />
+</label><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
+
+<label for="documents">
+	<f:translate key="tx_jobs_domain_model_joboffer.documents" />
+</label><br />
+	<h:form.upload property="documents.0">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
+	<f:form.hidden property="step" value="2" />

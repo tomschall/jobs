@@ -1,26 +1,41 @@
-
 <f:layout name="Default" />
 
-This template displays a EDIT form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Edit.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Edit JobOffer</h1>
+	<h1>Edit JobOffer</h1>
 
-<f:flashMessages />
+	<f:flashMessages />
 
-<f:render partial="FormErrors" arguments="{object:JobOffer}" />
+	<f:render partial="FormErrors" arguments="{object:JobOffer}" />
 
-<f:form action="update" name="jobOffer" object="{jobOffer}" >
-<f:render partial="JobOffer/FormFields" arguments="{jobOffer:jobOffer}" />
-	<f:form.submit value="Save" />
-</f:form>
+	<f:if condition="{jobOffer.processStep}==0">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFieldsEdit0" arguments="{jobOffer:jobOffer}" />
+			<f:form.submit value="Step 2" />
+		</f:form>
+	</f:if>
+	
+	<f:if condition="{jobOffer.processStep}==1">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFieldsEdit1" arguments="{jobOffer:jobOffer}" />
+			<f:form.submit value="Step3" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>		
+		<br /><br />
+	</f:if>
+	
+	<f:if condition="{jobOffer.processStep}==2">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFieldsEdit2" arguments="{jobOffer:jobOffer}" />
+			<f:form.submit value="Speichern" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>		
+		<br /><br />
+	</f:if>
+	<f:if condition="{jobOffer.processStep}==3">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFieldsEdit3" arguments="{jobOffer:jobOffer}" />
+			<f:form.submit value="Weiter" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>
+	</f:if>
 </f:section>

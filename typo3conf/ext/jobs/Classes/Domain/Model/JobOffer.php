@@ -29,13 +29,22 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * JobOffer
  */
-class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer {
+
+	const PROCESS_STEP_MAXIMUM = 3;
+
+	/**
+	 * processStep
+	 *
+	 * @var int
+	 */
+	protected $processStep = 0;
 
 	/**
 	 * startDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
+	 
 	 * 
 	 */
 	protected $startDate = NULL;
@@ -67,7 +76,6 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * jobTitle
 	 *
 	 * @var string
-	 * @validate NotEmpty
 	 */
 	protected $jobTitle = '';
 
@@ -1643,6 +1651,35 @@ class JobOffer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTypeOfInstitution(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $typeOfInstitution) {
 		$this->typeOfInstitution = $typeOfInstitution;
+	}
+
+	/**
+	 * Returns the processStep
+	 *
+	 * @return int $processStep
+	 */
+	public function getProcessStep() {
+		return $this->processStep;
+	}
+
+	/**
+	 * Increases the processStep
+	 *
+	 * @param int $processStep
+	 * @return void
+	 */
+	public function increaseProcessStep() {
+		$this->processStep += 1;
+	}
+
+	/**
+	 * Decrease the processStep
+	 *
+	 * @param int $processStep
+	 * @return void
+	 */
+	public function decreaseProcessStep() {
+		$this->processStep -= 1;
 	}
 
 }

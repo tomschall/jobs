@@ -1,27 +1,40 @@
-
 <f:layout name="Default" />
 
-This template displays a NEW form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        New.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>New JobOffer</h1>
+	<h1>New JobOffer</h1>
 
-<f:flashMessages />
+	<f:flashMessages />
 
-<f:render partial="FormErrors" arguments="{object:newJobOffer}" />
+	<f:render partial="FormErrors" arguments="{object:JobOffer}" />
 
-<f:form action="create"  enctype="multipart/form-data"  name="newJobOffer" object="{newJobOffer}">
-<f:render partial="JobOffer/FormFields" />
-	<br/><br/>
-	<f:form.submit value="Create new" />
-</f:form>
+	<f:if condition="{jobOffer.processStep}==0">
+		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFields0" arguments="{jobOffer:jobOffer}"/>
+			<f:form.submit value="Step 2" />
+		</f:form>
+	</f:if>
+	
+	<f:if condition="{jobOffer.processStep}==1">
+		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFields1" />
+			<f:form.submit value="Step3" />
+		</f:form>
+		<f:link.action action="previous">Zurück</f:link.action>		
+		<br /><br />
+	</f:if>
+	
+	<f:if condition="{jobOffer.processStep}==2">
+		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFields2" />
+			<f:form.submit value="Speichern" />
+		</f:form>
+		<f:link.action action="previous">Zurück</f:link.action>		
+		<br /><br />
+	</f:if>
+	<f:if condition="{jobOffer.processStep}==3">
+		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
+			<f:render partial="JobOffer/FormFields3" />
+			<f:form.submit value="Weiter" />
+		</f:form>
+	</f:if>
 </f:section>

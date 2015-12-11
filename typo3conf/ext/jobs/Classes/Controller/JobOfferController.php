@@ -42,6 +42,353 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $jobOfferRepository = NULL;
 
 	/**
+	 * Sessions
+	 *
+	 * @var \Sozialinfo\Jobs\Persistence\Session
+	 * @inject
+	 */
+	protected $session = NULL;
+
+	/**
+	 * New action.
+	 *
+	 * Displays form in its current step.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @ignorevalidation $jobOffer
+	 * @return void
+	  */
+	public function newAction($jobOffer = NULL) {
+		$this->hydrateFromSession($jobOffer);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer);
+		$this->view->assign('jobOffer', $jobOffer);
+	}
+
+	public function initializeContinueAction() {
+
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->skipProperties('step');
+		
+		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+
+		if(isset($this->arguments['jobOffer'])) {
+			if($arguments['jobOffer']['step'] == 0){
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('startDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('endDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('entryDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+			}
+		}
+	}
+	
+	/**
+	 * Continue action.
+	 *
+	 * Validates the object, stores data inside session and continues to the next step.
+	 *
+	 * Remember that data coming from the $model parameter only contains data from the
+	 * current step (unless you put a lot of hidden fields inside your view for each step).
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\jobOffer $jobOffer
+	 * @return void
+	 */
+	public function continueAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		$this->hydrateFromSession($jobOffer);
+		$jobOffer->increaseProcessStep();
+		$this->session->setSerialized('jobOffer', $jobOffer);
+		
+		if ($jobOffer->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\JobOffer::PROCESS_STEP_MAXIMUM) {
+			$this->forward('create');
+		}else{
+			$this->redirect('new');
+		}
+	}
+
+	public function initializeCreateAction() {
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->skipProperties('step');
+
+		//$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+		
+		/*
+		if($this->arguments->hasArgument('frontendUser')){
+			$arguments = $this->request->getArguments();
+			if($arguments['frontendUser']['step'] == 2){
+				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+	            // Alle alten Validatoren entfernen
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // Validatoren des Models ItemDynamicValidation hinzufuegen
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }
+	    }
+	    */
+	}
+	
+	/**
+	 * Create action.
+	 *
+	 * Last step of the form, persists the record.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @return void
+	 */
+	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		$this->hydrateFromSession($jobOffer);
+		$this->jobOfferRepository->add($jobOffer);
+		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
+		$this->persistenceManager->persistAll();
+		$this->session->remove('jobOffer');
+		$this->redirect('list', NULL, NULL, NULL);
+		//$this->redirect('createConfirm', NULL, NULL, array('frontendUser' => $frontendUser));
+	}
+
+	/**
+	 * Previous action.
+	 * 
+	 * Takes model a step back.
+	 *
+	 * @return void
+	 */
+	public function previousAction() {
+		$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+		$this->hydrateFromSession($jobOffer);
+		$jobOffer->decreaseProcessStep();
+		$this->session->setSerialized('jobOffer', $jobOffer);
+		$this->redirect('new');
+	}
+
+	/**
+	 * Hydrate given object with data stored inside session.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @return void
+	 */
+	protected function hydrateFromSession(\Sozialinfo\Jobs\Domain\Model\JobOffer &$jobOffer = NULL) {
+		$newJobOffer = FALSE;
+		if (!$jobOffer) {
+			$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+			$newJobOffer = TRUE;
+		}
+		$currentJobOffer = $this->session->getUnserialized('jobOffer');
+		
+		if ($currentJobOffer) {
+			if ($newJobOffer) {
+				// Do not process properties on a plain new object,
+				// as no new properties are given. If you do process it,
+				// default properties are used for overriding in array_merge
+				// and you will never leave step 0.
+				$properties = array_filter(
+					$currentJobOffer->_getPublicProperties(),
+					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+				);
+			} else {
+				$properties = array_filter(
+						$currentJobOffer->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				$propertiesToMerge = array_filter(
+						$jobOffer->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				foreach($propertiesToMerge as $key => $value){
+					if($value != ''){
+						$properties[$key] = $value; 
+					}
+				}
+			}			
+			$jobOffer->_setProperties($properties);
+		}
+	}
+
+	/**
+	 * edit action.
+	 *
+	 * Displays edit form in its current step.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @ignorevalidation $jobOffer
+	 * @return void
+	  */
+	public function editAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer=NULL) {
+		$this->hydrateEditFromSession($jobOffer);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
+		$this->view->assign('jobOffer', $jobOffer);
+	}
+
+	public function initializeContinueEditAction() {
+
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->skipProperties('step');
+		
+		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+
+		if(isset($this->arguments['jobOffer'])) {
+			if($arguments['jobOffer']['step'] == 0){
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('startDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('endDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('entryDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+			}
+		}
+	}
+	
+	/**
+	 * Continue edit action.
+	 *
+	 * shows current object data, Validates the object and
+	 * stores data inside session and continues to the next step.
+	 *
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\jobOffer $jobOffer
+	 * @return void
+	 */
+	public function continueEditAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		$this->hydrateEditFromSession($jobOffer);
+		$jobOffer->increaseProcessStep();
+		$this->session->setSerialized('jobOfferEdit', $jobOffer);
+
+		if ($jobOffer->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\JobOffer::PROCESS_STEP_MAXIMUM) {
+			$this->forward('update');
+		}else{
+			$this->redirect('edit');
+		}
+	}
+
+	public function initializeUpdateAction() {
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->skipProperties('step');
+		
+	}
+	
+	/**
+	 * Update action.
+	 *
+	 * Last step of the edit form, updates the record.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @return void
+	 */
+	public function updateAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		$this->hydrateEditFromSession($jobOffer);
+		$this->jobOfferRepository->update($jobOffer);
+		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
+		$this->persistenceManager->persistAll();
+		$this->session->remove('jobOfferEdit');
+		$this->redirect('list', NULL, NULL, NULL);
+	}
+
+	/**
+	 * Previous Edit action.
+	 * 
+	 * Takes model a step back.
+	 *
+	 * @return void
+	 */
+	public function previousEditAction() {
+		$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+		$this->hydrateEditFromSession($jobOffer);
+		$jobOffer->decreaseProcessStep();
+		$this->session->setSerialized('jobOfferEdit', $jobOffer);
+		$this->redirect('edit');
+	}
+
+	/**
+	 * Hydrate given object with data stored inside session.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
+	 * @return void
+	 */
+	protected function hydrateEditFromSession(\Sozialinfo\Jobs\Domain\Model\JobOffer &$jobOffer = NULL) {
+		$newJobOffer = FALSE;
+		if (!$jobOffer) {
+			$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+			$newJobOffer = TRUE;
+		}
+		$currentJobOffer = $this->session->getUnserialized('jobOfferEdit');
+		
+		if ($currentJobOffer) {
+			if ($newJobOffer) {
+				// Do not process properties on a plain new object,
+				// as no new properties are given. If you do process it,
+				// default properties are used for overriding in array_merge
+				// and you will never leave step 0.
+				$properties = array_filter(
+					$currentJobOffer->_getPublicProperties(),
+					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+				);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties new job offer');
+			} else {
+				$properties = array_filter(
+						$currentJobOffer->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties not new job offer');
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'properties not new job offer joboffer');
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($currentJobOffer,'properties not new job offer currentjoboffer');
+				
+				// !!!!IMPORTANT!!!!
+				// Here you have to set current properties which have not to be merged to NULL, 
+				// if you do not, the new object will not be merged right
+				if($currentJobOffer->getProcessStep() == 1){
+					$jobOffer->setStartDate(NULL);
+					$jobOffer->setEndDate(NULL);
+				}
+
+				if($currentJobOffer->getProcessStep() == 2){
+					$jobOffer->setStartDate(NULL);
+					$jobOffer->setEndDate(NULL);
+					$jobOffer->setJobTitle(NULL);
+				}
+				
+				$propertiesToMerge = array_filter(
+						$jobOffer->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertiesToMerge,'propertiesToMerge');
+				foreach($propertiesToMerge as $key => $value){
+					if($value != ''){
+						$properties[$key] = $value; 
+					}
+				}
+			}		
+			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties end');	
+			$jobOffer->_setProperties($properties);
+
+
+		}
+	}
+
+	/**
 	 * action list
 	 *
 	 * @return void
@@ -62,71 +409,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('jobOffer', $jobOffer);
 	}
 
-	/**
-	 * action new
-	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer
-	 *
-	 * @return void
-	 */
-	public function newAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer = NULL) {
-		
-	}
-
-	public function initializeCreateAction() {
-		$this->setTypeConverterConfigurationForImageUpload('newJobOffer');
-
-		if(isset($this->arguments['newJobOffer'])) {
-			$this->arguments[$newJobOffer]
-			->getPropertyMappingConfiguration()
-			->forProperty('startDate')
-			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-			$this->arguments[$newActivity]
-			->getPropertyMappingConfiguration()
-			->forProperty('endDate')
-			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-			$this->arguments[$newActivity]
-			->getPropertyMappingConfiguration()
-			->forProperty('entryDate')
-			->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-		}
-	}
-
-	/**
-	 * action create
-	 *
-	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer
-	 * @return void
-	 */
-	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $newJobOffer) {
-		$this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-		$this->jobOfferRepository->add($newJobOffer);
-		$this->redirect('list');
-	}
-
-	/**
-	 * action edit
-	 *
-	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
-	 * @ignorevalidation $jobOffer
-	 * @return void
-	 */
-	public function editAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
-		$this->view->assign('jobOffer', $jobOffer);
-	}
-
-	/**
-	 * action update
-	 *
-	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
-	 * @return void
-	 */
-	public function updateAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
-		$this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-		$this->jobOfferRepository->update($jobOffer);
-		$this->redirect('list');
-	}
+	
 
 	/**
 	 * action delete
