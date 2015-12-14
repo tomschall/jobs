@@ -9,7 +9,7 @@
 
 	<f:if condition="{jobOffer.processStep}==0">
 		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
-			<f:render partial="JobOffer/FormFieldsEdit0" arguments="{jobOffer:jobOffer}" />
+			<f:render partial="JobOffer/FormFieldsEdit0" arguments="{jobOffer:jobOffer,canton:canton}" />
 			<f:form.submit value="Step 2" />
 		</f:form>
 	</f:if>

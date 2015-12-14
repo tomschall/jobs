@@ -49,6 +49,22 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	protected $session = NULL;
 
+	/*
+	public function initializeAction() {
+		$action = $this->request->getControllerActionName();
+		// pruefen, ob eine andere Action ausser "show" aufgerufen wurde
+		if ($action != 'show' AND $action != 'list' AND $action != 'listFilterCategory'){
+			// Redirect zur Login Seite (UID=21) falls nicht eingeloggt
+			if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->fe_user->user['uid']);
+				$this->redirect(NULL, NULL, NULL, NULL, $this->settings['activity']['redirectLoginUid']);
+			}
+		}elseif($GLOBALS['TSFE']->fe_user->user['uid'] AND $action == 'listAdmin'){
+			$this->redirect('listAdmin');
+		}
+	}
+	*/
+
 	/**
 	 * New action.
 	 *

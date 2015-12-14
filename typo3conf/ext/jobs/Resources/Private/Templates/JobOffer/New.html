@@ -9,14 +9,14 @@
 
 	<f:if condition="{jobOffer.processStep}==0">
 		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
-			<f:render partial="JobOffer/FormFields0" arguments="{jobOffer:jobOffer}"/>
+			<f:render partial="JobOffer/FormFields0" arguments="{jobOffer:jobOffer,canton:canton}" />
 			<f:form.submit value="Step 2" />
 		</f:form>
 	</f:if>
 	
 	<f:if condition="{jobOffer.processStep}==1">
 		<f:form action="continue" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
-			<f:render partial="JobOffer/FormFields1" />
+			<f:render partial="JobOffer/FormFields1" arguments="{canton:canton}" />
 			<f:form.submit value="Step3" />
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		

@@ -6,4 +6,8 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.end_date" /> <span class="required">(required)</span>
 </label><br />
 	<f:form.textfield property="endDate" value="{jobOffer.endDate->f:format.date(format:'d.m.Y')}" /><br />
+<label for="canton">
+	<f:translate key="tx_jobs_domain_model_joboffer.canton" /> 
+</label><br />
+	<f:form.select name="canton" options="{canton}" optionLabelField="title" property="canton" multiple="3" /><br />
 	<f:form.hidden property="step" value="0" />

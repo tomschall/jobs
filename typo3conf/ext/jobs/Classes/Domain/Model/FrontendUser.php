@@ -564,8 +564,6 @@ class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity {
 	 * @return string
 	 */
 	public function serialize() {
-		echo "serialize";
-		exit();
 		$properties = $this->_getPublicProperties();
 		$objectStorages = array();
 		foreach($properties as $key => $value) {
@@ -585,8 +583,6 @@ class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	public function unserialize($serialized) {
-		echo "unserialize";
-		exit();
 		$data = unserialize($serialized);
 		$this->initStorageObjects();
 		foreach ($data['_objectStorages'] as $property => $values) {

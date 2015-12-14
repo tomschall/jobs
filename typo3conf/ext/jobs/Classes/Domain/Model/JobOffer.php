@@ -29,7 +29,7 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * JobOffer
  */
-class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer {
+class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
 
 	const PROCESS_STEP_MAXIMUM = 3;
 
@@ -44,7 +44,6 @@ class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer {
 	 * startDate
 	 *
 	 * @var \DateTime
-	 
 	 * 
 	 */
 	protected $startDate = NULL;
@@ -1680,6 +1679,48 @@ class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer {
 	 */
 	public function decreaseProcessStep() {
 		$this->processStep -= 1;
+	}
+
+	/**
+	 * Serialization method.
+	 *
+	 * As Extbase's ObjectStorage objects can't be serialized,
+	 * a workaroung has to be implemented in order to store
+	 * the whole breakout data.
+	 *
+	 * @todo test coverage
+	 * @return string
+	 */
+	public function serialize() {
+		$properties = $this->_getPublicProperties();
+		$objectStorages = array();
+		foreach($properties as $key => $value) {
+			if ($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+				unset($properties[$key]);
+				$objectStorages[$key] = $value->toArray();
+			}
+		}
+		$properties['_objectStorages'] = $objectStorages;
+		return serialize($properties);
+	}
+	
+	/**
+	 * Unserialize method.
+	 *
+	 * @todo test coverage
+	 * @return void
+	 */
+	public function unserialize($serialized) {
+		$data = unserialize($serialized);
+		
+		$this->initStorageObjects();
+		foreach ($data['_objectStorages'] as $property => $values) {
+			foreach ($values as $value) {
+				$this->{$property}->attach($value);
+			}
+		}
+		unset($data['_objectStorages']);
+		$this->_setProperties($data);
 	}
 
 }

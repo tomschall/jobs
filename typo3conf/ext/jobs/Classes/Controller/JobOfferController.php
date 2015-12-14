@@ -61,34 +61,44 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	public function newAction($jobOffer = NULL) {
 		$this->hydrateFromSession($jobOffer);
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_SESSION);
+
 		$this->view->assign('jobOffer', $jobOffer);
+		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
 	}
 
 	public function initializeContinueAction() {
 
+		$arguments = $this->request->getArguments();
+		//$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
-		$propertyMappingConfiguration->skipProperties('step');
-		
-		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+
+		$propertyMappingConfiguration->allowProperties('canton');
+		$propertyMappingConfiguration->allowCreationForSubProperty('canton.*');
+		$propertyMappingConfiguration->forProperty('canton')->allowAllPropertiesExcept('uid', 'pid');
+
+		$propertyMappingConfiguration->skipProperties('step');		
 
 		if(isset($this->arguments['jobOffer'])) {
 			if($arguments['jobOffer']['step'] == 0){
-				$this->arguments[$jobOffer]
+				$this->arguments['jobOffer']
 				->getPropertyMappingConfiguration()
 				->forProperty('startDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 
-				$this->arguments[$jobOffer]
+				$this->arguments['jobOffer']
 				->getPropertyMappingConfiguration()
 				->forProperty('endDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 
-				$this->arguments[$jobOffer]
+				$this->arguments['jobOffer']
 				->getPropertyMappingConfiguration()
 				->forProperty('entryDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
+
 		}
 	}
 	
@@ -209,8 +219,10 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 					);
 				foreach($propertiesToMerge as $key => $value){
-					if($value != ''){
+					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
+					}elseif(is_object($value) AND count(get_object_vars($value)) > 0){
+						$properties[$key] = $value;
 					}
 				}
 			}			
@@ -230,6 +242,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	public function editAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer=NULL) {
 		$this->hydrateEditFromSession($jobOffer);
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
+		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
 		$this->view->assign('jobOffer', $jobOffer);
 	}
 
@@ -376,8 +389,10 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 					);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertiesToMerge,'propertiesToMerge');
 				foreach($propertiesToMerge as $key => $value){
-					if($value != ''){
+					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
+					}elseif(is_object($value) AND count(get_object_vars($value)) > 0){
+						$properties[$key] = $value;
 					}
 				}
 			}		
