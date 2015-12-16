@@ -161,6 +161,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
 		$this->hydrateFromSession($jobOffer);
 		$this->jobOfferRepository->add($jobOffer);
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
@@ -193,14 +194,14 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	protected function hydrateFromSession(\Sozialinfo\Jobs\Domain\Model\JobOffer &$jobOffer = NULL) {
 		$newJobOffer = FALSE;
-		if (!$jobOffer) {
+		if(!$jobOffer){
 			$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
 			$newJobOffer = TRUE;
 		}
 		$currentJobOffer = $this->session->getUnserialized('jobOffer');
 		
-		if ($currentJobOffer) {
-			if ($newJobOffer) {
+		if($currentJobOffer){
+			if($newJobOffer){
 				// Do not process properties on a plain new object,
 				// as no new properties are given. If you do process it,
 				// default properties are used for overriding in array_merge
@@ -209,7 +210,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 					$currentJobOffer->_getPublicProperties(),
 					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 				);
-			} else {
+			}else{
 				$properties = array_filter(
 						$currentJobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
@@ -221,8 +222,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				foreach($propertiesToMerge as $key => $value){
 					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
-					}elseif(is_object($value) AND count(get_object_vars($value)) > 0){
-						$properties[$key] = $value;
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+							$tmp = $value->toArray();
+							if(!empty($tmp)){
+								$properties[$key] = $value;		
+							}
 					}
 				}
 			}			
@@ -361,6 +365,13 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties new job offer');
 			} else {
+				// !!!!IMPORTANT!!!!
+				// Here you have to set current properties which have not to be merged to NULL, 
+				// if you do not, the new object will not be merged right
+				if($currentJobOffer->getProcessStep() == 2){
+					$currentJobOffer->setDocuments(new \TYPO3\CMS\Extbase\Persistence\ObjectStorage());
+					$currentJobOffer->setCorporate(new \TYPO3\CMS\Extbase\Domain\Model\FileReference());
+				}
 				$properties = array_filter(
 						$currentJobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
@@ -387,19 +398,27 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						$jobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 					);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties');
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertiesToMerge,'propertiesToMerge');
 				foreach($propertiesToMerge as $key => $value){
 					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
-					}elseif(is_object($value) AND count(get_object_vars($value)) > 0){
-						$properties[$key] = $value;
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+							$tmp = $value->toArray();
+							if(!empty($tmp)){
+								$properties[$key] = $value;		
+							}
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+							$tmpf = (array) $value;
+							if(!empty($tmpf)){
+								$properties[$key] = $value;		
+							}
 					}
+
 				}
 			}		
 			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties end');	
 			$jobOffer->_setProperties($properties);
-
-
 		}
 	}
 

@@ -2,5 +2,8 @@
 	<f:translate key="tx_jobs_domain_model_joboffer.job_title" /> <span class="required">(required)</span>
 </label><br />
 	<f:form.textfield property="jobTitle" /><br />
-
+<label for="canton">
+	<f:translate key="tx_jobs_domain_model_joboffer.canton" /> 
+</label><br />
+	<f:form.select name="canton" options="{canton}" optionLabelField="title" property="canton" multiple="3" /><br />
 	<f:form.hidden property="step" value="1" />
