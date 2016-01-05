@@ -18,6 +18,7 @@ return [
     ],
     'EXT' => [
         'extConf' => [
+            'be_secure_pw' => 'a:7:{s:10:"validUntil";s:0:"";s:14:"passwordLength";s:1:"8";s:13:"lowercaseChar";s:1:"1";s:11:"capitalChar";s:1:"1";s:5:"digit";s:1:"1";s:11:"specialChar";s:1:"1";s:8:"patterns";s:1:"4";}',
             'builder' => 'a:0:{}',
             'extension_builder' => 'a:3:{s:15:"enableRoundtrip";s:1:"1";s:15:"backupExtension";s:1:"1";s:9:"backupDir";s:35:"uploads/tx_extensionbuilder/backups";}',
             'feedit' => 'a:0:{}',

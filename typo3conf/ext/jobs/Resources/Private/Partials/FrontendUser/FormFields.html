@@ -1,7 +1,4 @@
-<label for="username">
-	<f:translate key="tx_jobs_domain_model_frontenduser.username" />
-</label><br />
-	<f:form.textfield property="username" /><br />
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
 <label for="email">
 	<f:translate key="tx_jobs_domain_model_frontenduser.email" />
 </label><br />
@@ -21,8 +18,10 @@
 <label for="corporate">
 	<f:translate key="tx_jobs_domain_model_frontenduser.corporate" />
 </label><br />
-	<span>File upload is not implemented!</span><br  /><br />
-<label for="documents">
-	<f:translate key="tx_jobs_domain_model_frontenduser.documents" />
-</label><br />
-	<span>File upload is not implemented!</span><br /><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />

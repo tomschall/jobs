@@ -407,6 +407,15 @@ return array (
       array (
       ),
     ),
+    'be_secure_pw' => 
+    array (
+      'composerName' => 'be_secure_pw',
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/be_secure_pw/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'extension_builder' => 
     array (
       'composerName' => 'ebt/extension_builder',
@@ -457,15 +466,6 @@ return array (
       'composerName' => 'powermail',
       'state' => 'active',
       'packagePath' => 'typo3conf/ext/powermail/',
-      'suggestions' => 
-      array (
-      ),
-    ),
-    'sf_register' => 
-    array (
-      'composerName' => 'sf_register',
-      'state' => 'active',
-      'packagePath' => 'typo3conf/ext/sf_register/',
       'suggestions' => 
       array (
       ),
@@ -576,6 +576,15 @@ return array (
       'composerName' => 'typo3/cms-scheduler',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/scheduler/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'sf_register' => 
+    array (
+      'composerName' => 'sf_register',
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/sf_register/',
       'suggestions' => 
       array (
       ),

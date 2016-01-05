@@ -1712,7 +1712,6 @@ class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer impl
 	 */
 	public function unserialize($serialized) {
 		$data = unserialize($serialized);
-		
 		$this->initStorageObjects();
 		foreach ($data['_objectStorages'] as $property => $values) {
 			foreach ($values as $value) {

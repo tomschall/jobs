@@ -59,6 +59,14 @@ plugin.tx_jobs_jobregistration {
 			}
 		}
 	}
+	settings {
+		jobregistration {
+			usergroupJobOffers = 1
+			usergroupJobRequests = 2
+			usergroupActivation = 3
+			usergroupActiveInstitution = 4
+		}
+	}
 }
 
 plugin.tx_jobs_jobuseradmin {

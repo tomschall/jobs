@@ -77,6 +77,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function newAction($frontendUser = NULL) {
 		$this->hydrateFromSession($frontendUser);
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings['jobregistration']['usergroupJobOffers']);
 		$this->view->assign('frontendUser', $frontendUser);
 	}
 
@@ -193,6 +194,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$this->hydrateFromSession($frontendUser);
 		$frontendUser->setUsername($frontendUser->getEmail());
+		$frontendUser->setUsergroup($this->settings['jobregistration']['usergroupJobOffers']);
 		$this->frontendUserRepository->add($frontendUser);
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
 		$this->persistenceManager->persistAll();
@@ -292,6 +294,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	}
 
 	/**
+	 * action initializeUpdateAction
+	 *
+	 */
+	public function initializeUpdateAction() {
+		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
+	}
+
+	/**
 	 * action update
 	 *
 	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
@@ -299,6 +309,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function updateAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+		$frontendUser->setUsername($frontendUser->getEmail());
 		$this->frontendUserRepository->update($frontendUser);
 		$this->redirect('list');
 	}

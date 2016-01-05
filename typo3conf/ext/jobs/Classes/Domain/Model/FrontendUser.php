@@ -29,7 +29,7 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * FrontendUser
  */
-class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity {
+class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity implements \Serializable {
 
 	const PROCESS_STEP_MAXIMUM = 3;
 
@@ -39,6 +39,13 @@ class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity {
 	 * @var string
 	 */
 	protected $username = '';
+
+	/**
+	 * usergroup
+	 *
+	 * @var string
+	 */
+	protected $usergroup = '';
 
 	/**
 	 * password
@@ -187,6 +194,45 @@ class FrontendUser extends \Sozialinfo\Jobs\DomainObject\AbstractEntity {
 	 */
 	public function setUsername($username) {
 		$this->username = $username;
+	}
+
+	/**
+	 * Adds a Usergroup
+	 *
+	 * @param string $usergroup
+	 * @return void
+	 */
+	public function addUsergroup($usergroup) {
+		$this->usergroup->attach($usergroup);
+	}
+
+	/**
+	 * Removes a Usergroup
+	 *
+	 * @param $usergroupToRemove The Usergroup to be removed
+	 * @return void
+	 */
+	public function removeUsergroup($usergroupToRemove) {
+		$this->usergroup->detach($usergroupToRemove);
+	}
+
+	/**
+	 * Returns the Usergroup
+	 *
+	 * @return $usergroup
+	 */
+	public function getUsergroup() {
+		return $this->usergroup;
+	}
+
+	/**
+	 * Sets the Usergroup
+	 *
+	 * @param $usergroup
+	 * @return void
+	 */
+	public function setUsergroup($usergroup) {
+		$this->usergroup = $usergroup;
 	}
 
 	/**
