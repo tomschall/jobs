@@ -1,5 +1,5 @@
 <?php
-namespace Sozialinfo\Jobs\Domain\Repository;
+namespace Sozialinfo\Jobs\Validation\Validator;
 
 /***************************************************************
  *
@@ -27,10 +27,19 @@ namespace Sozialinfo\Jobs\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for FrontendUsers
+ * Member Id Validator
  */
-class FrontendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	protected $defaultOrderings = array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
-
+class MemberIdValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+	public function isValid($property) {
+		$max = $this->options['max'];
+		if (str_word_count($property, 0) <= $max) {
+			return TRUE;
+		}else{
+			$this->addError('Verringern Sie die Anzahl der Worte - es sind maximal '.$max.' erlaubt!', 1383400016);
+			return FALSE;
+		}
+	}
 }
+
+?>

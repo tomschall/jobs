@@ -3,7 +3,7 @@ return [
     'BE' => [
         'debug' => true,
         'explicitADmode' => 'explicitAllow',
-        'installToolPassword' => '$P$Cx2FMYGu8YeXzi0X004JMJ0DxE.cNv.',
+        'installToolPassword' => '$P$CR5Zuqgpd0/dNZFpgnlmzEzDnIhf0o/',
         'loginSecurityLevel' => 'rsa',
         'unzip_path' => '3007',
         'versionNumberInFilename' => '0',

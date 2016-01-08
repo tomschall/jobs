@@ -7,11 +7,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Jobregistration',
 	array(
-		'FrontendUser' => 'list, new, preview, create, show, delete, continue, previous, hydrateFromSession, edit, update',
+		'FrontendUser' => 'list, new, preview, create, show, delete, continue, previous, hydrateFromSession, edit, update, cancel',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'list, new, preview, create, show, delete, continue, previous, hydrateFromSession, edit, update',
+		'FrontendUser' => 'list, new, preview, create, show, delete, continue, previous, hydrateFromSession, edit, update, cancel',
 	)
 );
 

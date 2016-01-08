@@ -65,7 +65,6 @@ class FrontendUserDynamicValidation1 extends \Sozialinfo\Jobs\DomainObject\Abstr
 	 * additive
 	 *
 	 * @var string
-	 * @validate Text, NotEmpty
 	 */
 	protected $additive = '';
 
@@ -73,7 +72,6 @@ class FrontendUserDynamicValidation1 extends \Sozialinfo\Jobs\DomainObject\Abstr
 	 * department
 	 *
 	 * @var string
-	 * @validate Text, NotEmpty
 	 */
 	protected $department = '';
 

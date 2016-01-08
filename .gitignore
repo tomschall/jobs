@@ -20,3 +20,4 @@
 /index.php
 # Ignore temp directory.
 /typo3temp/
+/typo3conf/ENABLE_INSTALL_TOOL

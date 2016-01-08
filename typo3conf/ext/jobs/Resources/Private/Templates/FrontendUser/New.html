@@ -13,6 +13,7 @@
 			<f:render partial="FrontendUser/FormFields0" />
 			<f:form.submit value="Step 2" />
 		</f:form>
+		<f:link.action action="cancel">Abbrechen</f:link.action>	
 	</f:if>
 	
 	<f:if condition="{frontendUser.processStep}==1">
@@ -21,6 +22,8 @@
 			<f:form.submit value="Step3" />
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
 		<br /><br />
 	</f:if>
 	
@@ -31,12 +34,19 @@
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		
 		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
 	</f:if>
+
 	<f:if condition="{frontendUser.processStep}==3">
 		<f:form action="continue" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
 			<f:render partial="FrontendUser/FormFields3" />
 			<f:form.submit value="Weiter" />
 		</f:form>
+		<f:link.action action="previous">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
 	</f:if>
 	
 	

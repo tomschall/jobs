@@ -32,6 +32,13 @@ namespace Sozialinfo\Jobs\Domain\Model;
 class CompanyFrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
+	 * uid
+	 *
+	 * @var int
+	 */
+	protected $uid = NULL;
+
+	/**
 	 * isFrontendAdmin
 	 *
 	 * @var bool
@@ -113,6 +120,15 @@ class CompanyFrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 */
 	protected function initStorageObjects() {
 		$this->documents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
+	 * Returns the uid
+	 *
+	 * @return int $uid
+	 */
+	public function getUid() {
+		return $this->uid;
 	}
 
 	/**

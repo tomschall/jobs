@@ -31,5 +31,29 @@ namespace Sozialinfo\Jobs\Domain\Repository;
  */
 class CompanyFrontendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	
+	protected $defaultOrderings = array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+
+	/**
+	* @param mixed $arguments
+	* @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	*/
+	public function findCompanyFrontendUser($arguments,$count=FALSE) {
+		
+		$query = $this->createQuery();
+		$query->matching(
+			$query->logicalAnd(
+				$query->equals('username', $arguments['frontendUser']['sozialinfoMemberUsername'], $caseSensitive = TRUE),
+				$query->equals('password', $arguments['frontendUser']['sozialinfoMemberPassword'], $caseSensitive = TRUE),
+				$query->equals('tx_extbase_type', 'Tx_Jobs_CompanyFrontendUser', $caseSensitive = TRUE)
+			)
+		);
+		
+		if($count == TRUE){
+			return $query->count();	
+		}else{
+			return $query->execute();	
+		}
+		
+	}
+
 }

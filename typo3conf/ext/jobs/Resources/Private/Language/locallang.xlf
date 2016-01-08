@@ -48,6 +48,31 @@
 			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member">
 				<source>Sozialinfo Member</source>
 			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_username">
+				<source>Sozialinfo Member Username</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password">
+				<source>Sozialinfo Member Password</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message">
+				<source>Sie müssen eine Mitgliedschaft aufweisen, um ein Inserat aufschalten zu können!</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_password">
+				<source>Sie müssen ein Passwort eingeben!</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_sozialinfo_member">
+				<source>Sie müssen den Benutzernamen der Institution eingeben!</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass">
+				<source>Ihre Institutionsdaten wurden erfolgreich erfasst!</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_wrong_user_password">
+				<source>Wir konnten keine Organisation mit diesen Zugangsdaten finden!</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_only_one_member">
+				<source>Sie können nur eine Mitgliedschaft verwenden</source>
+			</trans-unit>
+
 			<trans-unit id="tx_jobs_domain_model_joboffer">
 				<source>Job Offer</source>
 			</trans-unit>

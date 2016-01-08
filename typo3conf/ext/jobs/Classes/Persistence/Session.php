@@ -28,7 +28,7 @@ class Session implements \TYPO3\CMS\Core\SingletonInterface {
 	 * Stores the given value.
 	 *
 	 * @param string $key
-	 * @param mixed $valie
+	 * @param mixed $value
 	 * @return void
 	 */
 	

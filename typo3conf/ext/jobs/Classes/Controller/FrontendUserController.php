@@ -42,6 +42,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $frontendUserRepository = NULL;
 
 	/**
+	 * companyFrontendUserRepository
+	 *
+	 * @var \Sozialinfo\Jobs\Domain\Repository\CompanyFrontendUserRepository
+	 * @inject
+	 */
+	protected $companyFrontendUserRepository = NULL;
+
+	/**
 	 * Sessions
 	 *
 	 * @var \Sozialinfo\Jobs\Persistence\Session
@@ -87,7 +95,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$propertyMappingConfiguration->allowProperties('documents','jobOffers','jobRequests');
 		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
 		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
-		$propertyMappingConfiguration->skipProperties('step');
+		$propertyMappingConfiguration->skipProperties('step','sozialinfoMemberUsername','sozialinfoMemberPassword','insosMemberId');
 
 		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
 
@@ -145,6 +153,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function continueAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
+		$arguments = $this->request->getArguments();
+		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments);
+		if(array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) OR array_key_exists('insosMemberId', $arguments['frontendUser'])){
+			$companyFrontendUser = $this->validateMember($arguments);
+			if(is_object($companyFrontendUser)){
+				$frontendUser->setCompanyFrontendUser($companyFrontendUser[0]);	
+			}
+		}
 		$this->hydrateFromSession($frontendUser);
 		$frontendUser->increaseProcessStep();
 		$this->session->setSerialized('frontendUser', $frontendUser);
@@ -155,6 +171,72 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		}
 	}
 
+	public function validateMember($arguments) {
+		if($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+				TRUE
+			);
+			$this->redirect('new');
+		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_sozialinfo_member','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+				TRUE
+			);
+			$this->redirect('new');	
+		}elseif(($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '')){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_only_one_member','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR, 
+				TRUE
+			);
+			$this->redirect('new');	
+		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			if($arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
+				$this->addFlashMessage(
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_password','jobs'),
+					'',
+					\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+					TRUE
+				);
+				$this->redirect('new');	
+			}else{
+				if($this->companyFrontendUserRepository->findCompanyFrontendUser($arguments,TRUE) != TRUE){
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_wrong_user_password','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+						TRUE
+					);
+					$this->redirect('new');
+				}else{
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+						TRUE
+					);
+					$companyFrontendUser = $this->companyFrontendUserRepository->findCompanyFrontendUser($arguments);
+					return $companyFrontendUser;
+				}
+			}
+		}elseif($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+				TRUE
+			);	
+		}
+		//$frontendUsers = $this->frontendUserRepository->findAll();
+
+	}
+	
 	public function initializeCreateAction() {
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
@@ -327,6 +409,17 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	}
 
 	/**
+	 * Cancel action
+	 *
+	 * Cancels the Registration Process and clears the Session 
+	 *
+	 */
+	public function cancelAction() {
+		$this->session->remove('frontendUser');
+		$this->redirect('list', NULL, NULL, NULL);
+	}
+
+	/**
 	 * action preview
 	 *
 	 * @return void
@@ -349,8 +442,10 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	protected function setTypeConverterConfigurationForImageUpload($argumentName) {
 
+		// \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']);
+
 		$uploadConfiguration = array(
-			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => 'gif,jpg,jpeg,png',
 			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/'
 		);
 
