@@ -55,12 +55,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 	<f:for each="{jobRequests}" as="jobRequest">
 		<tr>
-			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.startDate -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.endDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"><f:format.date format="d.m.Y">{jobRequest.startDate}</f:format.date></f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"><f:format.date format="d.m.Y">{jobRequest.endDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.percentOf}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.percentUp}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.jobTitle}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"><f:format.date format="d.m.Y">{jobRequest.entryDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryAgreement}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.entryImmediately}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.jobLocation}</f:link.action></td>
@@ -77,7 +77,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressZip}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.postalAddressCity}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.numberDaysPublication}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.publicationDate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"><f:format.date format="d.m.Y">{jobRequest.publicationDate}</f:format.date></f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.comments}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.deleteDate -> f:format.date()}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{jobRequest : jobRequest}"> {jobRequest.deletedHow}</f:link.action></td>

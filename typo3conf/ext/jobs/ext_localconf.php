@@ -31,11 +31,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Joboffers',
 	array(
-		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession',
+		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	),
 	// non-cacheable actions
 	array(
-		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession',
+		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	)
 );
 
@@ -43,11 +43,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Jobrequests',
 	array(
-		'JobRequest' => 'list, new, create',
+		'JobRequest' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	),
 	// non-cacheable actions
 	array(
-		'JobRequest' => 'list, new, create',
+		'JobRequest' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	)
 );
 

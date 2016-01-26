@@ -29,13 +29,21 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * JobRequest
  */
-class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class JobRequest extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest implements \Serializable {
+
+	const PROCESS_STEP_MAXIMUM = 3;
+
+	/**
+	 * processStep
+	 *
+	 * @var int
+	 */
+	protected $processStep = 0;
 
 	/**
 	 * startDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
 	 */
 	protected $startDate = NULL;
 
@@ -43,7 +51,6 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * endDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
 	 */
 	protected $endDate = NULL;
 
@@ -51,7 +58,6 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * percentOf
 	 *
 	 * @var string
-	 * @validate NotEmpty
 	 */
 	protected $percentOf = '';
 
@@ -66,7 +72,6 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * jobTitle
 	 *
 	 * @var string
-	 * @validate NotEmpty
 	 */
 	protected $jobTitle = '';
 
@@ -74,7 +79,6 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * entryDate
 	 *
 	 * @var \DateTime
-	 * @validate NotEmpty
 	 */
 	protected $entryDate = NULL;
 
@@ -348,7 +352,7 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $startDate
 	 * @return void
 	 */
-	public function setStartDate(\DateTime $startDate) {
+	public function setStartDate($startDate) {
 		$this->startDate = $startDate;
 	}
 
@@ -367,7 +371,7 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $endDate
 	 * @return void
 	 */
-	public function setEndDate(\DateTime $endDate) {
+	public function setEndDate($endDate) {
 		$this->endDate = $endDate;
 	}
 
@@ -443,7 +447,7 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $entryDate
 	 * @return void
 	 */
-	public function setEntryDate(\DateTime $entryDate) {
+	public function setEntryDate($entryDate) {
 		$this->entryDate = $entryDate;
 	}
 
@@ -802,7 +806,7 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $publicationDate
 	 * @return void
 	 */
-	public function setPublicationDate(\DateTime $publicationDate) {
+	public function setPublicationDate($publicationDate) {
 		$this->publicationDate = $publicationDate;
 	}
 
@@ -840,7 +844,7 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param \DateTime $deleteDate
 	 * @return void
 	 */
-	public function setDeleteDate(\DateTime $deleteDate) {
+	public function setDeleteDate($deleteDate) {
 		$this->deleteDate = $deleteDate;
 	}
 
@@ -1244,6 +1248,76 @@ class JobRequest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTypeOfInstitution(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $typeOfInstitution) {
 		$this->typeOfInstitution = $typeOfInstitution;
+	}
+
+	/**
+	 * Returns the processStep
+	 *
+	 * @return int $processStep
+	 */
+	public function getProcessStep() {
+		return $this->processStep;
+	}
+
+	/**
+	 * Increases the processStep
+	 *
+	 * @param int $processStep
+	 * @return void
+	 */
+	public function increaseProcessStep() {
+		$this->processStep += 1;
+	}
+
+	/**
+	 * Decrease the processStep
+	 *
+	 * @param int $processStep
+	 * @return void
+	 */
+	public function decreaseProcessStep() {
+		$this->processStep -= 1;
+	}
+
+	/**
+	 * Serialization method.
+	 *
+	 * As Extbase's ObjectStorage objects can't be serialized,
+	 * a workaroung has to be implemented in order to store
+	 * the whole breakout data.
+	 *
+	 * @todo test coverage
+	 * @return string
+	 */
+	public function serialize() {
+		$properties = $this->_getPublicProperties();
+		$objectStorages = array();
+		foreach($properties as $key => $value) {
+			if ($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+				unset($properties[$key]);
+				$objectStorages[$key] = $value->toArray();
+			}
+		}
+		$properties['_objectStorages'] = $objectStorages;
+		return serialize($properties);
+	}
+	
+	/**
+	 * Unserialize method.
+	 *
+	 * @todo test coverage
+	 * @return void
+	 */
+	public function unserialize($serialized) {
+		$data = unserialize($serialized);
+		$this->initStorageObjects();
+		foreach ($data['_objectStorages'] as $property => $values) {
+			foreach ($values as $value) {
+				$this->{$property}->attach($value);
+			}
+		}
+		unset($data['_objectStorages']);
+		$this->_setProperties($data);
 	}
 
 }

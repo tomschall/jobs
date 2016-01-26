@@ -1,0 +1,9 @@
+<label for="startDate">
+	<f:translate key="tx_jobs_domain_model_jobrequest.start_date" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="startDate" value="{jobRequest.startDate->f:format.date(format:'d.m.Y')}" /><br />
+<label for="endDate">
+	<f:translate key="tx_jobs_domain_model_jobrequest.end_date" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="endDate" value="{jobRequest.endDate->f:format.date(format:'d.m.Y')}" /><br />
+	<f:form.hidden property="step" value="0" />

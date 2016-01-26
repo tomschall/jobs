@@ -290,6 +290,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function continueEditAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
 		$this->hydrateEditFromSession($jobOffer);
+		$this->jobOfferRepository->update($jobOffer);
 		$jobOffer->increaseProcessStep();
 		$this->session->setSerialized('jobOfferEdit', $jobOffer);
 
@@ -365,9 +366,6 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties new job offer');
 			} else {
-				// !!!!IMPORTANT!!!!
-				// Here you have to set current properties which have not to be merged to NULL, 
-				// if you do not, the new object will not be merged right
 				if($currentJobOffer->getProcessStep() == 2){
 					$currentJobOffer->setDocuments(new \TYPO3\CMS\Extbase\Persistence\ObjectStorage());
 					$currentJobOffer->setCorporate(new \TYPO3\CMS\Extbase\Domain\Model\FileReference());
@@ -376,45 +374,36 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						$currentJobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 					);
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties not new job offer');
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'properties not new job offer joboffer');
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($currentJobOffer,'properties not new job offer currentjoboffer');
-				
-				// !!!!IMPORTANT!!!!
-				// Here you have to set current properties which have not to be merged to NULL, 
-				// if you do not, the new object will not be merged right
-				if($currentJobOffer->getProcessStep() == 1){
-					$jobOffer->setStartDate(NULL);
-					$jobOffer->setEndDate(NULL);
-				}
-
-				if($currentJobOffer->getProcessStep() == 2){
-					$jobOffer->setStartDate(NULL);
-					$jobOffer->setEndDate(NULL);
-					$jobOffer->setJobTitle(NULL);
-				}
 				
 				$propertiesToMerge = array_filter(
-						$jobOffer->_getPublicProperties(),
-						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
-					);
+					$jobOffer->_getPublicProperties(),
+					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+				);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties');
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertiesToMerge,'propertiesToMerge');
+				
+				// !!!!IMPORTANT!!!!
+				// Check if the Object is empty, if it's is empty, merge not, otherwise it would be merged everytime
 				foreach($propertiesToMerge as $key => $value){
 					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
 					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
-							$tmp = $value->toArray();
-							if(!empty($tmp)){
-								$properties[$key] = $value;		
-							}
+						$tmp = $value->toArray();
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
 					}elseif($value instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
-							$tmpf = (array) $value;
-							if(!empty($tmpf)){
-								$properties[$key] = $value;		
-							}
-					}
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \DateTime) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
 
+					}
 				}
 			}		
 			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties end');	
@@ -456,6 +445,28 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$this->jobOfferRepository->remove($jobOffer);
 		$this->redirect('list');
+	}
+
+	/**
+	 * cancel action
+	 *
+	 * Cancels the Job Offer Form Process and clears the Session 
+	 *
+	 */
+	public function cancelAction() {
+		$this->session->remove('jobOffer');
+		$this->redirect('list', NULL, NULL, NULL);
+	}
+
+	/**
+	 * cancelEdit action
+	 *
+	 * Cancels the Job Offer Edit Form Process and clears the Session 
+	 *
+	 */
+	public function cancelEditAction() {
+		$this->session->remove('jobOfferEdit');
+		$this->redirect('list', NULL, NULL, NULL);
 	}
 
 	/**

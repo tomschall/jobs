@@ -12,6 +12,9 @@
 			<f:render partial="JobOffer/FormFieldsEdit0" arguments="{jobOffer:jobOffer}" />
 			<f:form.submit value="Step 2" />
 		</f:form>
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
 	</f:if>
 	
 	<f:if condition="{jobOffer.processStep}==1">
@@ -20,6 +23,8 @@
 			<f:form.submit value="Step3" />
 		</f:form>
 		<f:link.action action="previousEdit">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
 		<br /><br />
 	</f:if>
 	
@@ -30,6 +35,8 @@
 		</f:form>
 		<f:link.action action="previousEdit">Zurück</f:link.action>		
 		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
 	</f:if>
 	<f:if condition="{jobOffer.processStep}==3">
 		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
@@ -37,5 +44,8 @@
 			<f:form.submit value="Weiter" />
 		</f:form>
 		<f:link.action action="previousEdit">Zurück</f:link.action>
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
 	</f:if>
 </f:section>

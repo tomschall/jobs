@@ -1,26 +1,51 @@
-
 <f:layout name="Default" />
 
-This template displays a EDIT form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Edit.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Edit JobRequest</h1>
+	<h1>Edit JobRequest</h1>
 
-<f:flashMessages />
+	<f:flashMessages />
 
-<f:render partial="FormErrors" arguments="{object:JobRequest}" />
+	<f:render partial="FormErrors" arguments="{object:JobRequest}" />
 
-<f:form action="update" name="jobRequest" object="{jobRequest}" >
-<f:render partial="JobRequest/FormFields" arguments="{jobRequest:jobRequest}" />
-	<f:form.submit value="Save" />
-</f:form>
+	<f:if condition="{jobRequest.processStep}==0">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
+			<f:render partial="JobRequest/FormFieldsEdit0" arguments="{jobRequest:jobRequest}" />
+			<f:form.submit value="Step 2" />
+		</f:form>
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	
+	<f:if condition="{jobRequest.processStep}==1">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
+			<f:render partial="JobRequest/FormFieldsEdit1" arguments="{jobRequest:jobRequest,canton:canton}" />
+			<f:form.submit value="Step3" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	
+	<f:if condition="{jobRequest.processStep}==2">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
+			<f:render partial="JobRequest/FormFieldsEdit2" arguments="{jobRequest:jobRequest}" />
+			<f:form.submit value="Speichern" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	<f:if condition="{jobRequest.processStep}==3">
+		<f:form action="continueEdit" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
+			<f:render partial="JobRequest/FormFieldsEdit3" arguments="{jobRequest:jobRequest}" />
+			<f:form.submit value="Weiter" />
+		</f:form>
+		<f:link.action action="previousEdit">Zurück</f:link.action>
+		<br /><br />
+		<f:link.action action="cancelEdit">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
 </f:section>
