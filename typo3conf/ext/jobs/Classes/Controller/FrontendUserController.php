@@ -50,6 +50,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $companyFrontendUserRepository = NULL;
 
 	/**
+	 * insosMemberRepository
+	 *
+	 * @var \Sozialinfo\Jobs\Domain\Repository\InsosMemberRepository
+	 * @inject
+	 */
+	protected $insosMemberRepository = NULL;
+
+	/**
 	 * Sessions
 	 *
 	 * @var \Sozialinfo\Jobs\Persistence\Session
@@ -154,14 +162,26 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function continueAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$arguments = $this->request->getArguments();
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments);
-		if(array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) OR array_key_exists('insosMemberId', $arguments['frontendUser'])){
-			$companyFrontendUser = $this->validateMember($arguments);
-			if(is_object($companyFrontendUser)){
-				$frontendUser->setCompanyFrontendUser($companyFrontendUser[0]);	
-			}
-		}
 		$this->hydrateFromSession($frontendUser);
+		if(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
+			if(array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) OR array_key_exists('insosMemberId', $arguments['frontendUser'])){
+				$proofResult = $this->validateMember($arguments);
+				if($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser){
+					$frontendUser->setCompanyFrontendUser($proofResult[0]);	
+				}elseif($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember){
+					$frontendUser->setInsosMember($proofResult[0]);	
+				}
+			}
+		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser == TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
+			if((array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '') OR (array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '')){
+				$this->sozialinfoMemberHasAlreadyBeenAssigned();	
+			}			
+		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember == TRUE)){
+			if((array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '') OR (array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '')){
+				$this->insosMemberHasAlreadyBeenAssigned();
+			}			
+		}
+
 		$frontendUser->increaseProcessStep();
 		$this->session->setSerialized('frontendUser', $frontendUser);
 		if ($frontendUser->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\FrontendUser::PROCESS_STEP_MAXIMUM) {
@@ -197,6 +217,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			);
 			$this->redirect('new');	
 		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			//Proof for Sozialinfo Membership
 			if($arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
 				$this->addFlashMessage(
 					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_password','jobs'),
@@ -226,15 +247,45 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 				}
 			}
 		}elseif($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
-			$this->addFlashMessage(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass','jobs'),
-				'',
-				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-				TRUE
-			);	
+			//Proof for Insos Membership
+			if($this->insosMemberRepository->findInsosMemberId($arguments,TRUE) != TRUE){
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_wrong_id','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+						TRUE
+					);
+					$this->redirect('new');
+			}else{
+				$this->addFlashMessage(
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_validation_pass','jobs'),
+					'',
+					\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+					TRUE
+				);
+				$insosMemberId = $this->insosMemberRepository->findInsosMemberId($arguments);
+				return $insosMemberId;
+			}	
 		}
 		//$frontendUsers = $this->frontendUserRepository->findAll();
+	}
 
+	public function sozialinfoMemberHasAlreadyBeenAssigned() {
+		$this->addFlashMessage(
+			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member.already_assigned','jobs'),
+			'',
+			\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+			TRUE
+		);
+	}
+
+	public function insosMemberHasAlreadyBeenAssigned() {
+		$this->addFlashMessage(
+			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member.already_assigned','jobs'),
+			'',
+			\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+			TRUE
+		);
 	}
 	
 	public function initializeCreateAction() {
@@ -334,8 +385,24 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 					);
 				foreach($propertiesToMerge as $key => $value){
-					if($value != ''){
+					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+						$tmp = $value->toArray();
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+
 					}
 				}
 			}			

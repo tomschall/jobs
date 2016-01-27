@@ -223,10 +223,21 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 					if(!is_object($value) AND $value != ''){
 						$properties[$key] = $value; 
 					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
-							$tmp = $value->toArray();
-							if(!empty($tmp)){
-								$properties[$key] = $value;		
-							}
+						$tmp = $value->toArray();
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \DateTime) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+
 					}
 				}
 			}			
