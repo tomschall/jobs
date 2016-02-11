@@ -34,6 +34,63 @@ class FrontendUserDynamicValidation2 extends \Sozialinfo\Jobs\DomainObject\Abstr
 	const PROCESS_STEP_MAXIMUM = 3;
 
 	/**
+	 * salutation
+	 *
+	 * @var boolean
+	 */
+	protected $salutation = '';
+
+	/**
+	 * firstName
+	 *
+	 * @var string
+	 */
+	protected $firstName = '';
+
+	/**
+	 * lastName
+	 *
+	 * @var string
+	 */
+	protected $lastName = '';
+
+	/**
+	 * address
+	 *
+	 * @var string
+	 */
+	protected $address = '';
+
+	/**
+	 * zip
+	 *
+	 * @var string
+	 */
+	protected $zip = '';
+
+	/**
+	 * city
+	 *
+	 * @var string
+	 */
+	protected $city = '';
+
+	/**
+	 * telephone
+	 *
+	 * @var string
+	 */
+	protected $telephone = '';
+
+	/**
+	 * mobilephone
+	 *
+	 * @var string
+	 */
+	protected $mobilephone = '';
+
+
+	/**
 	 * username
 	 *
 	 * @var string
@@ -171,6 +228,158 @@ class FrontendUserDynamicValidation2 extends \Sozialinfo\Jobs\DomainObject\Abstr
 		$this->documents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->jobOffers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->jobRequests = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
+	 * Returns the salutation
+	 *
+	 * @return boolean $salutation
+	 */
+	public function getSalutation() {
+		return $this->salutation;
+	}
+
+	/**
+	 * Sets the salutation
+	 *
+	 * @param boolean $salutation
+	 * @return void
+	 */
+	public function setSalutation($salutation) {
+		$this->salutation = $salutation;
+	}
+
+	/**
+	 * Returns the firstName
+	 *
+	 * @return string $firstName
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+
+	/**
+	 * Sets the firstName
+	 *
+	 * @param string $firstName
+	 * @return void
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+
+	/**
+	 * Returns the lastName
+	 *
+	 * @return string $lastName
+	 */
+	public function getLastName() {
+		return $this->lastName;
+	}
+
+	/**
+	 * Sets the lastName
+	 *
+	 * @param string $lastName
+	 * @return void
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
+
+	/**
+	 * Returns the address
+	 *
+	 * @return string $address
+	 */
+	public function getAddress() {
+		return $this->address;
+	}
+
+	/**
+	 * Sets the address
+	 *
+	 * @param string $address
+	 * @return void
+	 */
+	public function setAddress($address) {
+		$this->address = $address;
+	}
+
+	/**
+	 * Returns the zip
+	 *
+	 * @return string $zip
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * Sets the zip
+	 *
+	 * @param string $zip
+	 * @return void
+	 */
+	public function setZip($zip) {
+		$this->zip = $zip;
+	}
+
+	/**
+	 * Returns the city
+	 *
+	 * @return string $city
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * Sets the city
+	 *
+	 * @param string $city
+	 * @return void
+	 */
+	public function setCity($city) {
+		$this->city = $city;
+	}
+
+	/**
+	 * Returns the telephone
+	 *
+	 * @return string $telephone
+	 */
+	public function getTelephone() {
+		return $this->telephone;
+	}
+
+	/**
+	 * Sets the telephone
+	 *
+	 * @param string $telephone
+	 * @return void
+	 */
+	public function setTelephone($telephone) {
+		$this->telephone = $telephone;
+	}
+
+	/**
+	 * Returns the mobilephone
+	 *
+	 * @return string $mobilephone
+	 */
+	public function getMobilephone() {
+		return $this->mobilephone;
+	}
+
+	/**
+	 * Sets the mobilephone
+	 *
+	 * @param string $mobilephone
+	 * @return void
+	 */
+	public function setMobilephone($mobilephone) {
+		$this->mobilephone = $mobilephone;
 	}
 
 	/**

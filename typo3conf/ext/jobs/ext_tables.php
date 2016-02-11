@@ -143,3 +143,17 @@ if (TYPO3_MODE === 'BE') {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_jobs_domain_model_sozialinfomember', 'EXT:jobs/Resources/Private/Language/locallang_csh_tx_jobs_domain_model_sozialinfomember.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_jobs_domain_model_sozialinfomember');
+
+
+$GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_FrontendUser']['showitem'] = 'disable,username,password,usergroup,lastlogin,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.personelData,company,--palette--;;1,name,--palette--;;2,address,zip,city,country,telephone,fax,email,www,image,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.options,lockToDomain,TSconfig,felogin_redirectPid,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.access,starttime,endtime,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.extended,tx_extbase_type,
+--div--;LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser,salutation,additive,department,po_box,mobilephone,corporate,documents,job_offers,job_requests,country,company_frontend_user,insos_member,sozialinfo_member';
+
+$GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_CompanyFrontendUser']['showitem'] = 'disable,username,password,usergroup,lastlogin,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.personelData,company,--palette--;;1,name,--palette--;;2,address,zip,city,country,telephone,fax,email,www,image,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.options,lockToDomain,TSconfig,felogin_redirectPid,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.access,starttime,endtime,
+--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.extended,tx_extbase_type,
+--div--;LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_companyfrontenduser,is_frontend_admin,additive,department,po_box,corporate,documents,country,insos_member,sozialinfo_member';
+

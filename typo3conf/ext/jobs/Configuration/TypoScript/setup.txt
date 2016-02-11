@@ -76,7 +76,66 @@ plugin.tx_jobs_jobuseradmin {
 		layoutRootPaths.0 = {$plugin.tx_jobs_jobuseradmin.view.layoutRootPath}
 	}
 	persistence {
-		storagePid = {$plugin.tx_jobs_jobuseradmin.persistence.storagePid}
+		storagePid = 111
+		recursive = 1
+		classes {
+			Sozialinfo\Jobs\Domain\Model\AdvertisementType {
+				newRecordStoragePid = 118
+			}
+			Sozialinfo\Jobs\Domain\Model\AreasOfWork {
+				newRecordStoragePid = 114
+			}
+			Sozialinfo\Jobs\Domain\Model\Canton {
+				newRecordStoragePid = 119
+			}
+			Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser {
+				newRecordStoragePid = 125
+			}
+			Sozialinfo\Jobs\Domain\Model\Country {
+				newRecordStoragePid = 121
+			}
+			Sozialinfo\Jobs\Domain\Model\EmploymentRelationship {
+				newRecordStoragePid = 115
+			}
+			Sozialinfo\Jobs\Domain\Model\FrontendUser {
+				newRecordStoragePid = 126
+				mapping {
+					tableName = fe_users
+				}
+			}
+			Sozialinfo\Jobs\Domain\Model\InsosMember {
+				newRecordStoragePid = 113
+			}
+			Sozialinfo\Jobs\Domain\Model\JobOffer {
+				newRecordStoragePid = 123
+			}
+			Sozialinfo\Jobs\Domain\Model\JobRequest {
+				newRecordStoragePid = 124
+			}
+			Sozialinfo\Jobs\Domain\Model\Position {
+				newRecordStoragePid = 116
+			}
+			Sozialinfo\Jobs\Domain\Model\Qualification {
+				newRecordStoragePid = 117
+			}
+			Sozialinfo\Jobs\Domain\Model\Region {
+				newRecordStoragePid = 120
+			}
+			Sozialinfo\Jobs\Domain\Model\SozialinfoMember {
+				newRecordStoragePid = 112
+			}
+			Sozialinfo\Jobs\Domain\Model\TypeOfInstitution {
+				newRecordStoragePid = 122
+			}
+		}
+	}
+	settings {
+		jobregistration {
+			usergroupJobOffers = 1
+			usergroupJobRequests = 2
+			usergroupActivation = 3
+			usergroupActiveInstitution = 4
+		}
 	}
 }
 

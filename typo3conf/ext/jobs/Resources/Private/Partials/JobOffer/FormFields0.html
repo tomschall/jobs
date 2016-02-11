@@ -1,9 +1,165 @@
-<label for="startDate">
-	<f:translate key="tx_jobs_domain_model_joboffer.start_date" /> <span class="required">(required)</span>
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
+
+<label for="employmentRelationships">
+	<f:translate key="tx_jobs_domain_model_joboffer.employment_relationships" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="startDate" value="{jobOffer.startDate->f:format.date(format:'d.m.Y')}" /><br />
-<label for="endDate">
-	<f:translate key="tx_jobs_domain_model_joboffer.end_date" /> <span class="required">(required)</span>
+	<f:form.radio property="employmentRelationships" value="1" checked="{jobOffer.employmentRelationships.uid} == 1" /> Festanstellung <br />
+	<f:form.radio property="employmentRelationships" value="2" checked="{jobOffer.employmentRelationships.uid} == 2" /> Befristete Stelle <br />
+	<f:form.radio property="employmentRelationships" value="3" checked="{jobOffer.employmentRelationships.uid} == 3" /> Stellverstretung <br />
+	<f:form.radio property="employmentRelationships" value="4" checked="{jobOffer.employmentRelationships.uid} == 4" /> Mandatsverhältnis <br />
+	<f:form.radio property="employmentRelationships" value="5" checked="{jobOffer.employmentRelationships.uid} == 5" /> Praktikum/Zivildienst <br />
+	<f:form.radio property="employmentRelationships" value="6" checked="{jobOffer.employmentRelationships.uid} == 6" /> Ausbildungsplatz <br />
+	<f:form.radio property="employmentRelationships" value="7" checked="{jobOffer.employmentRelationships.uid} == 7" /> Freiwilligenarbeit/Ehrenamt <br />
+	<f:form.radio property="employmentRelationships" value="8" checked="{jobOffer.employmentRelationships.uid} == 8" /> Andere <br /><br />
+
+<label for="position">
+	<f:translate key="tx_jobs_domain_model_joboffer.position" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="endDate" value="{jobOffer.endDate->f:format.date(format:'d.m.Y')}" /><br />
-	<f:form.hidden property="step" value="0" />
+	<f:form.radio property="position" value="1" checked="{jobOffer.position.uid} == 1" /> Kaderstelle/Leitung <br />
+	<f:form.radio property="position" value="2" checked="{jobOffer.position.uid} == 2" /> Gruppenleitung/Teamleitung <br />
+	<f:form.radio property="position" value="3" checked="{jobOffer.position.uid} == 3" /> Qualifizierte Fachmitarbeit <br />
+	<f:form.radio property="position" value="4" checked="{jobOffer.position.uid} == 4" /> Stellvertretung/Aushilfe <br />
+	<f:form.radio property="position" value="5" checked="{jobOffer.position.uid} == 5" /> Praktikum <br />
+	<f:form.radio property="position" value="6" checked="{jobOffer.position.uid} == 6" /> Ausbildung <br />
+	<f:form.radio property="position" value="7" checked="{jobOffer.position.uid} == 7" /> Freiwilligenarbeit <br />
+	<f:form.radio property="position" value="8" checked="{jobOffer.position.uid} == 8" /> Andere <br /><br />
+
+<label for="percentOf">
+	<f:translate key="tx_jobs_domain_model_joboffer.percent_of" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="percentOf" value="{jobOffer.percentOf}" /><br />
+
+<label for="percentUp">
+	<f:translate key="tx_jobs_domain_model_joboffer.percent_up" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="percentUp" value="{jobOffer.percentUp}" /><br /><br />
+
+<label for="qualification">
+	<f:translate key="tx_jobs_domain_model_joboffer.qualification" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.checkbox property="qualification" value="1" multiple="1" checked="{qualificationChecked.1}" /> Hochschulbildung (Bachelor/Master) <br />
+	<f:form.checkbox property="qualification" value="2" multiple="1" checked="{qualificationChecked.2}" /> Höhere Berufsbildung (HFP, HF, BP) <br />
+	<f:form.checkbox property="qualification" value="3" multiple="1" checked="{qualificationChecked.3}" /> Berufliche Grundbildung (EBA, EFZ) <br />
+	<f:form.checkbox property="qualification" value="4" multiple="1" checked="{qualificationChecked.4}" /> Andere <br /><br />
+
+<label for="areasOfWork">
+	<f:translate key="tx_jobs_domain_model_joboffer.areas_of_work" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.checkbox property="areasOfWork" value="1" multiple="1" checked="{areasOfWorkChecked.1}" /> Kommunale polyvalente Sozialhilfe <br />
+	<f:form.checkbox property="areasOfWork" value="2" multiple="1" checked="{areasOfWorkChecked.2}" /> Kindes- und Erwachsenenschutz (KESB) <br />
+	<f:form.checkbox property="areasOfWork" value="3" multiple="1" checked="{areasOfWorkChecked.3}" /> Straf- und Massnahmenvollzug / Bewährungshilfe <br />
+	<f:form.checkbox property="areasOfWork" value="4" multiple="1" checked="{areasOfWorkChecked.4}" /> Opferhilfe <br />
+	<f:form.checkbox property="areasOfWork" value="5" multiple="1" checked="{areasOfWorkChecked.5}" /> Altersbetreuung / Gerontologie <br />
+	<f:form.checkbox property="areasOfWork" value="6" multiple="1" checked="{areasOfWorkChecked.6}" /> Paar- Familien- und Eheberatung <br />
+	<f:form.checkbox property="areasOfWork" value="7" multiple="1" checked="{areasOfWorkChecked.7}" /> Trennungs- und Scheidungsberatung <br />
+	<f:form.checkbox property="areasOfWork" value="8" multiple="1" checked="{areasOfWorkChecked.8}" /> Budget- und Schuldenberatung<br />
+	<f:form.checkbox property="areasOfWork" value="9" multiple="1" checked="{areasOfWorkChecked.9}" /> Beratung von Menschen mit Krankheiten und Suchterkrankungen <br />
+	<f:form.checkbox property="areasOfWork" value="10" multiple="1" checked="{areasOfWorkChecked.10}" /> Beratung von Menschen mit Beeinträchtigungen (körperlich, geistig, psychisch) <br />
+	<f:form.checkbox property="areasOfWork" value="11" multiple="1" checked="{areasOfWorkChecked.11}" /> Sozialpädagogische Familienhilfe / Tagesstätten / Betreuung <br />
+	<f:form.checkbox property="areasOfWork" value="12" multiple="1" checked="{areasOfWorkChecked.12}" /> Kinder- und Jugendpsychiatrie / Erziehungsberatung / Berufsberatung <br />
+	<f:form.checkbox property="areasOfWork" value="13" multiple="1" checked="{areasOfWorkChecked.13}" /> Sonderpädagogische Betreuung bei körperlichen oder geistigen Beeinträchtigungen <br />
+	<f:form.checkbox property="areasOfWork" value="14" multiple="1" checked="{areasOfWorkChecked.14}" /> Suchtberatung / Prävention <br />
+	<f:form.checkbox property="areasOfWork" value="15" multiple="1" checked="{areasOfWorkChecked.15}" /> Schulung / Erziehung / Pflegefamilie (ausserfamiliär) <br />
+	<f:form.checkbox property="areasOfWork" value="16" multiple="1" checked="{areasOfWorkChecked.16}" /> Jugendarbeit im öffentlichen Raum <br />
+	<f:form.checkbox property="areasOfWork" value="17" multiple="1" checked="{areasOfWorkChecked.17}" /> Arbeit mit Generationen und Randgruppen <br />
+	<f:form.checkbox property="areasOfWork" value="18" multiple="1" checked="{areasOfWorkChecked.18}" /> Gesundheitswesen / Prävention / Sozialpsychiatrie <br />
+	<f:form.checkbox property="areasOfWork" value="19" multiple="1" checked="{areasOfWorkChecked.19}" /> Wohnintegration / Notunterkünfte <br />
+	<f:form.checkbox property="areasOfWork" value="20" multiple="1" checked="{areasOfWorkChecked.20}" /> Migration / Asylwesen / Integration <br />
+	<f:form.checkbox property="areasOfWork" value="21" multiple="1" checked="{areasOfWorkChecked.21}" /> Betreuung von Menschen mit Krankheiten und Sucht <br />
+	<f:form.checkbox property="areasOfWork" value="22" multiple="1" checked="{areasOfWorkChecked.22}" /> Betreuung von Menschen mit Beeinträchtigungen (körperlich, geistig, psychisch) <br />
+	<f:form.checkbox property="areasOfWork" value="23" multiple="1" checked="{areasOfWorkChecked.23}" /> Interessenvertretung / Lobbying / Verbandsarbeit <br />
+	<f:form.checkbox property="areasOfWork" value="24" multiple="1" checked="{areasOfWorkChecked.24}" /> Bildung / Umschulung / Arbeitsintegration 1. AM <br />
+	<f:form.checkbox property="areasOfWork" value="25" multiple="1" checked="{areasOfWorkChecked.25}" /> Beschäftigung / Rehabilitation 2. und 3. AM <br /><br />
+	
+<label for="jobTitle">
+	<f:translate key="tx_jobs_domain_model_joboffer.job_title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="jobTitle" /><br /><br />
+
+<label for="employer">
+	<f:translate key="tx_jobs_domain_model_joboffer.employer" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="employer" /><br />
+
+<label for="employerAddition">
+	<f:translate key="tx_jobs_domain_model_joboffer.employer_addition" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="employerAddition" /><br /><br />
+
+<label for="linkToWebsite">
+	<f:translate key="tx_jobs_domain_model_joboffer.link_to_website" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="linkToWebsite" /><br /><br />
+
+<label for="entryDate">
+	<f:translate key="tx_jobs_domain_model_joboffer.entry_date" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="entryDate" value="{jobOffer.entryDate->f:format.date(format:'d.m.Y')}" /><br />
+<label for="entryAgreement">
+	<f:translate key="tx_jobs_domain_model_joboffer.entry_agreement" /> 
+</label><br />
+	<f:form.checkbox property="entryAgreement" value="1" checked="{jobOffer.entryAgreement}" /><br />
+<label for="entryImmediately">
+	<f:translate key="tx_jobs_domain_model_joboffer.entry_immediately" /> 
+</label><br />
+	<f:form.checkbox property="entryImmediately" value="1" checked="{jobOffer.entryImmediately}" /><br /><br />
+
+<label for="jobLocation">
+	<f:translate key="tx_jobs_domain_model_joboffer.job_location" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="jobLocation" /><br /><br />
+<label for="zipJobLocation">
+	<f:translate key="tx_jobs_domain_model_joboffer.zip_job_location" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="zipJobLocation" /><br /><br />
+
+<label for="canton">
+	<f:translate key="tx_jobs_domain_model_joboffer.canton" /> 
+</label><br />
+	<f:form.select name="canton" options="{canton}" optionLabelField="title" property="canton" multiple="3" value="{cantonSelected}" /><br /><br/>
+
+<label for="jobDescription">
+	<f:translate key="tx_jobs_domain_model_joboffer.job_description" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textarea style="width:600px;height:300px;" property="jobDescription" /><br /><br />
+
+<label for="applicationTo">
+	<f:translate key="tx_jobs_domain_model_joboffer.application_to" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield style="width:300px;height:200px;" property="applicationTo" /><br /><br />
+
+<label for="emailTo">
+	<f:translate key="tx_jobs_domain_model_joboffer.email_to" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="emailTo" /><br /><br />
+
+<label for="furtherInformation">
+	<f:translate key="tx_jobs_domain_model_joboffer.further_information" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textarea style="width:300px;height:200px;" property="furtherInformation" /><br /><br />
+
+<label for="applicationDeadline">
+	<f:translate key="tx_jobs_domain_model_joboffer.application_deadline" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="applicationDeadline" value="{jobOffer.applicationDeadline->f:format.date(format:'d.m.Y')}" /><br />
+
+<label for="corporate">
+	<f:translate key="tx_jobs_domain_model_joboffer.corporate" />
+</label><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload><br />
+
+<label for="documents">
+	<f:translate key="tx_jobs_domain_model_joboffer.documents" />
+</label><br />
+	<h:form.upload property="documents.0">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />

@@ -60,26 +60,37 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	  */
 	public function newAction($jobOffer = NULL) {
 		$this->hydrateFromSession($jobOffer);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_SESSION);
+		
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'newAction jobOffer');
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($qualificationChecked,'qualificationChecked');
 
 		$this->view->assign('jobOffer', $jobOffer);
 		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
+		$this->view->assign('employmentRelationships', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\EmploymentRelationshipRepository')->findAll());
+		$this->view->assign('position', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\PositionRepository')->findAll());
+		$this->view->assign('qualification', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\QualificationRepository')->findAll());
+		$this->view->assign('areasOfWork', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\AreasOfWorkRepository')->findAll());
+		$this->view->assign('qualificationChecked', $this->getCheckedQualifications($jobOffer));
+		$this->view->assign('areasOfWorkChecked', $this->getCheckedAreasOfWork($jobOffer));
+		$this->view->assign('cantonSelected', $this->getCheckedCantons($jobOffer));
+		
 	}
 
 	public function initializeContinueAction() {
 
 		$arguments = $this->request->getArguments();
-		//$this->setTypeConverterConfigurationForImageUpload('jobOffer');
 
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+		
+		// these are multiple select fields, if they are empty, you have to set property mapper to skip property, otherwise validation will not work correct
+		$arguments['jobOffer']['qualification'] == '' ? $propertyMappingConfiguration->skipProperties('qualification') : '';
+		$arguments['jobOffer']['areasOfWork'] == '' ? $propertyMappingConfiguration->skipProperties('areasOfWork') : '';
+		$arguments['jobOffer']['canton'] == '' ? $propertyMappingConfiguration->skipProperties('canton') : '';
 
-		$propertyMappingConfiguration->allowProperties('canton');
-		$propertyMappingConfiguration->allowCreationForSubProperty('canton.*');
-		$propertyMappingConfiguration->forProperty('canton')->allowAllPropertiesExcept('uid', 'pid');
+		$propertyMappingConfiguration->skipProperties('step');
 
-		$propertyMappingConfiguration->skipProperties('step');		
+		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
 
 		if(isset($this->arguments['jobOffer'])) {
 			if($arguments['jobOffer']['step'] == 0){
@@ -97,9 +108,55 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->getPropertyMappingConfiguration()
 				->forProperty('entryDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('applicationDeadline')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 
 		}
+		// dynamic validation because of different steps
+		if($this->arguments->hasArgument('jobOffer')){
+			$arguments = $this->request->getArguments();
+			if($arguments['jobOffer']['step'] == 0){
+				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 1){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 2){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }
+	    }
 	}
 	
 	/**
@@ -132,15 +189,14 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		//$this->setTypeConverterConfigurationForImageUpload('jobOffer');
 		
-		/*
-		if($this->arguments->hasArgument('frontendUser')){
+		if($this->arguments->hasArgument('jobOffer')){
 			$arguments = $this->request->getArguments();
-			if($arguments['frontendUser']['step'] == 2){
+			if($arguments['jobOffer']['step'] == 3){
 				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOffer');
 	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
 	            // Alle alten Validatoren entfernen
 	            foreach ($conjunctionValidator->getValidators() as $validator) {
 	                $conjunctionValidator->removeValidator($validator);
@@ -149,7 +205,6 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	            $conjunctionValidator->addValidator($extendedValidator);
 	        }
 	    }
-	    */
 	}
 	
 	/**
@@ -161,7 +216,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
+		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
 		$this->hydrateFromSession($jobOffer);
 		$this->jobOfferRepository->add($jobOffer);
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
@@ -179,7 +234,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function previousAction() {
-		$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+		//$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
 		$this->hydrateFromSession($jobOffer);
 		$jobOffer->decreaseProcessStep();
 		$this->session->setSerialized('jobOffer', $jobOffer);
@@ -196,6 +251,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$newJobOffer = FALSE;
 		if(!$jobOffer){
 			$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'newJobOffer');
 			$newJobOffer = TRUE;
 		}
 		$currentJobOffer = $this->session->getUnserialized('jobOffer');
@@ -219,8 +275,10 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						$jobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
 					);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties');
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($propertiesToMerge,'propertiesToMerge');
 				foreach($propertiesToMerge as $key => $value){
-					if(!is_object($value) AND $value != ''){
+					if(!is_object($value) AND (($value != '') OR ($value === TRUE) OR ($value === FALSE))){
 						$properties[$key] = $value; 
 					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
 						$tmp = $value->toArray();
@@ -232,16 +290,27 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\Position) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
 					}elseif($value instanceof \DateTime) {
 						$tmp = (array) $value;
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
-
 					}
 				}
 			}			
 			$jobOffer->_setProperties($properties);
+			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties');
+			
 		}
 	}
 
@@ -254,17 +323,36 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @ignorevalidation $jobOffer
 	 * @return void
 	  */
-	public function editAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer=NULL) {
+	public function editAction($jobOffer=NULL) {
 		$this->hydrateEditFromSession($jobOffer);
+		
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($currentJobOffer,'currentJobOffer');
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
-		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_SESSION);
+
 		$this->view->assign('jobOffer', $jobOffer);
+		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
+		$this->view->assign('employmentRelationships', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\EmploymentRelationshipRepository')->findAll());
+		$this->view->assign('position', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\PositionRepository')->findAll());
+		$this->view->assign('qualification', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\QualificationRepository')->findAll());
+		$this->view->assign('areasOfWork', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\AreasOfWorkRepository')->findAll());
+		$this->view->assign('qualificationChecked', $this->getCheckedQualifications($jobOffer));
+		$this->view->assign('areasOfWorkChecked', $this->getCheckedAreasOfWork($jobOffer));
+		$this->view->assign('cantonSelected', $this->getCheckedCantons($jobOffer));
 	}
 
 	public function initializeContinueEditAction() {
 
+		$arguments = $this->request->getArguments();
+
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
+
+		$arguments['jobOffer']['qualification'] == '' ? $propertyMappingConfiguration->skipProperties('qualification') : '';
+		$arguments['jobOffer']['areasOfWork'] == '' ? $propertyMappingConfiguration->skipProperties('areasOfWork') : '';
+		$arguments['jobOffer']['canton'] == '' ? $propertyMappingConfiguration->skipProperties('canton') : '';
+		//$arguments['jobOffer']['documents'] != '' ? $propertyMappingConfiguration->skipProperties('documents') : '';
+
 		$propertyMappingConfiguration->skipProperties('step');
 		
 		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
@@ -285,6 +373,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->getPropertyMappingConfiguration()
 				->forProperty('entryDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('applicationDeadline')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
 	}
@@ -301,7 +394,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function continueEditAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
 		$this->hydrateEditFromSession($jobOffer);
+
+		$processStep = $jobOffer->getProcessStep();
+		
 		$this->jobOfferRepository->update($jobOffer);
+		
 		$jobOffer->increaseProcessStep();
 		$this->session->setSerialized('jobOfferEdit', $jobOffer);
 
@@ -316,6 +413,8 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
 		$propertyMappingConfiguration->skipProperties('step');
+
+		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
 		
 	}
 	
@@ -344,7 +443,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function previousEditAction() {
-		$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
+		//$jobOffer = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\JobOffer');
 		$this->hydrateEditFromSession($jobOffer);
 		$jobOffer->decreaseProcessStep();
 		$this->session->setSerialized('jobOfferEdit', $jobOffer);
@@ -364,7 +463,6 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$newJobOffer = TRUE;
 		}
 		$currentJobOffer = $this->session->getUnserialized('jobOfferEdit');
-		
 		if ($currentJobOffer) {
 			if ($newJobOffer) {
 				// Do not process properties on a plain new object,
@@ -377,10 +475,15 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($properties,'properties new job offer');
 			} else {
-				if($currentJobOffer->getProcessStep() == 2){
+				// If the form for corporate or documents is on a higher step than step1, 
+				// there needs to be generated an ObjectStorage/FileReference, 
+				// otherwise the merging process will not work properly
+				 
+				if($currentJobOffer->getProcessStep() == 0){
 					$currentJobOffer->setDocuments(new \TYPO3\CMS\Extbase\Persistence\ObjectStorage());
 					$currentJobOffer->setCorporate(new \TYPO3\CMS\Extbase\Domain\Model\FileReference());
 				}
+				
 				$properties = array_filter(
 						$currentJobOffer->_getPublicProperties(),
 						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
@@ -396,7 +499,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				// !!!!IMPORTANT!!!!
 				// Check if the Object is empty, if it's is empty, merge not, otherwise it would be merged everytime
 				foreach($propertiesToMerge as $key => $value){
-					if(!is_object($value) AND $value != ''){
+					if(!is_object($value) AND (($value != '') OR ($value === TRUE) OR ($value === FALSE))){
 						$properties[$key] = $value; 
 					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
 						$tmp = $value->toArray();
@@ -408,12 +511,21 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\Position) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
 					}elseif($value instanceof \DateTime) {
 						$tmp = (array) $value;
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
-
 					}
 				}
 			}		
@@ -428,6 +540,17 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function listAction() {
+		$jobOffers = $this->jobOfferRepository->findAll();
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffers);
+		$this->view->assign('jobOffers', $jobOffers);
+	}
+
+	/**
+	 * action listUserSpecificDataAction
+	 *
+	 * @return void
+	 */
+	public function listUserSpecificDataAction() {
 		$jobOffers = $this->jobOfferRepository->findAll();
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffers);
 		$this->view->assign('jobOffers', $jobOffers);
@@ -504,7 +627,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected function setTypeConverterConfigurationForImageUpload($argumentName) {
 
 		$uploadConfiguration = array(
-			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => 'gif,jpg,jpeg,png',
 			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/'
 		);
 
@@ -528,5 +651,33 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				$uploadConfigurationVideo
 			);
 	}
+
+	public function getCheckedQualifications($jobOffer){
+		$qualifications = $jobOffer->getQualification();
+		$qualificationChecked = array();
+		foreach($qualifications as $key => $value){
+			$qualificationChecked[$value->getUid()] = $value->getUid();
+		}
+		return $qualificationChecked;
+	}
+
+	public function getCheckedAreasOfWork($jobOffer){
+		$areasOfWork = $jobOffer->getAreasOfWork();
+		$areasOfWorkChecked = array();
+		foreach($areasOfWork as $key => $value){
+			$areasOfWorkChecked[$value->getUid()] = $value->getUid();
+		}
+		return $areasOfWorkChecked;
+	}
+
+	public function getCheckedCantons($jobOffer){
+		$canton = $jobOffer->getCanton();
+		$cantonsChecked = array();
+		foreach($canton as $key => $value){
+			$cantonsChecked[$value->getUid()] = $value->getUid();
+		}
+		return $cantonsChecked;
+	}
+
 
 }

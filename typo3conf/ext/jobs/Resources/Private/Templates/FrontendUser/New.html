@@ -29,7 +29,7 @@
 	
 	<f:if condition="{frontendUser.processStep}==2">
 		<f:form action="continue" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
-			<f:render partial="FrontendUser/FormFields2" />
+			<f:render partial="FrontendUser/FormFields2" arguments="{salutations:salutations,countries:countries}" />
 			<f:form.submit value="Speichern" />
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		

@@ -29,9 +29,9 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * JobOffer
  */
-class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
+class JobOfferDynamicValidation2 extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
 
-	const PROCESS_STEP_MAXIMUM = 5;
+	const PROCESS_STEP_MAXIMUM = 3;
 
 	/**
 	 * processStep

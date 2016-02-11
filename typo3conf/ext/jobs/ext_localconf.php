@@ -19,11 +19,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Jobuseradmin',
 	array(
-		'FrontendUser' => 'listData, editData, updateData',
+		'FrontendUser' => 'listUserSpecificData, editData, updateData',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'listData, editData, updateData',
+		'FrontendUser' => 'listUserspecificData, editData, updateData',
 	)
 );
 
@@ -31,11 +31,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Joboffers',
 	array(
-		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
+		'JobOffer' => 'list, listUserSpecificData, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	),
 	// non-cacheable actions
 	array(
-		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
+		'JobOffer' => 'list, listUserSpecificData, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	)
 );
 

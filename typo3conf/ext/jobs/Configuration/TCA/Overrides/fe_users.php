@@ -239,6 +239,20 @@ $GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type
 
 $tmp_jobs_columns = array(
 
+	'salutation' => array(
+		'exclude' => 0,
+		'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.salutation',
+		'config' => array (
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => array (
+                        array('LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.salutation.options.I.0', '0'),
+                        array('LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.salutation.options.I.1', '1'),
+                ),
+                'size' => 1,
+                'maxitems' => 1,
+        )
+	),
 	'additive' => array(
 		'exclude' => 0,
 		'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.additive',
@@ -260,6 +274,15 @@ $tmp_jobs_columns = array(
 	'po_box' => array(
 		'exclude' => 0,
 		'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.po_box',
+		'config' => array(
+			'type' => 'input',
+			'size' => 30,
+			'eval' => 'trim'
+		),
+	),
+	'mobilephone' => array(
+		'exclude' => 0,
+		'label' => 'LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser.mobilephone',
 		'config' => array(
 			'type' => 'input',
 			'size' => 30,
@@ -469,7 +492,7 @@ if(isset($GLOBALS['TCA']['fe_users']['types']['0']['showitem'])) {
 	$GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_FrontendUser']['showitem'] = '';
 }
 $GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_FrontendUser']['showitem'] .= ',--div--;LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:tx_jobs_domain_model_frontenduser,';
-$GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_FrontendUser']['showitem'] .= 'additive, department, po_box, corporate, documents, job_offers, job_requests, country, company_frontend_user, insos_member, sozialinfo_member';
+$GLOBALS['TCA']['fe_users']['types']['Tx_Jobs_FrontendUser']['showitem'] .= 'salutation, additive, department, po_box, mobilephone, corporate, documents, job_offers, job_requests, country, company_frontend_user, insos_member, sozialinfo_member';
 
 $GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = array('LLL:EXT:jobs/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Tx_Jobs_FrontendUser','Tx_Jobs_FrontendUser');
 

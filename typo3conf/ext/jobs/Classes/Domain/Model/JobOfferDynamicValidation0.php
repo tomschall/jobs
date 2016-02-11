@@ -29,9 +29,9 @@ namespace Sozialinfo\Jobs\Domain\Model;
 /**
  * JobOffer
  */
-class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
+class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
 
-	const PROCESS_STEP_MAXIMUM = 5;
+	const PROCESS_STEP_MAXIMUM = 3;
 
 	/**
 	 * processStep
@@ -372,6 +372,7 @@ class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer impl
 
 	/**
 	 * qualification
+	 * @validate NotEmpty
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Sozialinfo\Jobs\Domain\Model\Qualification>
 	 */

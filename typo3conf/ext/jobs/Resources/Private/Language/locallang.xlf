@@ -6,6 +6,36 @@
 			<trans-unit id="tx_jobs_domain_model_frontenduser">
 				<source>Frontend User</source>
 			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.salutation">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.salutation.options.I.0">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.salutation.options.I.1">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_frontenduser.mobilephone">
+				<source>Mobilephone</source>
+			</trans-unit>
 			<trans-unit id="tx_jobs_domain_model_frontenduser.username">
 				<source>Username</source>
 			</trans-unit>

@@ -65,21 +65,23 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	protected $session = NULL;
 
-	/*
+	
 	public function initializeAction() {
 		$action = $this->request->getControllerActionName();
 		// pruefen, ob eine andere Action ausser "show" aufgerufen wurde
-		if ($action != 'show' AND $action != 'list' AND $action != 'listFilterCategory'){
+		if ($action != 'new' AND $action != 'continue' AND $action != 'create' AND $action != 'previous' AND $action!= 'list'){
 			// Redirect zur Login Seite (UID=21) falls nicht eingeloggt
 			if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->fe_user->user['uid']);
-				$this->redirect(NULL, NULL, NULL, NULL, $this->settings['activity']['redirectLoginUid']);
+				//$this->redirect(NULL, NULL, NULL, NULL, $this->settings['activity']['redirectLoginUid']);
+				$this->redirect(NULL, NULL, NULL, NULL, 71);
 			}
-		}elseif($GLOBALS['TSFE']->fe_user->user['uid'] AND $action == 'listAdmin'){
-			$this->redirect('listAdmin');
+		//}elseif($GLOBALS['TSFE']->fe_user->user['uid'] AND $action == ''){
+		}elseif($GLOBALS['TSFE']->fe_user->user['uid']){
+			$this->redirect('listUserSpecificData');
 		}
 	}
-	*/
+	
 
 	/**
 	 * New action.
@@ -94,7 +96,12 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$this->hydrateFromSession($frontendUser);
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser);
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings['jobregistration']['usergroupJobOffers']);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TCA']['fe_users']);
+
 		$this->view->assign('frontendUser', $frontendUser);
+		$this->view->assign('salutations', $this->getSalutation());
+		$this->view->assign('countries', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CountryRepository')->findAll());
+
 	}
 
 	public function initializeContinueAction() {
@@ -422,6 +429,17 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	}
 
 	/**
+	 * action listUserSpecificData
+	 *
+	 * @return void
+	 */
+	public function listUserspecificDataAction() {
+		$frontendUsers = $this->frontendUserRepository->findAll();
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUsers);
+		$this->view->assign('frontendUsers', $frontendUsers);
+	}
+
+	/**
 	 * action show
 	 *
 	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
@@ -534,4 +552,21 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			);
 	}
 
+	/**
+	 * prepare salutations for select box
+	 *
+	 * @return array
+	 */
+	public function getSalutation() {
+		$salutation = array();
+		$entries = array('0','1');
+		foreach ($entries as $entry) {
+			$salutation = new \stdClass;
+			$salutation->key = $entry;
+			$salutation->value = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.salutation.options.I.'.$entry, 'jobs');
+			$salutations[] = $salutation;
+		}
+		return $salutations;
+	}
+	
 }
