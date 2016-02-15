@@ -33,4 +33,18 @@ class FrontendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	protected $defaultOrderings = array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
 
+	/**
+	* @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	*/
+	public function findUserSpecificData() {
+		$query = $this->createQuery();
+		
+		$query->matching(
+			$query->equals('uid', $GLOBALS['TSFE']->fe_user->user['uid'], $caseSensitive = TRUE)
+		);
+		$query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+		
+		return $query->execute();
+	}
+
 }

@@ -50,6 +50,14 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $session = NULL;
 
 	/**
+	 * frontendUserRepository
+	 *
+	 * @var \Sozialinfo\Jobs\Domain\Repository\FrontendUserRepository
+	 * @inject
+	 */
+	protected $frontendUserRepository = NULL;
+
+	/**
 	 * New action.
 	 *
 	 * Displays form in its current step.
@@ -60,7 +68,9 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	  */
 	public function newAction($jobOffer = NULL) {
 		$this->hydrateFromSession($jobOffer);
+		$frontendUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 		
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser,'frontendUser');
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'newAction jobOffer');
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($qualificationChecked,'qualificationChecked');
 
@@ -240,13 +250,23 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function createAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'after hydrate');
 		$this->hydrateFromSession($jobOffer);
 		$this->jobOfferRepository->add($jobOffer);
+		$frontendUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		if($frontendUser instanceof \Sozialinfo\Jobs\Domain\Model\FrontendUser){
+			$frontendUser->addJobOffer($jobOffer);
+			$this->frontendUserRepository->update($frontendUser);
+		}else{
+			$this->addFlashMessage('User war nicht eingeloggt, Object JobOffer konnte somit nicht dem FeUser hinzugefügt werden.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+			$this->session->remove('jobOffer');
+			$this->redirect('list', NULL, NULL, NULL);	
+		}
+		
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
 		$this->persistenceManager->persistAll();
 		$this->session->remove('jobOffer');
-		$this->redirect('list', NULL, NULL, NULL);
+
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 		//$this->redirect('createConfirm', NULL, NULL, array('frontendUser' => $frontendUser));
 	}
 

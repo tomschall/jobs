@@ -52,7 +52,6 @@ class JobOfferDynamicValidation4 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * endDate
 	 *
 	 * @var \DateTime
-	 * 
 	 */
 	protected $endDate = NULL;
 

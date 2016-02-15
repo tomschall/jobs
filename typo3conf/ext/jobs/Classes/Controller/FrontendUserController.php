@@ -68,17 +68,17 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	
 	public function initializeAction() {
 		$action = $this->request->getControllerActionName();
+		
 		// pruefen, ob eine andere Action ausser "show" aufgerufen wurde
-		if ($action != 'new' AND $action != 'continue' AND $action != 'create' AND $action != 'previous' AND $action!= 'list'){
+		if($action != 'new' AND $action != 'continue' AND $action != 'create' AND $action != 'previous' AND $action != 'list' AND $action != 'show'){
 			// Redirect zur Login Seite (UID=21) falls nicht eingeloggt
 			if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->fe_user->user['uid']);
 				//$this->redirect(NULL, NULL, NULL, NULL, $this->settings['activity']['redirectLoginUid']);
 				$this->redirect(NULL, NULL, NULL, NULL, 71);
 			}
-		//}elseif($GLOBALS['TSFE']->fe_user->user['uid'] AND $action == ''){
-		}elseif($GLOBALS['TSFE']->fe_user->user['uid']){
-			$this->redirect('listUserSpecificData');
+		}elseif($GLOBALS['TSFE']->fe_user->user['uid'] AND $action == 'listUserSpecificData'){
+			$this->redirect('listUserSpecificData', NULL, NULL, NULL);
 		}
 	}
 	
@@ -433,9 +433,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 *
 	 * @return void
 	 */
-	public function listUserspecificDataAction() {
-		$frontendUsers = $this->frontendUserRepository->findAll();
+	public function listUserSpecificDataAction() {
+		$frontendUsers = $this->frontendUserRepository->findUserSpecificData();
+		$actualFeUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\FrontendUserRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		//$frontendUsers = $this->frontendUserRepository->findAll();
+		
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUsers);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($actualFeUser);
+
 		$this->view->assign('frontendUsers', $frontendUsers);
 	}
 
@@ -478,7 +483,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$frontendUser->setUsername($frontendUser->getEmail());
 		$this->frontendUserRepository->update($frontendUser);
-		$this->redirect('list');
+		$this->redirect('listUserSpecificData');
 	}
 
 	/**

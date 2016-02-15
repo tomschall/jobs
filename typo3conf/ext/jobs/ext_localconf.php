@@ -19,11 +19,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Jobuseradmin',
 	array(
-		'FrontendUser' => 'listUserSpecificData, editData, updateData',
+		'FrontendUser' => 'listUserSpecificData, edit, updateData, show',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'listUserspecificData, editData, updateData',
+		'FrontendUser' => 'listUserSpecificData, edit, updateData, show',
 	)
 );
 
@@ -31,11 +31,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Joboffers',
 	array(
-		'JobOffer' => 'list, listUserSpecificData, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
+		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	),
 	// non-cacheable actions
 	array(
-		'JobOffer' => 'list, listUserSpecificData, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
+		'JobOffer' => 'list, new, create, delete, edit, continueEdit, previousEdit, hydrateEditFromSession, show, continue, previous, hydrateFromSession, cancel, cancelEdit',
 	)
 );
 
@@ -53,3 +53,4 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter('Sozialinfo\\Jobs\\Property\\TypeConverter\\UploadedFileReferenceConverter');
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter('Sozialinfo\\Jobs\\Property\\TypeConverter\\ObjectStorageConverter');
+

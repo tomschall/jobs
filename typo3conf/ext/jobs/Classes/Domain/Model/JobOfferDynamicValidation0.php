@@ -371,7 +371,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 
 	/**
 	 * qualification
-	 * @validate NotEmpty
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Sozialinfo\Jobs\Domain\Model\Qualification>
 	 */

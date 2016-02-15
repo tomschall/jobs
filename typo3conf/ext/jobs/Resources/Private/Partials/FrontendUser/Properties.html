@@ -29,7 +29,17 @@
 			<f:translate key="tx_jobs_domain_model_frontenduser.corporate" />
 		</td>
 		<td>
-				<f:image src="{frontendUser.corporate.originalResource.publicUrl}" width="200"/>
+			<f:if condition="{frontendUser.corporate}">
+				<f:then>
+					<a href="{frontendUser.corporate.originalResource.publicUrl}" target="_blank">
+						<f:image image="{frontendUser.corporate}" width="468c" minWidth="468" maxWidth="468" height="373c" minHeight="373" maxHeight="373" alt="" />
+					</a>
+				</f:then>
+				<f:else>
+					kein corporate vorhanden
+				</f:else>
+			</f:if>
+
 		</td>
 	</tr>
 	<tr>
@@ -37,11 +47,19 @@
 			<f:translate key="tx_jobs_domain_model_frontenduser.documents" />
 		</td>
 		<td>
-				<f:for each="{frontendUser.documents}" as="file" >
-					<a href="{file.originalResource.publicUrl}">
-						{file.originalResource.name}
-					</a>
-				</f:for>
+			<f:if condition="{frontendUser.documents}">
+				<f:then>
+					<f:for each="{frontendUser.documents}" as="file" >
+						<a href="{file.originalResource.publicUrl}">
+							{file.originalResource.name}
+						</a>
+					</f:for>
+				</f:then>
+				<f:else>
+					keine dokumente hochgeladen
+				</f:else>
+			</f:if>
+
 		</td>
 	</tr>
 </table>
