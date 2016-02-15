@@ -1,0 +1,34 @@
+
+config.tx_extbase{
+    persistence{
+        classes{
+
+            GeorgRinger\News\Domain\Model\News {
+                subclasses {
+                    Tx_SiNews_News = Sozialinfo\SiNews\Domain\Model\News
+					
+          		}
+            }
+            TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+                subclasses {
+                    Tx_SiNews_FeUser = Sozialinfo\SiNews\Domain\Model\FeUser
+					
+          		}
+            }
+            Sozialinfo\SiNews\Domain\Model\News {
+                mapping {
+                    tableName = tx_news_domain_model_news
+                    recordType = Tx_SiNews_News
+                }
+            }
+            
+            Sozialinfo\SiNews\Domain\Model\FeUser {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_SiNews_FeUser
+                }
+            }
+            
+    	}
+    }
+}

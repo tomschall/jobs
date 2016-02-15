@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-04T10:47:20Z" product-name="si_news">
+		<header/>
+		<body>
+			<trans-unit id="tabauthor.description">
+				<source>Autorenschaft/Hrsg</source>
+			</trans-unit>
+			<trans-unit id="tabspecification.description">
+				<source>Spezifikationen</source>
+			</trans-unit>
+			<trans-unit id="date.description">
+				<source>Datum</source>
+			</trans-unit>
+			<trans-unit id="subtitle.description">
+				<source>Untertitel</source>
+			</trans-unit>
+			<trans-unit id="isbn.description">
+				<source>ISBN</source>
+			</trans-unit>
+			<trans-unit id="issn.description">
+				<source>ISSN</source>
+			</trans-unit>
+			<trans-unit id="edition.description">
+				<source>Auflage</source>
+			</trans-unit>
+			<trans-unit id="yearofpublicaition.description">
+				<source>Erscheinungsjahr</source>
+			</trans-unit>
+			<trans-unit id="channels.description">
+				<source>Kanal</source>
+			</trans-unit>
+			<trans-unit id="news.description">
+				<source>News</source>
+			</trans-unit>
+			<trans-unit id="keywords.description">
+				<source>keywords</source>
+			</trans-unit>
+			<trans-unit id="hrsg.description">
+				<source>Herausgeber</source>
+			</trans-unit>
+			<trans-unit id="id_author.description">
+				<source>Autorenschaft</source>
+			</trans-unit>
+			<trans-unit id="id_publisher.description">
+				<source>Verlag</source>
+			</trans-unit>
+			<trans-unit id="id_canton.description">
+				<source>Zuständigkeitsgebiet</source>
+			</trans-unit>
+			<trans-unit id="id_adresse.description">
+				<source>Herausgeber (Institutionen)</source>
+			</trans-unit>
+			<trans-unit id="id_informationstype.description">
+				<source>idInformationstype</source>
+			</trans-unit>
+			<trans-unit id="id_category.description">
+				<source>Kategorie</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

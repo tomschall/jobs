@@ -389,6 +389,24 @@ return array (
       array (
       ),
     ),
+    'news' => 
+    array (
+      'composerName' => 'georgringer/news',
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/news/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'si_news' => 
+    array (
+      'composerName' => 'si_news',
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/si_news/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'static_info_tables' => 
     array (
       'composerName' => 'sjbr/static_info_tables',
@@ -448,15 +466,6 @@ return array (
       'composerName' => 'jobs',
       'state' => 'active',
       'packagePath' => 'typo3conf/ext/jobs/',
-      'suggestions' => 
-      array (
-      ),
-    ),
-    'news' => 
-    array (
-      'composerName' => 'georgringer/news',
-      'state' => 'active',
-      'packagePath' => 'typo3conf/ext/news/',
       'suggestions' => 
       array (
       ),

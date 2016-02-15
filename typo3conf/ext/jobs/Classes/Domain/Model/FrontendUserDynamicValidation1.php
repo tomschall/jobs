@@ -150,7 +150,6 @@ class FrontendUserDynamicValidation1 extends \Sozialinfo\Jobs\DomainObject\Abstr
 	 * documents
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-	 * @cascade remove
 	 */
 	protected $documents = NULL;
 

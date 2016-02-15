@@ -31,7 +31,7 @@ namespace Sozialinfo\Jobs\Domain\Model;
  */
 class JobOfferDynamicValidation1 extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
 
-	const PROCESS_STEP_MAXIMUM = 3;
+	const PROCESS_STEP_MAXIMUM = 5;
 
 	/**
 	 * processStep
@@ -97,7 +97,6 @@ class JobOfferDynamicValidation1 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * documents
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-	 * @cascade remove
 	 */
 	protected $documents = NULL;
 

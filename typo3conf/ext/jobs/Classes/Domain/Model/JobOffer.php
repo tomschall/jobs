@@ -97,7 +97,6 @@ class JobOffer extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer impl
 	 * documents
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-	 * @cascade remove
 	 */
 	protected $documents = NULL;
 

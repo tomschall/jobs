@@ -1,0 +1,46 @@
+plugin.tx_news_domain_model_news.persistence{
+    classes{
+        Sozialinfo\SiNews\Domain\Model\AreasOfWork{
+                    newRecordStoragePid = 149
+                }
+        Sozialinfo\SiNews\Domain\Model\Authors{
+                    newRecordStoragePid = 142
+                }
+        Sozialinfo\SiNews\Domain\Model\Category{
+                    newRecordStoragePid = 148
+                }
+        Sozialinfo\SiNews\Domain\Model\Canton{
+                    newRecordStoragePid = 150
+                }
+        Sozialinfo\SiNews\Domain\Model\Country{
+                    newRecordStoragePid = 151
+        }
+        Sozialinfo\SiNews\Domain\Model\Degree{
+                    newRecordStoragePid = 146
+        }
+        Sozialinfo\SiNews\Domain\Model\EdcuationLevel{
+                    newRecordStoragePid = 145
+        }
+        Sozialinfo\SiNews\Domain\Model\Education{
+                    newRecordStoragePid = 145
+        }
+        Sozialinfo\SiNews\Domain\Model\Informationstype{
+                    newRecordStoragePid = 141
+        }
+        Sozialinfo\SiNews\Domain\Model\Media{
+                    newRecordStoragePid = 141
+        }
+        Sozialinfo\SiNews\Domain\Model\Periodicals{
+                    newRecordStoragePid = 140
+        }
+        Sozialinfo\SiNews\Domain\Model\Publisher{
+            newRecordStoragePid = 143
+        }
+        Sozialinfo\SiNews\Domain\Model\Range{
+            newRecordStoragePid = 147
+        }
+        Sozialinfo\SiNews\Domain\Model\Offer{
+            newRecordStoragePid = 144
+        }
+    }
+}

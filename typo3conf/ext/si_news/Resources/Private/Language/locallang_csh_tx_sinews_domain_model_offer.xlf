@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-04T10:47:20Z" product-name="si_news">
+		<header/>
+		<body>
+			<trans-unit id="fegroup.description">
+				<source>fegroup</source>
+			</trans-unit>
+			<trans-unit id="offer_type.description">
+				<source>offerType</source>
+			</trans-unit>
+			<trans-unit id="number.description">
+				<source>number</source>
+			</trans-unit>
+			<trans-unit id="date.description">
+				<source>date</source>
+			</trans-unit>
+			<trans-unit id="location.description">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="content.description">
+				<source>content</source>
+			</trans-unit>
+			<trans-unit id="infos.description">
+				<source>infos</source>
+			</trans-unit>
+			<trans-unit id="www.description">
+				<source>www</source>
+			</trans-unit>
+			<trans-unit id="del_date.description">
+				<source>delDate</source>
+			</trans-unit>
+			<trans-unit id="id_category.description">
+				<source>idCategory</source>
+			</trans-unit>
+			<trans-unit id="id_user.description">
+				<source>idUser</source>
+			</trans-unit>
+			<trans-unit id="id_degree.description">
+				<source>idDegree</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

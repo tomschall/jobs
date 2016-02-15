@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-04T10:47:20Z" product-name="si_news">
+		<header/>
+		<body>
+			<trans-unit id="tx_sinews_domain_model_news">
+				<source>News</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.tabauthor">
+				<source>Autorenschaft/Hrsg</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.tabspecification">
+				<source>Spezifikationen</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.date">
+				<source>Datum</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.subtitle">
+				<source>Untertitel</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.isbn">
+				<source>ISBN</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.issn">
+				<source>ISSN</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.edition">
+				<source>Auflage</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.yearofpublicaition">
+				<source>Erscheinungsjahr</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.channels">
+				<source>Kanäle</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.news">
+				<source>News</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.keywords">
+				<source>Keywords</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.hrsg">
+				<source>Herausgeber</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_author">
+				<source>id author</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_publisher">
+				<source>id publisher</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_canton">
+				<source>id canton</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_adresse">
+				<source>id adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_informationstype">
+				<source>Id informationstype</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_news.id_category">
+				<source>id category</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse">
+				<source>Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.institution">
+				<source>Herausgeber (Institution)</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.category">
+				<source>Kategorie</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.displayname">
+				<source>Displayname</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.addition">
+				<source>Addition</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.adresse">
+				<source>Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.post_office">
+				<source>Post Office</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.postcode">
+				<source>Postcode</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.p_postcode">
+				<source>P Postcode</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.p_location">
+				<source>P Location</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.areas_of_work">
+				<source>Areas Of Work</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.canton">
+				<source>Kanton</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.telefax">
+				<source>Telefax</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.www">
+				<source>Www</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.remark">
+				<source>Remark</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.other">
+				<source>Other</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.datasheet">
+				<source>Datasheet</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.back_empty">
+				<source>Back Empty</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.institution_short">
+				<source>Institution Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.facebook">
+				<source>Facebook</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.twitter">
+				<source>Twitter</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.other_s_m">
+				<source>Other S M</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.googleplus">
+				<source>Googleplus</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.xing">
+				<source>Xing</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.youtube">
+				<source>Youtube</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.rss">
+				<source>Rss</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.id_user">
+				<source>Id User</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.id_canton">
+				<source>Id Canton</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.id_areaofwork">
+				<source>Id Areaofwork</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_adresse.id_education">
+				<source>Id Education</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_authors">
+				<source>Authors</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_authors.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_authors.prename">
+				<source>Prename</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_authors.surname">
+				<source>Surname</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_informationstype">
+				<source>Informationsart</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_informationstype.informationstype">
+				<source>Informationsart</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_informationstype.definition">
+				<source>Definition (für interne Zwecke)</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_informationstype.validity">
+				<source>Gültigkeit in Monaten</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_informationstype.media">
+				<source>Media</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_canton">
+				<source>Canton</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_canton.definition">
+				<source>Definition</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_canton.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_category.definition">
+				<source>Definition</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_category.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_category.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_country.definition">
+				<source>Definition</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_country.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_media">
+				<source>Media</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_media.medium">
+				<source>Medium</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_media.id_informationstype">
+				<source>Id Informationstype</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_periodicals">
+				<source>Periodicals</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_periodicals.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_periodicals.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_periodicals.www">
+				<source>Www</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_periodicals.id_adresse">
+				<source>Id Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_publisher">
+				<source>Publisher</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_publisher.publisher">
+				<source>Publisher</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_education">
+				<source>Education</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_education.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_education.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_education.id_education_level">
+				<source>Id Education Level</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_range">
+				<source>Range</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_range.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_range.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_edcuationlevel">
+				<source>Edcuation Level</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_edcuationlevel.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_edcuationlevel.level">
+				<source>Level</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer">
+				<source>Offer</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.fegroup">
+				<source>Fegroup</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.offer_type">
+				<source>Offer Type</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.number">
+				<source>Number</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.content">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.infos">
+				<source>Infos</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.www">
+				<source>Www</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.del_date">
+				<source>Del Date</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.id_category">
+				<source>Id Category</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.id_user">
+				<source>Id User</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_offer.id_degree">
+				<source>Id Degree</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_degree">
+				<source>Degree</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_degree.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_areasofwork">
+				<source>Areas Of Work</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_areasofwork.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_areasofwork.offer">
+				<source>Offer</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_areasofwork.request">
+				<source>Request</source>
+			</trans-unit>
+			<trans-unit id="tx_sinews_domain_model_feuser">
+				<source>Fe User</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -155,6 +155,30 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	            }
 	            // add validators of model ItemDynamicValidation
 	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 3){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 4){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
 	        }
 	    }
 	}
@@ -191,7 +215,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		
 		if($this->arguments->hasArgument('jobOffer')){
 			$arguments = $this->request->getArguments();
-			if($arguments['jobOffer']['step'] == 3){
+			if($arguments['jobOffer']['step'] == 5){
 				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
 	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
 	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOffer');

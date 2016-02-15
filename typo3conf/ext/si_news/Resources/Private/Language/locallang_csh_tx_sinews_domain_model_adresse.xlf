@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-04T10:47:20Z" product-name="si_news">
+		<header/>
+		<body>
+			<trans-unit id="institution.description">
+				<source>institution</source>
+			</trans-unit>
+			<trans-unit id="category.description">
+				<source>category</source>
+			</trans-unit>
+			<trans-unit id="department.description">
+				<source>department</source>
+			</trans-unit>
+			<trans-unit id="short.description">
+				<source>short</source>
+			</trans-unit>
+			<trans-unit id="displayname.description">
+				<source>displayname</source>
+			</trans-unit>
+			<trans-unit id="addition.description">
+				<source>addition</source>
+			</trans-unit>
+			<trans-unit id="adresse.description">
+				<source>adresse</source>
+			</trans-unit>
+			<trans-unit id="post_office.description">
+				<source>postOffice</source>
+			</trans-unit>
+			<trans-unit id="postcode.description">
+				<source>postcode</source>
+			</trans-unit>
+			<trans-unit id="location.description">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="p_postcode.description">
+				<source>pPostcode</source>
+			</trans-unit>
+			<trans-unit id="p_location.description">
+				<source>pLocation</source>
+			</trans-unit>
+			<trans-unit id="areas_of_work.description">
+				<source>areasOfWork</source>
+			</trans-unit>
+			<trans-unit id="canton.description">
+				<source>canton</source>
+			</trans-unit>
+			<trans-unit id="phone.description">
+				<source>phone</source>
+			</trans-unit>
+			<trans-unit id="telefax.description">
+				<source>telefax</source>
+			</trans-unit>
+			<trans-unit id="email.description">
+				<source>email</source>
+			</trans-unit>
+			<trans-unit id="www.description">
+				<source>www</source>
+			</trans-unit>
+			<trans-unit id="remark.description">
+				<source>remark</source>
+			</trans-unit>
+			<trans-unit id="other.description">
+				<source>other</source>
+			</trans-unit>
+			<trans-unit id="datasheet.description">
+				<source>datasheet</source>
+			</trans-unit>
+			<trans-unit id="back_empty.description">
+				<source>backEmpty</source>
+			</trans-unit>
+			<trans-unit id="institution_short.description">
+				<source>institutionShort</source>
+			</trans-unit>
+			<trans-unit id="facebook.description">
+				<source>facebook</source>
+			</trans-unit>
+			<trans-unit id="twitter.description">
+				<source>twitter</source>
+			</trans-unit>
+			<trans-unit id="other_s_m.description">
+				<source>other Social Media</source>
+			</trans-unit>
+			<trans-unit id="googleplus.description">
+				<source>googleplus</source>
+			</trans-unit>
+			<trans-unit id="xing.description">
+				<source>xing</source>
+			</trans-unit>
+			<trans-unit id="youtube.description">
+				<source>youtube</source>
+			</trans-unit>
+			<trans-unit id="rss.description">
+				<source>rss</source>
+			</trans-unit>
+			<trans-unit id="id_user.description">
+				<source>idUser</source>
+			</trans-unit>
+			<trans-unit id="id_canton.description">
+				<source>idCanton</source>
+			</trans-unit>
+			<trans-unit id="id_areaofwork.description">
+				<source>idAreaofwork</source>
+			</trans-unit>
+			<trans-unit id="id_education.description">
+				<source>idEducation</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

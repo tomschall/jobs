@@ -1,0 +1,45 @@
+{namespace n=GeorgRinger\News\ViewHelpers}<!--
+	=====================
+		Partials/List/Item.html
+-->
+<div class="article articletype-{newsItem.type}{f:if(condition: newsItem.istopnews, then: ' topnews')}" itemscope="itemscope" itemtype="http://schema.org/Article">
+	<n:excludeDisplayedNews newsItem="{newsItem}"/>
+	<!-- header -->
+	<div class="header">
+		<!-- date -->
+		<span class="news-list-date">
+			<time datetime="{f:format.date(date:newsItem.datetime, format:'Y-m-d')}">
+				<f:format.date format="{f:translate(key:'dateFormat')}">{newsItem.datetime}</f:format.date>
+				<meta itemprop="datePublished" content="{f:format.date(date:newsItem.datetime, format:'Y-m-d')}" />
+			</time>
+			<span class="news-list-publisher">
+				20minuten online
+			</span>
+		</span>
+		<p class="news-list-publisher">
+			<f:if condition="{newsItem.idPublisher}">
+				<!-- first Publisher -->
+				<f:for each="{newsItem.idPublisher}" as="publisherItem">
+					{publisherItem.publisher},
+				</f:for>
+			</f:if>
+		</p>
+		<h4>
+			<n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+				<span itemprop="headline">{newsItem.title}</span>
+			</n:link>
+		</h4>
+	</div>
+
+	<!-- teaser -->
+	<div class="teaser-text">
+		<span itemprop="description">{newsItem.subtitle}</span>
+		<span itemprop="description">{newsItem.bodytext -> f:format.crop(maxCharacters: '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}</span>
+		<n:link newsItem="{newsItem}" settings="{settings}" class="more" title="{newsItem.title}">
+			<f:translate key="more-link"/>
+		</n:link>
+	</div>
+	<p>Kategorie:</p>
+	<!-- footer information -->
+	<div class="footer"></div>
+</div>
