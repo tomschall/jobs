@@ -68,12 +68,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	  */
 	public function newAction($jobOffer = NULL) {
 		$this->hydrateFromSession($jobOffer);
-		$frontendUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 		
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser,'frontendUser');
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffer,'newAction jobOffer');
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($qualificationChecked,'qualificationChecked');
-
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']),'frontendUser');
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->getSalutation(),'salutation');
+		
 		$this->view->assign('jobOffer', $jobOffer);
 		$this->view->assign('canton', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CantonRepository')->findAll());
 		$this->view->assign('employmentRelationships', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\EmploymentRelationshipRepository')->findAll());
@@ -83,6 +82,9 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('qualificationChecked', $this->getCheckedQualifications($jobOffer));
 		$this->view->assign('areasOfWorkChecked', $this->getCheckedAreasOfWork($jobOffer));
 		$this->view->assign('cantonSelected', $this->getCheckedCantons($jobOffer));
+		$this->view->assign('frontendUser', $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']));
+		$this->view->assign('postalAddressTitles', $this->getSalutation());
+		$this->view->assign('postalAddressCountries', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CountryRepository')->findAll());
 		
 	}
 
@@ -104,17 +106,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		if(isset($this->arguments['jobOffer'])) {
 			if($arguments['jobOffer']['step'] == 0){
-				$this->arguments['jobOffer']
-				->getPropertyMappingConfiguration()
-				->forProperty('startDate')
-				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-				$this->arguments['jobOffer']
-				->getPropertyMappingConfiguration()
-				->forProperty('endDate')
-				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-				$this->arguments['jobOffer']
+				$this->arguments[$jobOffer]
 				->getPropertyMappingConfiguration()
 				->forProperty('entryDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
@@ -123,8 +115,12 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->getPropertyMappingConfiguration()
 				->forProperty('applicationDeadline')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+			}elseif($arguments['jobOffer']['step'] == 3){
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('startDate')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
-
 		}
 		// dynamic validation because of different steps
 		if($this->arguments->hasArgument('jobOffer')){
@@ -206,6 +202,12 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function continueAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
 		$this->hydrateFromSession($jobOffer);
+		if($jobOffer->getProcessStep() == 3){
+			$endDate = new \DateTime();
+			$endDate->setTimestamp($jobOffer->getStartDate()->getTimestamp());
+			$endDate->modify('+'.$jobOffer->getNumberDaysPublication().'days');
+			$jobOffer->setEndDate($endDate);
+		}
 		$jobOffer->increaseProcessStep();
 		$this->session->setSerialized('jobOffer', $jobOffer);
 		
@@ -349,7 +351,17 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
-					}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\Country) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\AdvertisementType) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}					
 				}
 			}			
 			$jobOffer->_setProperties($properties);
@@ -405,22 +417,17 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			if($arguments['jobOffer']['step'] == 0){
 				$this->arguments[$jobOffer]
 				->getPropertyMappingConfiguration()
-				->forProperty('startDate')
-				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-				$this->arguments[$jobOffer]
-				->getPropertyMappingConfiguration()
-				->forProperty('endDate')
-				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-
-				$this->arguments[$jobOffer]
-				->getPropertyMappingConfiguration()
 				->forProperty('entryDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 
 				$this->arguments[$jobOffer]
 				->getPropertyMappingConfiguration()
 				->forProperty('applicationDeadline')
+				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+			}elseif($arguments['jobOffer']['step'] == 3){
+				$this->arguments[$jobOffer]
+				->getPropertyMappingConfiguration()
+				->forProperty('startDate')
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
@@ -570,6 +577,16 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 						if(!empty($tmp)){
 							$properties[$key] = $value;		
 						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\Country) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\AdvertisementType) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
 					}
 				}
 			}		
@@ -696,6 +713,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			);
 	}
 
+	/**
+	 * get selected qualifications for form
+	 *
+	 * @return array
+	 */
 	public function getCheckedQualifications($jobOffer){
 		$qualifications = $jobOffer->getQualification();
 		$qualificationChecked = array();
@@ -705,6 +727,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		return $qualificationChecked;
 	}
 
+	/**
+	 * get selected areasOfWork for form
+	 *
+	 * @return array
+	 */
 	public function getCheckedAreasOfWork($jobOffer){
 		$areasOfWork = $jobOffer->getAreasOfWork();
 		$areasOfWorkChecked = array();
@@ -714,6 +741,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		return $areasOfWorkChecked;
 	}
 
+	/**
+	 * get selected cantons for form
+	 *
+	 * @return array
+	 */
 	public function getCheckedCantons($jobOffer){
 		$canton = $jobOffer->getCanton();
 		$cantonsChecked = array();
@@ -721,6 +753,23 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$cantonsChecked[$value->getUid()] = $value->getUid();
 		}
 		return $cantonsChecked;
+	}
+
+	/**
+	 * prepare salutations for select box
+	 *
+	 * @return array
+	 */
+	public function getSalutation() {
+		$salutation = array();
+		$entries = array('0','1');
+		foreach ($entries as $entry) {
+			$salutation = new \stdClass;
+			$salutation->key = $entry;
+			$salutation->value = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.salutation.options.I.'.$entry, 'jobs');
+			$salutations[] = $salutation;
+		}
+		return $salutations;
 	}
 
 

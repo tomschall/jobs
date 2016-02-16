@@ -1,1 +1,21 @@
+<h1>Preisberechnung und Bestätigung</h1><br />
+
+<h2>Inseratedauer</h2>
+
+<f:translate key="tx_jobs_domain_model_joboffer.number_days_publication" />: {jobOffer.numberDaysPublication} <br />
+<f:translate key="tx_jobs_domain_model_joboffer.start_date" />: {jobOffer.startDate->f:format.date(format:'d.m.Y')} <br />
+<f:translate key="tx_jobs_domain_model_joboffer.end_date" />: {jobOffer.endDate->f:format.date(format:'d.m.Y')} <br />
+
+<h2>Preis</h2>
+
+<f:translate key="tx_jobs_domain_model_joboffer.advertisement_type" />: {jobOffer.advertisementType.title} <br />
+Preis: {jobOffer.advertisementType.priceMember}.00 Stei <br />
+
+<h2>Geschäftsbedingungen</h2>
+
+<label for="useAgreements">
+	<f:translate key="tx_jobs_domain_model_joboffer.use_agreements" /> 
+</label><br />
+	<f:form.checkbox property="useAgreements" value="1" checked="{jobOffer.useAgreements}" /><br /><br />
+
 <f:form.hidden property="step" value="4" />
