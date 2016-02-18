@@ -1,9 +1,93 @@
-<label for="jobTitle">
-	<f:translate key="tx_jobs_domain_model_jobrequest.job_title" /> <span class="required">(required)</span>
-</label><br />
-	<f:form.textfield property="jobTitle" /><br />
-<label for="canton">
-	<f:translate key="tx_jobs_domain_model_jobrequest.canton" /> 
-</label><br />
-	<f:form.select name="canton" options="{canton}" optionLabelField="title" property="canton" multiple="3" /><br />
-	<f:form.hidden property="step" value="1" />
+<h1>Stellengesuch</h1>
+
+<f:translate key="tx_jobs_domain_model_jobrequest.employment_relationship" />: {jobRequest.employmentRelationship.title} <br />
+<f:translate key="tx_jobs_domain_model_jobrequest.position" />: {jobRequest.position.title} <br />
+
+<f:translate key="tx_jobs_domain_model_jobrequest.qualification" />:
+	<f:for each="{jobRequest.qualification}" as="quali" iteration="i">
+		<f:if condition="{jobRequest.qualification->f:count()} >= 3">
+			<f:if condition="{i.isFirst}">
+			 	{quali.title},
+			</f:if>
+				{quali.title},
+			<f:if condition="{i.isLast}">
+				{quali.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.qualification->f:count()} == 2">
+			<f:if condition="{i.isFirst}">
+			 	{quali.title},
+			</f:if>
+			<f:if condition="{i.isLast}">
+				{quali.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.qualification->f:count()} == 1">
+			{quali.title}
+		</f:if>
+
+	</f:for><br />
+
+<f:translate key="tx_jobs_domain_model_jobrequest.areas_of_work" />:
+	<f:for each="{jobRequest.areasOfWork}" as="aow" iteration="i">
+		<f:if condition="{jobRequest.areasOfWork->f:count()} >= 3">
+			<f:if condition="{i.isFirst}">
+			 	{aow.title},
+			</f:if>
+				{aow.title},
+			<f:if condition="{i.isLast}">
+				{aow.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.areasOfWork->f:count()} == 2">
+			<f:if condition="{i.isFirst}">
+			 	{aow.title},
+			</f:if>
+			<f:if condition="{i.isLast}">
+				{aow.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.areasOfWork->f:count()} == 1">
+			{aow.title}
+		</f:if>
+	</f:for><br />
+
+<f:translate key="tx_jobs_domain_model_jobrequest.percent_of" />: {jobRequest.percentOf} - {jobRequest.percentUp}<br />
+<f:translate key="tx_jobs_domain_model_jobrequest.job_title" />: {jobRequest.jobTitle} <br />
+<f:translate key="tx_jobs_domain_model_jobrequest.entry_date" />: {jobRequest.entryDate->f:format.date(format:'d.m.Y')} <br />
+<f:translate key="tx_jobs_domain_model_jobrequest.job_location" />: {jobRequest.jobLocation} <br />
+
+<f:translate key="tx_jobs_domain_model_jobrequest.canton" />:
+	<f:for each="{jobRequest.canton}" as="cant" iteration="i">
+		<f:if condition="{jobRequest.canton->f:count()} >= 3">
+			<f:if condition="{i.isFirst}">
+			 	{cant.title},
+			</f:if>
+				{cant.title},
+			<f:if condition="{i.isLast}">
+				{cant.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.canton->f:count()} == 2">
+			<f:if condition="{i.isFirst}">
+			 	{cant.title},
+			</f:if>
+			<f:if condition="{i.isLast}">
+				{cant.title}
+			</f:if>
+		</f:if>
+		<f:if condition="{jobRequest.canton->f:count()} == 1">
+			{cant.title}
+		</f:if>
+	</f:for><br />
+
+<h1>Profil/Wünsche</h1>
+
+<f:translate key="tx_jobs_domain_model_jobrequest.job_description" />: {jobRequest.jobDescription} <br />
+
+<h1>Kontakt</h1>
+
+<f:translate key="tx_jobs_domain_model_jobrequest.contact_to" />: {jobRequest.contactTo} <br />
+<f:translate key="tx_jobs_domain_model_jobrequest.email_to" />: {jobRequest.emailTo} <br />
+
+<br /><br /><f:form.hidden property="step" value="1" />

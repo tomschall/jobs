@@ -237,6 +237,9 @@
 			<trans-unit id="tx_jobs_domain_model_joboffer.use_agreements">
 				<source>Use Agreements</source>
 			</trans-unit>
+			<trans-unit id="tx_jobs_domain_model_joboffer.use_agreements_error_message">
+				<source>You must confirm the use agreements!</source>
+			</trans-unit>
 			<trans-unit id="tx_jobs_domain_model_joboffer.offer_is_german">
 				<source>Offer Is German</source>
 			</trans-unit>

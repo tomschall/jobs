@@ -1,9 +1,11 @@
-<label for="corporate">
-	<f:translate key="tx_jobs_domain_model_frontenduser.corporate" />
+<label for="numberDaysPublication">
+	<f:translate key="tx_jobs_domain_model_jobrequest.number_days_publication" /><span class="required"> (required)</span>
 </label><br />
-	<span>File upload is not implemented!</span><br  /><br />
-<label for="documents">
-	<f:translate key="tx_jobs_domain_model_frontenduser.documents" />
+	<f:form.textfield property="numberDaysPublication" /><br /><br />
+
+<label for="startDate">
+	<f:translate key="tx_jobs_domain_model_jobrequest.start_date" /><span class="required"> (required)</span>
 </label><br />
-	<span>File upload is not implemented!</span><br /><br />
-	<f:form.hidden property="step" value="3" />
+	<f:form.textfield property="startDate" value="{jobRequest.startDate->f:format.date(format:'d.m.Y')}" /><br /><br />
+
+<f:form.hidden property="step" value="3" />

@@ -1,1 +1,82 @@
+<h1>Registrationsadresse</h1>
+<f:translate key="tx_jobs_domain_model_frontenduser.salutation" />: 
+	<f:if condition="{frontendUser.salutation}==0"><f:translate key="tx_jobs_domain_model_frontenduser.salutation.options.I.0" /></f:if>
+	<f:if condition="{frontendUser.salutation}==1"><f:translate key="tx_jobs_domain_model_frontenduser.salutation.options.I.1" /></f:if><br />
+	
+<f:translate key="tx_jobs_domain_model_frontenduser.first_name" />: {frontendUser.firstName} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.last_name" />: {frontendUser.lastName} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.company_frontend_user" />: {frontendUser.companyFrontendUser.company} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.additive" />: {frontendUser.additive} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.department" />: {frontendUser.department} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.address" />: {frontendUser.address} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.zip" />: {frontendUser.zip} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.city" />: {frontendUser.city} <br />
+<f:translate key="tx_jobs_domain_model_frontenduser.country" />: {frontendUser.country.title} <br /><br />
+
+<label for="assignmentReference">
+	<f:translate key="tx_jobs_domain_model_joboffer.assignment_reference" />
+</label><br />
+	<f:form.textfield property="assignmentReference" /><br /><br />
+
+<label for="postalAddresEqualToRegistrationAddress">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_addres_equal_to_registration_address" /> 
+</label><br />
+	<f:form.checkbox property="postalAddresEqualToRegistrationAddress" value="1" checked="{jobOffer.postalAddresEqualToRegistrationAddress}" /><br /><br />
+
+<label for="postalAddressTitle">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_title" />
+</label><br />
+	<f:form.select name="postalAddressTitle" options="{postalAddressTitles}" optionValueField="key" optionLabelField="value" property="postalAddressTitle" value="{f:if(condition:'{jobOffer.postalAddressTitle}==0',then:'0',else:'1')}" /><br />
+
+<label for="postalAddressFirstName">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_first_name" />
+</label><br />
+	<f:form.textfield property="postalAddressFirstName" /><br />
+
+<label for="postalAddressName">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_name" />
+</label><br />
+	<f:form.textfield property="postalAddressName" /><br />
+
+<label for="postalAddressCompany">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_company" />
+</label><br />
+	<f:form.textfield property="postalAddressCompany" /><br />
+
+<label for="postalAddressAdditive">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_additive" />
+</label><br />
+	<f:form.textfield property="postalAddressAdditive" /><br />
+
+<label for="postalAddressDepartment">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_department" />
+</label><br />
+	<f:form.textfield property="postalAddressDepartment" /><br />
+
+<label for="postalAddressStreetNr">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_street_nr" />
+</label><br />
+	<f:form.textfield property="postalAddressStreetNr" /><br />
+
+<label for="postalAddressPoBox">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_po_box" />
+</label><br />
+	<f:form.textfield property="postalAddressPoBox" /><br />
+
+<label for="postalAddressZip">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_zip" />
+</label><br />
+	<f:form.textfield property="postalAddressZip" /><br />
+
+<label for="postalAddressCity">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_city" />
+</label><br />
+	<f:form.textfield property="postalAddressCity" /><br />
+
+<label for="postalAddressCountry">
+	<f:translate key="tx_jobs_domain_model_joboffer.postal_address_country" />
+</label><br />
+	<f:form.select name="postalAddressCountry" options="{postalAddressCountries}" optionLabelField="title" property="postalAddressCountry" value="{jobOffer.postalAddressCountry.uid}" /><br />
+
+<br />
 <f:form.hidden property="step" value="2" />

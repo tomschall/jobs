@@ -1,1 +1,20 @@
+<label for="numberDaysPublication">
+	<f:translate key="tx_jobs_domain_model_joboffer.number_days_publication" />
+</label><br />
+	<f:form.textfield property="numberDaysPublication" /><span class="required">(required)</span><br /><br />
+
+<label for="startDate">
+	<f:translate key="tx_jobs_domain_model_joboffer.start_date" /><span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="startDate" value="{jobOffer.startDate->f:format.date(format:'d.m.Y')}" /><br /><br />
+
+<label for="advertisementType">
+	<f:translate key="tx_jobs_domain_model_joboffer.advertisement_type" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.radio property="advertisementType" value="6" checked="{jobOffer.advertisementType.uid} == 6" /> Classic <br />
+	<f:form.radio property="advertisementType" value="7" checked="{jobOffer.advertisementType.uid} == 7" /> Plus <br />
+	<f:form.radio property="advertisementType" value="8" checked="{jobOffer.advertisementType.uid} == 8" /> Newsletter <br />
+	<f:form.radio property="advertisementType" value="9" checked="{jobOffer.advertisementType.uid} == 9" /> Social <br />
+	<f:form.radio property="advertisementType" value="10" checked="{jobOffer.advertisementType.uid} == 10" /> Kombi <br /><br />
+	
 <f:form.hidden property="step" value="3" />

@@ -1,16 +1,4 @@
-
 <f:layout name="Default" />
-
-This Template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
 <h1>Listing for FrontendUser</h1>
@@ -25,7 +13,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_jobs_domain_model_frontenduser.department" /></th>
 		<th><f:translate key="tx_jobs_domain_model_frontenduser.po_box" /></th>
 		<th><f:translate key="tx_jobs_domain_model_frontenduser.corporate" /></th>
-		<th><f:translate key="tx_jobs_domain_model_frontenduser.jobOffers" /></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -38,19 +25,61 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{frontendUser : frontendUser}"> {frontendUser.department} </f:link.action></td>
 			<td><f:link.action action="show" arguments="{frontendUser : frontendUser}"> {frontendUser.poBox} </f:link.action></td>
 			<td><f:link.action action="show" arguments="{frontendUser : frontendUser}"> {frontendUser.corporate.originalResource.name} </f:link.action></td>
-			<td>
-				<f:for each="{frontendUser.jobOffers}" as="jobOffer" iteration="i">
-					<f:link.action action="show" controller="JobOffer" pageUid="68" arguments="{jobOffer : jobOffer}"> {jobOffer.jobTitle} </f:link.action><br />
-				</f:for>
-			</td>
-				
-				
 			<td><f:link.action action="edit" arguments="{frontendUser : frontendUser}">Edit</f:link.action></td>
 			<td><f:link.action action="delete" arguments="{frontendUser : frontendUser}">Delete</f:link.action></td>
 		</tr>
 	</f:for>
 </table>
 
+<br /><br />
+
+<table  class="tx_jobs" >
+	<tr>
+		<th><f:translate key="tx_jobs_domain_model_frontenduser.job_offers" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{frontendUsers}" as="frontendUser">		
+		<f:for each="{frontendUser.jobOffers}" as="jobOffer" iteration="i">
+			<tr>
+				<td><f:link.action action="show" controller="JobOffer" pageUid="68" arguments="{jobOffer : jobOffer}"> {jobOffer.jobTitle} </f:link.action></td>
+				<td><f:link.action action="edit" controller="JobOffer" pageUid="68" arguments="{jobOffer : jobOffer}">Edit</f:link.action></td>
+				<td><f:link.action action="delete" controller="JobOffer" pageUid="68" arguments="{jobOffer : jobOffer}">Delete</f:link.action></td>
+			</tr>
+		</f:for>
+	</f:for>
+</table>
+
+<br />
+
 <f:link.action action="new" controller="JobOffer" pageUid="68" >New JobOffer</f:link.action>
+
+<br /><br /><br /><br />
+
+<table  class="tx_jobs" >
+	<tr>
+		<th><f:translate key="tx_jobs_domain_model_frontenduser.job_requests" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{frontendUsers}" as="frontendUser">		
+		<f:for each="{frontendUser.jobRequests}" as="jobRequest" iteration="i">
+			<tr>
+				<td><f:link.action action="show" controller="JobRequest" pageUid="70" arguments="{jobRequest : jobRequest}"> {jobRequest.jobTitle} </f:link.action></td>
+				<td><f:link.action action="edit" controller="JobRequest" pageUid="70" arguments="{jobRequest : jobRequest}">Edit</f:link.action></td>
+				<td><f:link.action action="delete" controller="JobRequest" pageUid="70" arguments="{jobRequest : jobRequest}">Delete</f:link.action></td>
+			</tr>
+		</f:for>
+	</f:for>
+</table>
+
+<br />
+
+<f:link.action action="new" controller="JobRequest" pageUid="70" >New JobRequest</f:link.action>
+
+<br /><br />
+
 
 </f:section>

@@ -1,9 +1,87 @@
-<label for="startDate">
-	<f:translate key="tx_jobs_domain_model_jobrequest.start_date" /> <span class="required">(required)</span>
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
+
+<label for="employmentRelationship">
+	<f:translate key="tx_jobs_domain_model_jobrequest.employment_relationship" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="startDate" value="{jobRequest.startDate->f:format.date(format:'d.m.Y')}" /><br />
-<label for="endDate">
-	<f:translate key="tx_jobs_domain_model_jobrequest.end_date" /> <span class="required">(required)</span>
+	<f:form.radio property="employmentRelationship" value="1" checked="{jobRequest.employmentRelationship.uid} == 1" /> Festanstellung <br />
+	<f:form.radio property="employmentRelationship" value="2" checked="{jobRequest.employmentRelationship.uid} == 2" /> Befristete Stelle <br />
+	<f:form.radio property="employmentRelationship" value="3" checked="{jobRequest.employmentRelationship.uid} == 3" /> Stellverstretung <br />
+	<f:form.radio property="employmentRelationship" value="4" checked="{jobRequest.employmentRelationship.uid} == 4" /> Mandatsverhältnis <br />
+	<f:form.radio property="employmentRelationship" value="5" checked="{jobRequest.employmentRelationship.uid} == 5" /> Praktikum/Zivildienst <br />
+	<f:form.radio property="employmentRelationship" value="6" checked="{jobRequest.employmentRelationship.uid} == 6" /> Ausbildungsplatz <br />
+	<f:form.radio property="employmentRelationship" value="7" checked="{jobRequest.employmentRelationship.uid} == 7" /> Freiwilligenarbeit/Ehrenamt <br />
+	<f:form.radio property="employmentRelationship" value="8" checked="{jobRequest.employmentRelationship.uid} == 8" /> Andere <br /><br />
+
+<label for="position">
+	<f:translate key="tx_jobs_domain_model_jobrequest.position" /> <span class="required">(required)</span>
 </label><br />
-	<f:form.textfield property="endDate" value="{jobRequest.endDate->f:format.date(format:'d.m.Y')}" /><br />
-	<f:form.hidden property="step" value="0" />
+	<f:form.radio property="position" value="1" checked="{jobRequest.position.uid} == 1" /> Kaderstelle/Leitung <br />
+	<f:form.radio property="position" value="2" checked="{jobRequest.position.uid} == 2" /> Gruppenleitung/Teamleitung <br />
+	<f:form.radio property="position" value="3" checked="{jobRequest.position.uid} == 3" /> Qualifizierte Fachmitarbeit <br />
+	<f:form.radio property="position" value="4" checked="{jobRequest.position.uid} == 4" /> Stellvertretung/Aushilfe <br />
+	<f:form.radio property="position" value="5" checked="{jobRequest.position.uid} == 5" /> Praktikum <br />
+	<f:form.radio property="position" value="6" checked="{jobRequest.position.uid} == 6" /> Ausbildung <br />
+	<f:form.radio property="position" value="7" checked="{jobRequest.position.uid} == 7" /> Freiwilligenarbeit <br />
+	<f:form.radio property="position" value="8" checked="{jobRequest.position.uid} == 8" /> Andere <br /><br />
+
+<label for="percentOf">
+	<f:translate key="tx_jobs_domain_model_jobrequest.percent_of" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="percentOf" value="{jobRequest.percentOf}" /><br />
+
+<label for="percentUp">
+	<f:translate key="tx_jobs_domain_model_jobrequest.percent_up" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="percentUp" value="{jobRequest.percentUp}" /><br /><br />
+
+<label for="qualification">
+	<f:translate key="tx_jobs_domain_model_jobrequest.qualification" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.checkbox property="qualification" value="1" multiple="1" checked="{qualificationChecked.1}" /> Hochschulbildung (Bachelor/Master) <br />
+	<f:form.checkbox property="qualification" value="2" multiple="1" checked="{qualificationChecked.2}" /> Höhere Berufsbildung (HFP, HF, BP) <br />
+	<f:form.checkbox property="qualification" value="3" multiple="1" checked="{qualificationChecked.3}" /> Berufliche Grundbildung (EBA, EFZ) <br />
+	<f:form.checkbox property="qualification" value="4" multiple="1" checked="{qualificationChecked.4}" /> Andere <br /><br />
+
+<label for="jobTitle">
+	<f:translate key="tx_jobs_domain_model_jobrequest.job_title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="jobTitle" /><br /><br />
+
+<label for="entryDate">
+	<f:translate key="tx_jobs_domain_model_jobrequest.entry_date" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="entryDate" value="{jobRequest.entryDate->f:format.date(format:'d.m.Y')}" /><br />
+<label for="entryAgreement">
+	<f:translate key="tx_jobs_domain_model_jobrequest.entry_agreement" /> 
+</label><br />
+	<f:form.checkbox property="entryAgreement" value="1" checked="{jobRequest.entryAgreement}" /><br />
+<label for="entryImmediately">
+	<f:translate key="tx_jobs_domain_model_jobrequest.entry_immediately" /> 
+</label><br />
+	<f:form.checkbox property="entryImmediately" value="1" checked="{jobRequest.entryImmediately}" /><br /><br />
+
+<label for="jobLocation">
+	<f:translate key="tx_jobs_domain_model_jobrequest.job_location" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="jobLocation" /><br /><br />
+
+<label for="canton">
+	<f:translate key="tx_jobs_domain_model_jobrequest.canton" /> 
+</label><br />
+	<f:form.select name="canton" options="{canton}" optionLabelField="title" property="canton" multiple="3" value="{cantonSelected}" /><br /><br/>
+
+<label for="jobDescription">
+	<f:translate key="tx_jobs_domain_model_jobrequest.job_description" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textarea style="width:600px;height:300px;" property="jobDescription" /><br /><br />
+
+<label for="contactTo">
+	<f:translate key="tx_jobs_domain_model_jobrequest.contact_to" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textarea style="width:300px;height:200px;" property="contactTo" /><br /><br />
+
+<label for="emailTo">
+	<f:translate key="tx_jobs_domain_model_jobrequest.email_to" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="emailTo" /><br /><br />
+	

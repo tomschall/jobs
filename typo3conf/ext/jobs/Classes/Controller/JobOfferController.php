@@ -88,6 +88,10 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		
 	}
 
+	/**
+	 * initialize continue action.
+	 *
+	 */
 	public function initializeContinueAction() {
 
 		$arguments = $this->request->getArguments();
@@ -188,7 +192,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	        }
 	    }
 	}
-	
+
 	/**
 	 * Continue action.
 	 *
@@ -201,6 +205,11 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function continueAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
+		$arguments = $this->request->getArguments();
+
+		if(array_key_exists('useAgreements', $arguments['jobOffer'])){
+			$arguments['jobOffer']['useAgreements'] != 1 ? $this->useAgreementsErrorMessage() : '';
+		}
 		$this->hydrateFromSession($jobOffer);
 		if($jobOffer->getProcessStep() == 3){
 			$endDate = new \DateTime();
@@ -262,8 +271,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$this->addFlashMessage('User war nicht eingeloggt, Object JobOffer konnte somit nicht dem FeUser hinzugefügt werden.', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 			$this->session->remove('jobOffer');
 			$this->redirect('list', NULL, NULL, NULL);	
-		}
-		
+		}		
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
 		$this->persistenceManager->persistAll();
 		$this->session->remove('jobOffer');
@@ -395,8 +403,15 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('qualificationChecked', $this->getCheckedQualifications($jobOffer));
 		$this->view->assign('areasOfWorkChecked', $this->getCheckedAreasOfWork($jobOffer));
 		$this->view->assign('cantonSelected', $this->getCheckedCantons($jobOffer));
+		$this->view->assign('frontendUser', $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']));
+		$this->view->assign('postalAddressTitles', $this->getSalutation());
+		$this->view->assign('postalAddressCountries', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CountryRepository')->findAll());
 	}
 
+	/**
+	 * initialize the edit continue action.
+	 *
+	 */
 	public function initializeContinueEditAction() {
 
 		$arguments = $this->request->getArguments();
@@ -410,7 +425,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		//$arguments['jobOffer']['documents'] != '' ? $propertyMappingConfiguration->skipProperties('documents') : '';
 
 		$propertyMappingConfiguration->skipProperties('step');
-		
+
 		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
 
 		if(isset($this->arguments['jobOffer'])) {
@@ -431,6 +446,72 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
+
+		// dynamic validation because of different steps
+		if($this->arguments->hasArgument('jobOffer')){
+			$arguments = $this->request->getArguments();
+			if($arguments['jobOffer']['step'] == 0){
+				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 1){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 2){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 3){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }elseif($arguments['jobOffer']['step'] == 4){
+	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // remove old validator
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // add validators of model ItemDynamicValidation
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }
+	    }
 	}
 	
 	/**
@@ -444,12 +525,19 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function continueEditAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
-		$this->hydrateEditFromSession($jobOffer);
+		$arguments = $this->request->getArguments();
 
-		$processStep = $jobOffer->getProcessStep();
-		
+		if(array_key_exists('useAgreements', $arguments['jobOffer'])){
+			$arguments['jobOffer']['useAgreements'] != 1 ? $this->useAgreementsErrorMessage() : '';
+		}
+		$this->hydrateEditFromSession($jobOffer);
+		if($jobOffer->getProcessStep() == 3){
+			$endDate = new \DateTime();
+			$endDate->setTimestamp($jobOffer->getStartDate()->getTimestamp());
+			$endDate->modify('+'.$jobOffer->getNumberDaysPublication().'days');
+			$jobOffer->setEndDate($endDate);
+		}		
 		$this->jobOfferRepository->update($jobOffer);
-		
 		$jobOffer->increaseProcessStep();
 		$this->session->setSerialized('jobOfferEdit', $jobOffer);
 
@@ -465,7 +553,24 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$propertyMappingConfiguration = $this->arguments['jobOffer']->getPropertyMappingConfiguration();
 		$propertyMappingConfiguration->skipProperties('step');
 
-		$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+		//$this->setTypeConverterConfigurationForImageUpload('jobOffer');
+
+		if($this->arguments->hasArgument('jobOffer')){
+			$arguments = $this->request->getArguments();
+			if($arguments['jobOffer']['step'] == 5){
+				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOffer');
+	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+	            // Alle alten Validatoren entfernen
+	            foreach ($conjunctionValidator->getValidators() as $validator) {
+	                $conjunctionValidator->removeValidator($validator);
+	            }
+	            // Validatoren des Models ItemDynamicValidation hinzufuegen
+	            $conjunctionValidator->addValidator($extendedValidator);
+	        }
+	    }
 		
 	}
 	
@@ -483,7 +588,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
 		$this->persistenceManager->persistAll();
 		$this->session->remove('jobOfferEdit');
-		$this->redirect('list', NULL, NULL, NULL);
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**
@@ -536,9 +641,9 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				}
 				
 				$properties = array_filter(
-						$currentJobOffer->_getPublicProperties(),
-						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
-					);
+					$currentJobOffer->_getPublicProperties(),
+					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+				);
 				
 				$propertiesToMerge = array_filter(
 					$jobOffer->_getPublicProperties(),
@@ -607,17 +712,6 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	}
 
 	/**
-	 * action listUserSpecificDataAction
-	 *
-	 * @return void
-	 */
-	public function listUserSpecificDataAction() {
-		$jobOffers = $this->jobOfferRepository->findAll();
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jobOffers);
-		$this->view->assign('jobOffers', $jobOffers);
-	}
-
-	/**
 	 * action show
 	 *
 	 * @param \Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer
@@ -639,7 +733,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	public function deleteAction(\Sozialinfo\Jobs\Domain\Model\JobOffer $jobOffer) {
 		$this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$this->jobOfferRepository->remove($jobOffer);
-		$this->redirect('list');
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**
@@ -650,7 +744,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function cancelAction() {
 		$this->session->remove('jobOffer');
-		$this->redirect('list', NULL, NULL, NULL);
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**
@@ -661,7 +755,7 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function cancelEditAction() {
 		$this->session->remove('jobOfferEdit');
-		$this->redirect('list', NULL, NULL, NULL);
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**
@@ -770,6 +864,21 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$salutations[] = $salutation;
 		}
 		return $salutations;
+	}
+
+	/**
+	 * generate flash message if useAgreements are not confirmed
+	 *
+	 */
+	public function useAgreementsErrorMessage() {
+		$this->addFlashMessage(
+			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_joboffer.use_agreements_error_message','jobs'),
+			'',
+			\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+			TRUE
+		);
+		$action = $this->request->getControllerActionName();
+		$action == 'continue' ? $this->redirect('new') : $this->redirect('edit');		
 	}
 
 

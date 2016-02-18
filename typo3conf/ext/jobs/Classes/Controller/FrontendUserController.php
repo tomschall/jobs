@@ -438,8 +438,8 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$actualFeUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\FrontendUserRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 		//$frontendUsers = $this->frontendUserRepository->findAll();
 		
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUsers);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($actualFeUser);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUsers,'frontendUser found in Repository');
+		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($actualFeUser,'actual logged in user');
 
 		$this->view->assign('frontendUsers', $frontendUsers);
 	}

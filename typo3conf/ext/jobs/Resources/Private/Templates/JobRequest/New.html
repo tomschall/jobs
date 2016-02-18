@@ -9,7 +9,7 @@
 
 	<f:if condition="{jobRequest.processStep}==0">
 		<f:form action="continue" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
-			<f:render partial="JobRequest/FormFields0" arguments="{jobRequest:jobRequest}" />
+			<f:render partial="JobRequest/FormFields0" arguments="{jobRequest:jobRequest,employmentRelationship:employmentRelationship,position:position,qualification:qualification,areasOfWork:areasOfWork,qualificationChecked:qualificationChecked,areasOfWorkChecked:areasOfWorkChecked,canton:canton,cantonSelected:cantonSelected}" />
 			<f:form.submit value="Step 2" />
 		</f:form>
 		<br /><br />
@@ -19,7 +19,7 @@
 	
 	<f:if condition="{jobRequest.processStep}==1">
 		<f:form action="continue" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
-			<f:render partial="JobRequest/FormFields1" arguments="{jobRequest:jobRequest,canton:canton}" />
+			<f:render partial="JobRequest/FormFields1" arguments="{jobRequest:jobRequest,canton:canton,cantonSelected:cantonSelected}" />
 			<f:form.submit value="Step3" />
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		
@@ -30,8 +30,8 @@
 	
 	<f:if condition="{jobRequest.processStep}==2">
 		<f:form action="continue" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
-			<f:render partial="JobRequest/FormFields2" />
-			<f:form.submit value="Speichern" />
+			<f:render partial="JobRequest/FormFields2" arguments="{jobRequest:jobRequest,frontendUser:frontendUser,postalAddressTitles:postalAddressTitles,postalAddressCountries:postalAddressCountries}" />
+			<f:form.submit value="Step4" />
 		</f:form>
 		<f:link.action action="previous">Zurück</f:link.action>		
 		<br /><br />
@@ -40,9 +40,20 @@
 	</f:if>
 	<f:if condition="{jobRequest.processStep}==3">
 		<f:form action="continue" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
-			<f:render partial="JobRequest/FormFields3" />
-			<f:form.submit value="Weiter" />
+			<f:render partial="JobRequest/FormFields3" arguments="{jobRequest:jobRequest}" />
+			<f:form.submit value="Step5" />
 		</f:form>
+		<f:link.action action="previous">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	<f:if condition="{jobRequest.processStep}==4">
+		<f:form action="continue" enctype="multipart/form-data" name="jobRequest" object="{jobRequest}">
+			<f:render partial="JobRequest/FormFields4" arguments="{jobRequest:jobRequest}" />
+			<f:form.submit value="Speichern" />
+		</f:form>
+		<f:link.action action="previous">Zurück</f:link.action>	
 		<br /><br />
 		<f:link.action action="cancel">Abbrechen</f:link.action>
 		<br /><br />

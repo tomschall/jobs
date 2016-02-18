@@ -30,7 +30,7 @@
 	
 	<f:if condition="{jobOffer.processStep}==2">
 		<f:form action="continueEdit" enctype="multipart/form-data" name="jobOffer" object="{jobOffer}">
-			<f:render partial="JobOffer/FormFieldsEdit2" arguments="{jobOffer:jobOffer}" />
+			<f:render partial="JobOffer/FormFieldsEdit2" arguments="{jobOffer:jobOffer,frontendUser:frontendUser,postalAddressTitles:postalAddressTitles,postalAddressCountries:postalAddressCountries}" />
 			<f:form.submit value="Step4" />
 		</f:form>
 		<f:link.action action="previousEdit">Zurück</f:link.action>		

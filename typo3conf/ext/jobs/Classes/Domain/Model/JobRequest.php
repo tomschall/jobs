@@ -31,7 +31,7 @@ namespace Sozialinfo\Jobs\Domain\Model;
  */
 class JobRequest extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest implements \Serializable {
 
-	const PROCESS_STEP_MAXIMUM = 3;
+	const PROCESS_STEP_MAXIMUM = 5;
 
 	/**
 	 * processStep
@@ -87,14 +87,14 @@ class JobRequest extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest 
 	 *
 	 * @var bool
 	 */
-	protected $entryAgreement = FALSE;
+	protected $entryAgreement = '';
 
 	/**
 	 * entryImmediately
 	 *
 	 * @var bool
 	 */
-	protected $entryImmediately = FALSE;
+	protected $entryImmediately = '';
 
 	/**
 	 * jobLocation
@@ -129,14 +129,14 @@ class JobRequest extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest 
 	 *
 	 * @var bool
 	 */
-	protected $postalAddresEqualToRegistrationAddress = FALSE;
+	protected $postalAddresEqualToRegistrationAddress = '';
 
 	/**
 	 * postalAddressTitle
 	 *
 	 * @var bool
 	 */
-	protected $postalAddressTitle = FALSE;
+	protected $postalAddressTitle = '';
 
 	/**
 	 * postalAddressFirstName
@@ -227,28 +227,28 @@ class JobRequest extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest 
 	 *
 	 * @var bool
 	 */
-	protected $useAgreements = FALSE;
+	protected $useAgreements = '';
 
 	/**
 	 * requestIsGerman
 	 *
 	 * @var bool
 	 */
-	protected $requestIsGerman = FALSE;
+	protected $requestIsGerman = '';
 
 	/**
 	 * requestIsFrench
 	 *
 	 * @var bool
 	 */
-	protected $requestIsFrench = FALSE;
+	protected $requestIsFrench = '';
 
 	/**
 	 * requestIsItalian
 	 *
 	 * @var bool
 	 */
-	protected $requestIsItalian = FALSE;
+	protected $requestIsItalian = '';
 
 	/**
 	 * employmentRelationship
