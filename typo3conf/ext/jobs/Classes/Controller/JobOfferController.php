@@ -126,72 +126,25 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
+
+		
 		// dynamic validation because of different steps
-		if($this->arguments->hasArgument('jobOffer')){
-			$arguments = $this->request->getArguments();
-			if($arguments['jobOffer']['step'] == 0){
-				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 1){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 2){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 3){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 4){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }
-	    }
-	}
+		// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+        $arguments['JobOffer']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0') : '';
+        $arguments['JobOffer']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1') : '';
+        $arguments['JobOffer']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2') : '';
+        $arguments['JobOffer']['step'] == 3 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3') : '';
+        $arguments['JobOffer']['step'] == 4 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4') : '';
+        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+        $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+        // remove old validator
+        foreach ($conjunctionValidator->getValidators() as $validator) {
+            $conjunctionValidator->removeValidator($validator);
+        }
+        // add validators of model ItemDynamicValidation
+        $conjunctionValidator->addValidator($extendedValidator);
+    }
 
 	/**
 	 * Continue action.
@@ -448,71 +401,22 @@ class JobOfferController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		}
 
 		// dynamic validation because of different steps
-		if($this->arguments->hasArgument('jobOffer')){
-			$arguments = $this->request->getArguments();
-			if($arguments['jobOffer']['step'] == 0){
-				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 1){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 2){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 3){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['jobOffer']['step'] == 4){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
-	            // remove old validator
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // add validators of model ItemDynamicValidation
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }
-	    }
-	}
+		// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+        $arguments['JobOffer']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation0') : '';
+        $arguments['JobOffer']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation1') : '';
+        $arguments['JobOffer']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation2') : '';
+        $arguments['JobOffer']['step'] == 3 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation3') : '';
+        $arguments['JobOffer']['step'] == 4 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobOfferDynamicValidation4') : '';
+        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+        $conjunctionValidator = $this->arguments->getArgument('jobOffer')->getValidator();
+        // remove old validator
+        foreach ($conjunctionValidator->getValidators() as $validator) {
+            $conjunctionValidator->removeValidator($validator);
+        }
+        // add validators of model ItemDynamicValidation
+        $conjunctionValidator->addValidator($extendedValidator);
+    }
 	
 	/**
 	 * Continue edit action.

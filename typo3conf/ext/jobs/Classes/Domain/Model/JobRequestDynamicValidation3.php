@@ -27,9 +27,9 @@ namespace Sozialinfo\Jobs\Domain\Model;
  ***************************************************************/
 
 /**
- * JobOffer
+ * JobRequest
  */
-class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobOffer implements \Serializable {
+class JobRequestDynamicValidation3 extends \Sozialinfo\Jobs\DomainObject\AbstractEntityJobRequest implements \Serializable {
 
 	const PROCESS_STEP_MAXIMUM = 5;
 
@@ -44,7 +44,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * startDate
 	 *
 	 * @var \DateTime
-	 * 
 	 */
 	protected $startDate = NULL;
 
@@ -52,60 +51,13 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * endDate
 	 *
 	 * @var \DateTime
-	 * 
 	 */
 	protected $endDate = NULL;
-
-	/**
-	 * numberDaysPublication
-	 *
-	 * @var int
-	 * 
-	 */
-	protected $numberDaysPublication = 0;
-
-	/**
-	 * publicationDate
-	 *
-	 * @var \DateTime
-	 */
-	protected $publicationDate = NULL;
-
-	/**
-	 * jobTitle
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $jobTitle = '';
-
-	/**
-	 * company
-	 *
-	 * @var string
-	 * 
-	 */
-	protected $company = '';
-
-	/**
-	 * corporate
-	 *
-	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-	 */
-	protected $corporate = NULL;
-
-	/**
-	 * documents
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-	 */
-	protected $documents = NULL;
 
 	/**
 	 * percentOf
 	 *
 	 * @var string
-	 * 
 	 */
 	protected $percentOf = '';
 
@@ -117,39 +69,16 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $percentUp = '';
 
 	/**
-	 * onCall
-	 *
-	 * @var bool
-	 */
-	protected $onCall = '';
-
-	/**
-	 * employer
-	 *
-	 * @var string
-	 * 
-	 */
-	protected $employer = '';
-
-	/**
-	 * employerAddition
+	 * jobTitle
 	 *
 	 * @var string
 	 */
-	protected $employerAddition = '';
-
-	/**
-	 * linkToWebsite
-	 *
-	 * @var string
-	 */
-	protected $linkToWebsite = '';
+	protected $jobTitle = '';
 
 	/**
 	 * entryDate
 	 *
 	 * @var \DateTime
-	 * 
 	 */
 	protected $entryDate = NULL;
 
@@ -175,13 +104,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $jobLocation = '';
 
 	/**
-	 * zipJobLocation
-	 *
-	 * @var int
-	 */
-	protected $zipJobLocation = 0;
-
-	/**
 	 * jobDescription
 	 *
 	 * @var string
@@ -189,11 +111,11 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $jobDescription = '';
 
 	/**
-	 * applicationTo
+	 * contactTo
 	 *
 	 * @var string
 	 */
-	protected $applicationTo = '';
+	protected $contactTo = '';
 
 	/**
 	 * emailTo
@@ -201,27 +123,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * @var string
 	 */
 	protected $emailTo = '';
-
-	/**
-	 * furtherInformation
-	 *
-	 * @var string
-	 */
-	protected $furtherInformation = '';
-
-	/**
-	 * applicationDeadline
-	 *
-	 * @var \DateTime
-	 */
-	protected $applicationDeadline = NULL;
-
-	/**
-	 * assignmentReference
-	 *
-	 * @var string
-	 */
-	protected $assignmentReference = '';
 
 	/**
 	 * postalAddresEqualToRegistrationAddress
@@ -252,13 +153,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $postalAddressName = '';
 
 	/**
-	 * postalAddressCompany
-	 *
-	 * @var string
-	 */
-	protected $postalAddressCompany = '';
-
-	/**
 	 * postalAddressAdditive
 	 *
 	 * @var string
@@ -266,18 +160,11 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $postalAddressAdditive = '';
 
 	/**
-	 * postalAddressDepartment
-	 *
-	 * @var string
-	 */
-	protected $postalAddressDepartment = '';
-
-	/**
 	 * postalAddressStreetNr
 	 *
-	 * @var string
+	 * @var int
 	 */
-	protected $postalAddressStreetNr = '';
+	protected $postalAddressStreetNr = 0;
 
 	/**
 	 * postalAddressPoBox
@@ -299,6 +186,20 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * @var string
 	 */
 	protected $postalAddressCity = '';
+
+	/**
+	 * numberDaysPublication
+	 *
+	 * @var int
+	 */
+	protected $numberDaysPublication = 0;
+
+	/**
+	 * publicationDate
+	 *
+	 * @var \DateTime
+	 */
+	protected $publicationDate = NULL;
 
 	/**
 	 * comments
@@ -329,39 +230,32 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	protected $useAgreements = '';
 
 	/**
-	 * offerIsGerman
+	 * requestIsGerman
 	 *
 	 * @var bool
 	 */
-	protected $offerIsGerman = '';
+	protected $requestIsGerman = '';
 
 	/**
-	 * offerIsFrench
+	 * requestIsFrench
 	 *
 	 * @var bool
 	 */
-	protected $offerIsFrench = '';
+	protected $requestIsFrench = '';
 
 	/**
-	 * offerIsItalian
+	 * requestIsItalian
 	 *
 	 * @var bool
 	 */
-	protected $offerIsItalian = '';
+	protected $requestIsItalian = '';
 
 	/**
-	 * startDateRenew
-	 *
-	 * @var \DateTime
-	 */
-	protected $startDateRenew = NULL;
-
-	/**
-	 * employmentRelationships
+	 * employmentRelationship
 	 *
 	 * @var \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship
 	 */
-	protected $employmentRelationships = NULL;
+	protected $employmentRelationship = NULL;
 
 	/**
 	 * position
@@ -436,7 +330,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->documents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->qualification = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->areasOfWork = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->canton = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -483,140 +376,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the numberDaysPublication
-	 *
-	 * @return int $numberDaysPublication
-	 */
-	public function getNumberDaysPublication() {
-		return $this->numberDaysPublication;
-	}
-
-	/**
-	 * Sets the numberDaysPublication
-	 *
-	 * @param int $numberDaysPublication
-	 * @return void
-	 */
-	public function setNumberDaysPublication($numberDaysPublication) {
-		$this->numberDaysPublication = $numberDaysPublication;
-	}
-
-	/**
-	 * Returns the publicationDate
-	 *
-	 * @return \DateTime $publicationDate
-	 */
-	public function getPublicationDate() {
-		return $this->publicationDate;
-	}
-
-	/**
-	 * Sets the publicationDate
-	 *
-	 * @param \DateTime $publicationDate
-	 * @return void
-	 */
-	public function setPublicationDate($publicationDate) {
-		$this->publicationDate = $publicationDate;
-	}
-
-	/**
-	 * Returns the jobTitle
-	 *
-	 * @return string $jobTitle
-	 */
-	public function getJobTitle() {
-		return $this->jobTitle;
-	}
-
-	/**
-	 * Sets the jobTitle
-	 *
-	 * @param string $jobTitle
-	 * @return void
-	 */
-	public function setJobTitle($jobTitle) {
-		$this->jobTitle = $jobTitle;
-	}
-
-	/**
-	 * Returns the company
-	 *
-	 * @return string $company
-	 */
-	public function getCompany() {
-		return $this->company;
-	}
-
-	/**
-	 * Sets the company
-	 *
-	 * @param string $company
-	 * @return void
-	 */
-	public function setCompany($company) {
-		$this->company = $company;
-	}
-
-	/**
-	 * Returns the corporate
-	 *
-	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $corporate
-	 */
-	public function getCorporate() {
-		return $this->corporate;
-	}
-
-	/**
-	 * Sets the corporate
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $corporate
-	 * @return void
-	 */
-	public function setCorporate($corporate) {
-		$this->corporate = $corporate;
-	}
-
-	/**
-	 * Adds a FileReference
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $document
-	 * @return void
-	 */
-	public function addDocument(\TYPO3\CMS\Extbase\Domain\Model\FileReference $document) {
-		$this->documents->attach($document);
-	}
-
-	/**
-	 * Removes a FileReference
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $documentToRemove The FileReference to be removed
-	 * @return void
-	 */
-	public function removeDocument(\TYPO3\CMS\Extbase\Domain\Model\FileReference $documentToRemove) {
-		$this->documents->detach($documentToRemove);
-	}
-
-	/**
-	 * Returns the documents
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $documents
-	 */
-	public function getDocuments() {
-		return $this->documents;
-	}
-
-	/**
-	 * Sets the documents
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $documents
-	 * @return void
-	 */
-	public function setDocuments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $documents) {
-		$this->documents = $documents;
-	}
-
-	/**
 	 * Returns the percentOf
 	 *
 	 * @return string $percentOf
@@ -655,88 +414,22 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the onCall
+	 * Returns the jobTitle
 	 *
-	 * @return bool $onCall
+	 * @return string $jobTitle
 	 */
-	public function getOnCall() {
-		return $this->onCall;
+	public function getJobTitle() {
+		return $this->jobTitle;
 	}
 
 	/**
-	 * Sets the onCall
+	 * Sets the jobTitle
 	 *
-	 * @param bool $onCall
+	 * @param string $jobTitle
 	 * @return void
 	 */
-	public function setOnCall($onCall) {
-		$this->onCall = $onCall;
-	}
-
-	/**
-	 * Returns the boolean state of onCall
-	 *
-	 * @return bool
-	 */
-	public function isOnCall() {
-		return $this->onCall;
-	}
-
-	/**
-	 * Returns the employer
-	 *
-	 * @return string $employer
-	 */
-	public function getEmployer() {
-		return $this->employer;
-	}
-
-	/**
-	 * Sets the employer
-	 *
-	 * @param string $employer
-	 * @return void
-	 */
-	public function setEmployer($employer) {
-		$this->employer = $employer;
-	}
-
-	/**
-	 * Returns the employerAddition
-	 *
-	 * @return string $employerAddition
-	 */
-	public function getEmployerAddition() {
-		return $this->employerAddition;
-	}
-
-	/**
-	 * Sets the employerAddition
-	 *
-	 * @param string $employerAddition
-	 * @return void
-	 */
-	public function setEmployerAddition($employerAddition) {
-		$this->employerAddition = $employerAddition;
-	}
-
-	/**
-	 * Returns the linkToWebsite
-	 *
-	 * @return string $linkToWebsite
-	 */
-	public function getLinkToWebsite() {
-		return $this->linkToWebsite;
-	}
-
-	/**
-	 * Sets the linkToWebsite
-	 *
-	 * @param string $linkToWebsite
-	 * @return void
-	 */
-	public function setLinkToWebsite($linkToWebsite) {
-		$this->linkToWebsite = $linkToWebsite;
+	public function setJobTitle($jobTitle) {
+		$this->jobTitle = $jobTitle;
 	}
 
 	/**
@@ -834,25 +527,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the zipJobLocation
-	 *
-	 * @return int $zipJobLocation
-	 */
-	public function getZipJobLocation() {
-		return $this->zipJobLocation;
-	}
-
-	/**
-	 * Sets the zipJobLocation
-	 *
-	 * @param int $zipJobLocation
-	 * @return void
-	 */
-	public function setZipJobLocation($zipJobLocation) {
-		$this->zipJobLocation = $zipJobLocation;
-	}
-
-	/**
 	 * Returns the jobDescription
 	 *
 	 * @return string $jobDescription
@@ -872,22 +546,22 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the applicationTo
+	 * Returns the contactTo
 	 *
-	 * @return string $applicationTo
+	 * @return string $contactTo
 	 */
-	public function getApplicationTo() {
-		return $this->applicationTo;
+	public function getContactTo() {
+		return $this->contactTo;
 	}
 
 	/**
-	 * Sets the applicationTo
+	 * Sets the contactTo
 	 *
-	 * @param string $applicationTo
+	 * @param string $contactTo
 	 * @return void
 	 */
-	public function setApplicationTo($applicationTo) {
-		$this->applicationTo = $applicationTo;
+	public function setContactTo($contactTo) {
+		$this->contactTo = $contactTo;
 	}
 
 	/**
@@ -907,63 +581,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 */
 	public function setEmailTo($emailTo) {
 		$this->emailTo = $emailTo;
-	}
-
-	/**
-	 * Returns the furtherInformation
-	 *
-	 * @return string $furtherInformation
-	 */
-	public function getFurtherInformation() {
-		return $this->furtherInformation;
-	}
-
-	/**
-	 * Sets the furtherInformation
-	 *
-	 * @param string $furtherInformation
-	 * @return void
-	 */
-	public function setFurtherInformation($furtherInformation) {
-		$this->furtherInformation = $furtherInformation;
-	}
-
-	/**
-	 * Returns the applicationDeadline
-	 *
-	 * @return \DateTime $applicationDeadline
-	 */
-	public function getApplicationDeadline() {
-		return $this->applicationDeadline;
-	}
-
-	/**
-	 * Sets the applicationDeadline
-	 *
-	 * @param \DateTime $applicationDeadline
-	 * @return void
-	 */
-	public function setApplicationDeadline($applicationDeadline) {
-		$this->applicationDeadline = $applicationDeadline;
-	}
-
-	/**
-	 * Returns the assignmentReference
-	 *
-	 * @return string $assignmentReference
-	 */
-	public function getAssignmentReference() {
-		return $this->assignmentReference;
-	}
-
-	/**
-	 * Sets the assignmentReference
-	 *
-	 * @param string $assignmentReference
-	 * @return void
-	 */
-	public function setAssignmentReference($assignmentReference) {
-		$this->assignmentReference = $assignmentReference;
 	}
 
 	/**
@@ -1061,25 +678,6 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the postalAddressCompany
-	 *
-	 * @return string $postalAddressCompany
-	 */
-	public function getPostalAddressCompany() {
-		return $this->postalAddressCompany;
-	}
-
-	/**
-	 * Sets the postalAddressCompany
-	 *
-	 * @param string $postalAddressCompany
-	 * @return void
-	 */
-	public function setPostalAddressCompany($postalAddressCompany) {
-		$this->postalAddressCompany = $postalAddressCompany;
-	}
-
-	/**
 	 * Returns the postalAddressAdditive
 	 *
 	 * @return string $postalAddressAdditive
@@ -1099,28 +697,9 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the postalAddressDepartment
-	 *
-	 * @return string $postalAddressDepartment
-	 */
-	public function getPostalAddressDepartment() {
-		return $this->postalAddressDepartment;
-	}
-
-	/**
-	 * Sets the postalAddressDepartment
-	 *
-	 * @param string $postalAddressDepartment
-	 * @return void
-	 */
-	public function setPostalAddressDepartment($postalAddressDepartment) {
-		$this->postalAddressDepartment = $postalAddressDepartment;
-	}
-
-	/**
 	 * Returns the postalAddressStreetNr
 	 *
-	 * @return string $postalAddressStreetNr
+	 * @return int $postalAddressStreetNr
 	 */
 	public function getPostalAddressStreetNr() {
 		return $this->postalAddressStreetNr;
@@ -1129,7 +708,7 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	/**
 	 * Sets the postalAddressStreetNr
 	 *
-	 * @param string $postalAddressStreetNr
+	 * @param int $postalAddressStreetNr
 	 * @return void
 	 */
 	public function setPostalAddressStreetNr($postalAddressStreetNr) {
@@ -1191,6 +770,44 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	 */
 	public function setPostalAddressCity($postalAddressCity) {
 		$this->postalAddressCity = $postalAddressCity;
+	}
+
+	/**
+	 * Returns the numberDaysPublication
+	 *
+	 * @return int $numberDaysPublication
+	 */
+	public function getNumberDaysPublication() {
+		return $this->numberDaysPublication;
+	}
+
+	/**
+	 * Sets the numberDaysPublication
+	 *
+	 * @param int $numberDaysPublication
+	 * @return void
+	 */
+	public function setNumberDaysPublication($numberDaysPublication) {
+		$this->numberDaysPublication = $numberDaysPublication;
+	}
+
+	/**
+	 * Returns the publicationDate
+	 *
+	 * @return \DateTime $publicationDate
+	 */
+	public function getPublicationDate() {
+		return $this->publicationDate;
+	}
+
+	/**
+	 * Sets the publicationDate
+	 *
+	 * @param \DateTime $publicationDate
+	 * @return void
+	 */
+	public function setPublicationDate($publicationDate) {
+		$this->publicationDate = $publicationDate;
 	}
 
 	/**
@@ -1279,125 +896,106 @@ class JobOfferDynamicValidation0 extends \Sozialinfo\Jobs\DomainObject\AbstractE
 	}
 
 	/**
-	 * Returns the offerIsGerman
+	 * Returns the requestIsGerman
 	 *
-	 * @return bool $offerIsGerman
+	 * @return bool $requestIsGerman
 	 */
-	public function getOfferIsGerman() {
-		return $this->offerIsGerman;
+	public function getRequestIsGerman() {
+		return $this->requestIsGerman;
 	}
 
 	/**
-	 * Sets the offerIsGerman
+	 * Sets the requestIsGerman
 	 *
-	 * @param bool $offerIsGerman
+	 * @param bool $requestIsGerman
 	 * @return void
 	 */
-	public function setOfferIsGerman($offerIsGerman) {
-		$this->offerIsGerman = $offerIsGerman;
+	public function setRequestIsGerman($requestIsGerman) {
+		$this->requestIsGerman = $requestIsGerman;
 	}
 
 	/**
-	 * Returns the boolean state of offerIsGerman
+	 * Returns the boolean state of requestIsGerman
 	 *
 	 * @return bool
 	 */
-	public function isOfferIsGerman() {
-		return $this->offerIsGerman;
+	public function isRequestIsGerman() {
+		return $this->requestIsGerman;
 	}
 
 	/**
-	 * Returns the offerIsFrench
+	 * Returns the requestIsFrench
 	 *
-	 * @return bool $offerIsFrench
+	 * @return bool $requestIsFrench
 	 */
-	public function getOfferIsFrench() {
-		return $this->offerIsFrench;
+	public function getRequestIsFrench() {
+		return $this->requestIsFrench;
 	}
 
 	/**
-	 * Sets the offerIsFrench
+	 * Sets the requestIsFrench
 	 *
-	 * @param bool $offerIsFrench
+	 * @param bool $requestIsFrench
 	 * @return void
 	 */
-	public function setOfferIsFrench($offerIsFrench) {
-		$this->offerIsFrench = $offerIsFrench;
+	public function setRequestIsFrench($requestIsFrench) {
+		$this->requestIsFrench = $requestIsFrench;
 	}
 
 	/**
-	 * Returns the boolean state of offerIsFrench
+	 * Returns the boolean state of requestIsFrench
 	 *
 	 * @return bool
 	 */
-	public function isOfferIsFrench() {
-		return $this->offerIsFrench;
+	public function isRequestIsFrench() {
+		return $this->requestIsFrench;
 	}
 
 	/**
-	 * Returns the offerIsItalian
+	 * Returns the requestIsItalian
 	 *
-	 * @return bool $offerIsItalian
+	 * @return bool $requestIsItalian
 	 */
-	public function getOfferIsItalian() {
-		return $this->offerIsItalian;
+	public function getRequestIsItalian() {
+		return $this->requestIsItalian;
 	}
 
 	/**
-	 * Sets the offerIsItalian
+	 * Sets the requestIsItalian
 	 *
-	 * @param bool $offerIsItalian
+	 * @param bool $requestIsItalian
 	 * @return void
 	 */
-	public function setOfferIsItalian($offerIsItalian) {
-		$this->offerIsItalian = $offerIsItalian;
+	public function setRequestIsItalian($requestIsItalian) {
+		$this->requestIsItalian = $requestIsItalian;
 	}
 
 	/**
-	 * Returns the boolean state of offerIsItalian
+	 * Returns the boolean state of requestIsItalian
 	 *
 	 * @return bool
 	 */
-	public function isOfferIsItalian() {
-		return $this->offerIsItalian;
+	public function isRequestIsItalian() {
+		return $this->requestIsItalian;
 	}
 
 	/**
-	 * Returns the startDateRenew
+	 * Returns the employmentRelationship
 	 *
-	 * @return \DateTime $startDateRenew
+	 * @return \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationship
 	 */
-	public function getStartDateRenew() {
-		return $this->startDateRenew;
+	public function getEmploymentRelationship() {
+		return $this->employmentRelationship;
 	}
 
 	/**
-	 * Sets the startDateRenew
+	 * Sets the employmentRelationship
 	 *
-	 * @param \DateTime $startDateRenew
+	 * @param \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationship
 	 * @return void
 	 */
-	public function setStartDateRenew($startDateRenew) {
-		$this->startDateRenew = $startDateRenew;
-	}
-
-	/**
-	 * Returns the employmentRelationships
-	 *
-	 * @return \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationships
-	 */
-	public function getEmploymentRelationships() {
-		return $this->employmentRelationships;
-	}
-
-	/**
-	 * Sets the employmentRelationships
-	 *
-	 * @param \Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationships
-	 * @return void
-	 */
-	public function setEmploymentRelationships(\Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationships) {
-		$this->employmentRelationships = $employmentRelationships;
+	public function setEmploymentRelationship(\Sozialinfo\Jobs\Domain\Model\EmploymentRelationship $employmentRelationship) {
+		$this->employmentRelationship = $employmentRelationship;
 	}
 
 	/**

@@ -113,7 +113,24 @@ class JobRequestController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
-	}
+
+		// dynamic validation because of different steps
+		// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+        $arguments['jobRequest']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation0') : '';
+        $arguments['jobRequest']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation1') : '';
+        $arguments['jobRequest']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation2') : '';
+        $arguments['jobRequest']['step'] == 3 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation3') : '';
+        $arguments['jobRequest']['step'] == 4 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation4') : '';
+        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+        $conjunctionValidator = $this->arguments->getArgument('jobRequest')->getValidator();
+        // remove old validator
+        foreach ($conjunctionValidator->getValidators() as $validator) {
+            $conjunctionValidator->removeValidator($validator);
+        }
+        // add validators of model ItemDynamicValidation
+        $conjunctionValidator->addValidator($extendedValidator);
+    }
 	
 	/**
 	 * Continue action.
@@ -352,6 +369,23 @@ class JobRequestController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 			}
 		}
+
+		// dynamic validation because of different steps
+		// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+        $arguments['jobRequest']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation0') : '';
+        $arguments['jobRequest']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation1') : '';
+        $arguments['jobRequest']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation2') : '';
+        $arguments['jobRequest']['step'] == 3 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation3') : '';
+        $arguments['jobRequest']['step'] == 4 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\JobRequestDynamicValidation4') : '';
+        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+        $conjunctionValidator = $this->arguments->getArgument('jobRequest')->getValidator();
+        // remove old validator
+        foreach ($conjunctionValidator->getValidators() as $validator) {
+            $conjunctionValidator->removeValidator($validator);
+        }
+        // add validators of model ItemDynamicValidation
+        $conjunctionValidator->addValidator($extendedValidator);
 	}
 	
 	/**
@@ -573,7 +607,7 @@ class JobRequestController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function cancelAction() {
 		$this->session->remove('jobRequest');
-		$this->redirect('list', NULL, NULL, NULL);
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**
@@ -584,7 +618,7 @@ class JobRequestController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function cancelEditAction() {
 		$this->session->remove('jobRequestEdit');
-		$this->redirect('list', NULL, NULL, NULL);
+		$this->redirect('listUserSpecificData', 'FrontendUser', NULL, NULL, 110);
 	}
 
 	/**

@@ -8,7 +8,7 @@
 	<f:render partial="FormErrors" arguments="{object:FrontendUser}" />
 
 	<f:form action="update" name="frontendUser" object="{frontendUser}" enctype="multipart/form-data" >
-		<f:render partial="FrontendUser/FormFields" arguments="{frontendUser:frontendUser}" />
+		<f:render partial="FrontendUser/FormFields" arguments="{frontendUser:frontendUser,salutations:salutations,countries:countries}" />
 			<f:form.submit value="Save" />
 	</f:form>
 </f:section>

@@ -116,43 +116,19 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		if($this->arguments->hasArgument('frontendUser')){
 			$arguments = $this->request->getArguments();
-			if($arguments['frontendUser']['step'] == 0){
-				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation0');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-	            // Alle alten Validatoren entfernen
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // Validatoren des Models ItemDynamicValidation hinzufuegen
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['frontendUser']['step'] == 1){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation1');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-	            // Alle alten Validatoren entfernen
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // Validatoren des Models ItemDynamicValidation hinzufuegen
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }elseif($arguments['frontendUser']['step'] == 2){
-	        	// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	 	        $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation2');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-	            // Alle alten Validatoren entfernen
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // Validatoren des Models ItemDynamicValidation hinzufuegen
-	            $conjunctionValidator->addValidator($extendedValidator);
+			// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	        $arguments['frontendUser']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation0') : '';
+	        $arguments['frontendUser']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation1') : '';
+	        $arguments['frontendUser']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation2') : '';
+	        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	        $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+	        // Alle alten Validatoren entfernen
+	        foreach ($conjunctionValidator->getValidators() as $validator) {
+	            $conjunctionValidator->removeValidator($validator);
 	        }
+	        // Validatoren des Models ItemDynamicValidation hinzufuegen
+	        $conjunctionValidator->addValidator($extendedValidator);
 	    }
 	}
 	
@@ -170,25 +146,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function continueAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$arguments = $this->request->getArguments();
 		$this->hydrateFromSession($frontendUser);
-		if(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
-			if(array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) OR array_key_exists('insosMemberId', $arguments['frontendUser'])){
-				$proofResult = $this->validateMember($arguments);
-				if($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser){
-					$frontendUser->setCompanyFrontendUser($proofResult[0]);	
-				}elseif($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember){
-					$frontendUser->setInsosMember($proofResult[0]);	
-				}
-			}
-		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser == TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
-			if((array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '') OR (array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '')){
-				$this->sozialinfoMemberHasAlreadyBeenAssigned();	
-			}			
-		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember == TRUE)){
-			if((array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '') OR (array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '')){
-				$this->insosMemberHasAlreadyBeenAssigned();
-			}			
-		}
-
+		$this->checkMember($frontendUser,$arguments);
 		$frontendUser->increaseProcessStep();
 		$this->session->setSerialized('frontendUser', $frontendUser);
 		if ($frontendUser->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\FrontendUser::PROCESS_STEP_MAXIMUM) {
@@ -198,103 +156,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		}
 	}
 
-	public function validateMember($arguments) {
-		if($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '' AND $arguments['frontendUser']['insosMemberId'] == ''){
-			$this->addFlashMessage(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message','jobs'),
-				'',
-				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-				TRUE
-			);
-			$this->redirect('new');
-		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
-			$this->addFlashMessage(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_sozialinfo_member','jobs'),
-				'',
-				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-				TRUE
-			);
-			$this->redirect('new');	
-		}elseif(($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '')){
-			$this->addFlashMessage(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_only_one_member','jobs'),
-				'',
-				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR, 
-				TRUE
-			);
-			$this->redirect('new');	
-		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
-			//Proof for Sozialinfo Membership
-			if($arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
-				$this->addFlashMessage(
-					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_password','jobs'),
-					'',
-					\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-					TRUE
-				);
-				$this->redirect('new');	
-			}else{
-				if($this->companyFrontendUserRepository->findCompanyFrontendUser($arguments,TRUE) != TRUE){
-					$this->addFlashMessage(
-						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_wrong_user_password','jobs'),
-						'',
-						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-						TRUE
-					);
-					$this->redirect('new');
-				}else{
-					$this->addFlashMessage(
-						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass','jobs'),
-						'',
-						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-						TRUE
-					);
-					$companyFrontendUser = $this->companyFrontendUserRepository->findCompanyFrontendUser($arguments);
-					return $companyFrontendUser;
-				}
-			}
-		}elseif($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
-			//Proof for Insos Membership
-			if($this->insosMemberRepository->findInsosMemberId($arguments,TRUE) != TRUE){
-					$this->addFlashMessage(
-						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_wrong_id','jobs'),
-						'',
-						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-						TRUE
-					);
-					$this->redirect('new');
-			}else{
-				$this->addFlashMessage(
-					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_validation_pass','jobs'),
-					'',
-					\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-					TRUE
-				);
-				$insosMemberId = $this->insosMemberRepository->findInsosMemberId($arguments);
-				return $insosMemberId;
-			}	
-		}
-		//$frontendUsers = $this->frontendUserRepository->findAll();
-	}
-
-	public function sozialinfoMemberHasAlreadyBeenAssigned() {
-		$this->addFlashMessage(
-			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member.already_assigned','jobs'),
-			'',
-			\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-			TRUE
-		);
-	}
-
-	public function insosMemberHasAlreadyBeenAssigned() {
-		$this->addFlashMessage(
-			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member.already_assigned','jobs'),
-			'',
-			\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
-			TRUE
-		);
-	}
-	
 	public function initializeCreateAction() {
 		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
 		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
@@ -307,19 +168,17 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		
 		if($this->arguments->hasArgument('frontendUser')){
 			$arguments = $this->request->getArguments();
-			if($arguments['frontendUser']['step'] == 2){
-				// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
-	            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
-	            $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser');
-	            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
-	            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
-	            // Alle alten Validatoren entfernen
-	            foreach ($conjunctionValidator->getValidators() as $validator) {
-	                $conjunctionValidator->removeValidator($validator);
-	            }
-	            // Validatoren des Models ItemDynamicValidation hinzufuegen
-	            $conjunctionValidator->addValidator($extendedValidator);
-	        }
+			// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+            $arguments['frontendUser']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser') : '';
+            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+            // Alle alten Validatoren entfernen
+            foreach ($conjunctionValidator->getValidators() as $validator) {
+                $conjunctionValidator->removeValidator($validator);
+            }
+            // Validatoren des Models ItemDynamicValidation hinzufuegen
+            $conjunctionValidator->addValidator($extendedValidator);
 	    }
 	}
 	
@@ -437,10 +296,8 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$frontendUsers = $this->frontendUserRepository->findUserSpecificData();
 		$actualFeUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\FrontendUserRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 		//$frontendUsers = $this->frontendUserRepository->findAll();
-		
 		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUsers,'frontendUser found in Repository');
 		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($actualFeUser,'actual logged in user');
-
 		$this->view->assign('frontendUsers', $frontendUsers);
 	}
 
@@ -463,6 +320,8 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function editAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
 		$this->view->assign('frontendUser', $frontendUser);
+		$this->view->assign('salutations', $this->getSalutation());
+		$this->view->assign('countries', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CountryRepository')->findAll());
 	}
 
 	/**
@@ -480,9 +339,9 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function updateAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
-		$this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 		$frontendUser->setUsername($frontendUser->getEmail());
 		$this->frontendUserRepository->update($frontendUser);
+		$this->addFlashMessage('Ihre Benutzerdaten wurden aktualisiert', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
 		$this->redirect('listUserSpecificData');
 	}
 
@@ -493,7 +352,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function deleteAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
-		$this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+		$this->addFlashMessage('Der Datensatz wurde gelöscht', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
 		$this->frontendUserRepository->remove($frontendUser);
 		$this->redirect('list');
 	}
@@ -558,6 +417,36 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	}
 
 	/**
+	 * check member action.
+	 *
+	 * Proof if there exists at least one Object of Type \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser 
+	 * or \Sozialinfo\Jobs\Domain\Model\InsosMember. If not, member validation will be executed, if there 
+	 * exists one, validation will be passed and a success message will be generated.
+	 *
+	 * @return void
+	 */
+	public function checkMember($frontendUser,$arguments) {
+		if(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
+			if(array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) OR array_key_exists('insosMemberId', $arguments['frontendUser'])){
+				$proofResult = $this->validateMember($arguments);
+				if($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser){
+					$frontendUser->setCompanyFrontendUser($proofResult[0]);	
+				}elseif($proofResult[0] instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember){
+					$frontendUser->setInsosMember($proofResult[0]);	
+				}
+			}
+		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser == TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember != TRUE)){
+			if((array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '') OR (array_key_exists('sozialinfoMemberUsername', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '')){
+				$this->sozialinfoMemberHasAlreadyBeenAssigned();	
+			}			
+		}elseif(($frontendUser->getCompanyFrontendUser() instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser != TRUE) AND ($frontendUser->getInsosMember() instanceof \Sozialinfo\Jobs\Domain\Model\InsosMember == TRUE)){
+			if((array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['insosMemberId'] != '') OR (array_key_exists('insosMemberId', $arguments['frontendUser']) AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '')){
+				$this->insosMemberHasAlreadyBeenAssigned();
+			}			
+		}
+	}
+
+	/**
 	 * prepare salutations for select box
 	 *
 	 * @return array
@@ -573,5 +462,101 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		}
 		return $salutations;
 	}
-	
+
+	public function sozialinfoMemberHasAlreadyBeenAssigned() {
+		$this->addFlashMessage(
+			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member.already_assigned','jobs'),
+			'',
+			\TYPO3\CMS\Core\Messaging\AbstractMessage::OK,
+			TRUE
+		);
+	}
+
+	public function insosMemberHasAlreadyBeenAssigned() {
+		$this->addFlashMessage(
+			\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member.already_assigned','jobs'),
+			'',
+			\TYPO3\CMS\Core\Messaging\AbstractMessage::OK,
+			TRUE
+		);
+	}
+
+	public function validateMember($arguments) {
+		if($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+				TRUE
+			);
+			$this->redirect('new');
+		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_sozialinfo_member','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+				TRUE
+			);
+			$this->redirect('new');	
+		}elseif(($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] != '') OR ($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == '')){
+			$this->addFlashMessage(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_only_one_member','jobs'),
+				'',
+				\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR, 
+				TRUE
+			);
+			$this->redirect('new');	
+		}elseif($arguments['frontendUser']['sozialinfoMemberUsername'] != '' AND $arguments['frontendUser']['insosMemberId'] == ''){
+			//Proof for Sozialinfo Membership
+			if($arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
+				$this->addFlashMessage(
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.error_message_no_password','jobs'),
+					'',
+					\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+					TRUE
+				);
+				$this->redirect('new');	
+			}else{
+				if($this->companyFrontendUserRepository->findCompanyFrontendUser($arguments,TRUE) != TRUE){
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_wrong_user_password','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+						TRUE
+					);
+					$this->redirect('new');
+				}else{
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.sozialinfo_member_password.sozialinfo_member_validation_pass','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::OK,
+						TRUE
+					);
+					$companyFrontendUser = $this->companyFrontendUserRepository->findCompanyFrontendUser($arguments);
+					return $companyFrontendUser;
+				}
+			}
+		}elseif($arguments['frontendUser']['insosMemberId'] != '' AND $arguments['frontendUser']['sozialinfoMemberUsername'] == '' AND $arguments['frontendUser']['sozialinfoMemberPassword'] == ''){
+			//Proof for Insos Membership
+			if($this->insosMemberRepository->findInsosMemberId($arguments,TRUE) != TRUE){
+					$this->addFlashMessage(
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_wrong_id','jobs'),
+						'',
+						\TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+						TRUE
+					);
+					$this->redirect('new');
+			}else{
+				$this->addFlashMessage(
+					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_jobs_domain_model_frontenduser.insos_member_password.insos_member_validation_pass','jobs'),
+					'',
+					\TYPO3\CMS\Core\Messaging\AbstractMessage::OK,
+					TRUE
+				);
+				$insosMemberId = $this->insosMemberRepository->findInsosMemberId($arguments);
+				return $insosMemberId;
+			}	
+		}
+		//$frontendUsers = $this->frontendUserRepository->findAll();
+	}
 }

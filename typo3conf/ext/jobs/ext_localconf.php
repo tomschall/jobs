@@ -19,11 +19,11 @@ if (!defined('TYPO3_MODE')) {
 	'Sozialinfo.' . $_EXTKEY,
 	'Jobuseradmin',
 	array(
-		'FrontendUser' => 'listUserSpecificData, edit, updateData, show',
+		'FrontendUser' => 'listUserSpecificData, edit, update, show',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'listUserSpecificData, edit, updateData, show',
+		'FrontendUser' => 'listUserSpecificData, edit, update, show',
 	)
 );
 
