@@ -11,6 +11,12 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	'Sozialinfo.' . $_EXTKEY,
+	'JobregistrationRegNoMember',
+	'Jobs - Registration No Member'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Sozialinfo.' . $_EXTKEY,
 	'Jobuseradmin',
 	'Jobs - User Administration'
 );

@@ -70,7 +70,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$action = $this->request->getControllerActionName();
 		
 		// pruefen, ob eine andere Action ausser "show" aufgerufen wurde
-		if($action != 'new' AND $action != 'continue' AND $action != 'create' AND $action != 'previous' AND $action != 'list' AND $action != 'show'){
+		if($action != 'new' AND $action != 'continue' AND $action != 'create' AND $action != 'previous' AND $action != 'list' AND $action != 'show' AND $action != 'newRegNoMember' AND $action != 'continueRegNoMember' AND $action != 'createRegNoMember' AND $action != 'previousRegNoMember'){
 			// Redirect zur Login Seite (UID=21) falls nicht eingeloggt
 			if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->fe_user->user['uid']);
@@ -559,4 +559,209 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		}
 		//$frontendUsers = $this->frontendUserRepository->findAll();
 	}
+
+
+
+
+
+
+
+
+
+	/**
+	 * NewRegNoMember action.
+	 *
+	 * Displays form in its current step.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
+	 * @ignorevalidation $frontendUser
+	 * @return void
+	  */
+	public function newRegNoMemberAction($frontendUser = NULL) {
+		$this->hydrateRegNoMemberFromSession($frontendUser);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($frontendUser);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings['jobregistration']['usergroupJobOffers']);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TCA']['fe_users']);
+
+		$this->view->assign('frontendUser', $frontendUser);
+		$this->view->assign('salutations', $this->getSalutation());
+		$this->view->assign('countries', $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Repository\\CountryRepository')->findAll());
+
+	}
+
+	public function initializeContinueRegNoMemberAction() {
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->allowProperties('documents','jobOffers','jobRequests');
+		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
+		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
+		$propertyMappingConfiguration->skipProperties('step','sozialinfoMemberUsername','sozialinfoMemberPassword','insosMemberId');
+
+		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
+
+		if($this->arguments->hasArgument('frontendUser')){
+			$arguments = $this->request->getArguments();
+			// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+	        $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+	        $arguments['frontendUser']['step'] == 0 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation0') : '';
+	        $arguments['frontendUser']['step'] == 1 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation1') : '';
+	        $arguments['frontendUser']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUserDynamicValidation2') : '';
+	        // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+	        $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+	        // Alle alten Validatoren entfernen
+	        foreach ($conjunctionValidator->getValidators() as $validator) {
+	            $conjunctionValidator->removeValidator($validator);
+	        }
+	        // Validatoren des Models ItemDynamicValidation hinzufuegen
+	        $conjunctionValidator->addValidator($extendedValidator);
+	    }
+	}
+	
+	/**
+	 * ContinueRegNoMember action.
+	 *
+	 * Validates the object, stores data inside session and continues to the next step.
+	 *
+	 * Remember that data coming from the $model parameter only contains data from the
+	 * current step (unless you put a lot of hidden fields inside your view for each step).
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
+	 * @return void
+	 */
+	public function continueRegNoMemberAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
+		$arguments = $this->request->getArguments();
+		$this->hydrateRegNoMemberFromSession($frontendUser);
+		//$this->checkMember($frontendUser,$arguments);
+		$frontendUser->increaseProcessStep();
+		$this->session->setSerialized('frontendUser', $frontendUser);
+		if ($frontendUser->getProcessStep() >= \Sozialinfo\Jobs\Domain\Model\FrontendUser::PROCESS_STEP_MAXIMUM) {
+			$this->forward('createRegNoMember');
+		}else{
+			$this->redirect('newRegNoMember');
+		}
+	}
+
+	public function initializeCreateRegNoMemberAction() {
+		/** @var \TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration */
+		$propertyMappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->allowProperties('documents','jobOffers','jobRequests');
+		$propertyMappingConfiguration->allowCreationForSubProperty('documents.*','jobOffers.*','jobRequests.*');
+		$propertyMappingConfiguration->forProperty('documents.*','jobOffers.*','jobRequests.*')->allowAllPropertiesExcept('uid', 'pid');
+		$propertyMappingConfiguration->skipProperties('step');
+
+		$this->setTypeConverterConfigurationForImageUpload('frontendUser');
+		
+		if($this->arguments->hasArgument('frontendUser')){
+			$arguments = $this->request->getArguments();
+			// @var \TYPO3\CMS\Extbase\Validation\ValidatorResolver 
+            $validatorResolver = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\ValidatorResolver');
+            $arguments['frontendUser']['step'] == 2 ? $extendedValidator = $validatorResolver->getBaseValidatorConjunction('\Sozialinfo\Jobs\Domain\Model\FrontendUser') : '';
+            // @var \TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator
+            $conjunctionValidator = $this->arguments->getArgument('frontendUser')->getValidator();
+            // Alle alten Validatoren entfernen
+            foreach ($conjunctionValidator->getValidators() as $validator) {
+                $conjunctionValidator->removeValidator($validator);
+            }
+            // Validatoren des Models ItemDynamicValidation hinzufuegen
+            $conjunctionValidator->addValidator($extendedValidator);
+	    }
+	}
+	
+	/**
+	 * CreateRegNoMember action.
+	 *
+	 * Last step of the form, persists the record.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
+	 * @return void
+	 */
+	public function createRegNoMemberAction(\Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser) {
+		$this->hydrateRegNoMemberFromSession($frontendUser);
+		$frontendUser->setUsername($frontendUser->getEmail());
+		$frontendUser->setUsergroup($this->settings['jobregistration']['usergroupJobOffers']);
+		$this->frontendUserRepository->add($frontendUser);
+		$this->persistenceManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
+		$this->persistenceManager->persistAll();
+		$this->session->remove('frontendUser');
+		$this->redirect('list', NULL, NULL, NULL);
+		//$this->redirect('createConfirm', NULL, NULL, array('frontendUser' => $frontendUser));
+	}
+
+	/**
+	 * Previous action.
+	 * 
+	 * Takes model a step back.
+	 *
+	 * @return void
+	 */
+	public function previousRegNoMemberAction() {
+		$frontendUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\FrontendUser');
+		$this->hydrateRegNoMemberFromSession($frontendUser);
+		$frontendUser->decreaseProcessStep();
+		$this->session->setSerialized('frontendUser', $frontendUser);
+		$this->redirect('newRegNoMember');
+	}
+
+	/**
+	 * Hydrate given object with data stored inside session.
+	 *
+	 * @param \Sozialinfo\Jobs\Domain\Model\FrontendUser $frontendUser
+	 * @return void
+	 */
+	protected function hydrateRegNoMemberFromSession(\Sozialinfo\Jobs\Domain\Model\FrontendUser &$frontendUser = NULL) {
+		$newFrontendUser = FALSE;
+		if (!$frontendUser) {
+			$frontendUser = $this->objectManager->get('Sozialinfo\\Jobs\\Domain\\Model\\FrontendUser');
+			$newFrontendUser = TRUE;
+		}
+		$currentFrontendUser = $this->session->getUnserialized('frontendUser');
+		
+		if ($currentFrontendUser) {
+			if ($newFrontendUser) {
+				// Do not process properties on a plain new object,
+				// as no new properties are given. If you do process it,
+				// default properties are used for overriding in array_merge
+				// and you will never leave step 0.
+				$properties = array_filter(
+					$currentFrontendUser->_getPublicProperties(),
+					'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+				);
+			} else {
+				$properties = array_filter(
+						$currentFrontendUser->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				$propertiesToMerge = array_filter(
+						$frontendUser->_getPublicProperties(),
+						'\\Sozialinfo\\Jobs\\Utility\\FunctionUtility::isNotNull'
+					);
+				foreach($propertiesToMerge as $key => $value){
+					if(!is_object($value) AND $value != ''){
+						$properties[$key] = $value; 
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+						$tmp = $value->toArray();
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+					}elseif($value instanceof \Sozialinfo\Jobs\Domain\Model\CompanyFrontendUser) {
+						$tmp = (array) $value;
+						if(!empty($tmp)){
+							$properties[$key] = $value;		
+						}
+
+					}
+				}
+			}			
+			$frontendUser->_setProperties($properties);
+		}
+	}	
+
+
+
+
 }

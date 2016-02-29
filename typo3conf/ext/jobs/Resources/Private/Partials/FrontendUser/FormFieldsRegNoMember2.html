@@ -1,0 +1,69 @@
+{namespace h=Sozialinfo\Jobs\ViewHelpers}
+4test
+<label for="salutation">
+	<f:translate key="tx_jobs_domain_model_frontenduser.salutation" />
+</label><br />
+	<f:form.select name="salutation" options="{salutations}" optionValueField="key" optionLabelField="value" property="salutation" /><br />
+<label for="firstName">
+	<f:translate key="tx_jobs_domain_model_frontenduser.first_name" />
+</label><br />
+	<f:form.textfield property="firstName" /><br />
+<label for="lastName">
+	<f:translate key="tx_jobs_domain_model_frontenduser.last_name" />
+</label><br />
+	<f:form.textfield property="lastName" /><br />
+
+
+
+<label for="additive">
+	<f:translate key="tx_jobs_domain_model_frontenduser.additive" />
+</label><br />
+	<f:form.textfield property="additive" /><br />
+<label for="department">
+	<f:translate key="tx_jobs_domain_model_frontenduser.department" />
+</label><br />
+	<f:form.textfield property="department" /><br />
+<label for="address">
+	<f:translate key="tx_jobs_domain_model_frontenduser.address" />
+</label><br />
+	<f:form.textfield property="address" /><br />
+<label for="poBox">
+	<f:translate key="tx_jobs_domain_model_frontenduser.po_box" />
+</label><br />
+	<f:form.textfield property="poBox" /><br />
+<label for="zip">
+	<f:translate key="tx_jobs_domain_model_frontenduser.zip" />
+</label><br />
+	<f:form.textfield property="zip" /><br />
+<label for="city">
+	<f:translate key="tx_jobs_domain_model_frontenduser.city" />
+</label><br />
+	<f:form.textfield property="city" /><br />
+<label for="country">
+	<f:translate key="tx_jobs_domain_model_frontenduser.country" />
+</label><br />
+	<f:form.select name="country" options="{countries}" optionLabelField="title" property="country" /><br />
+<label for="telephone">
+	<f:translate key="tx_jobs_domain_model_frontenduser.telephone" />
+</label><br />
+	<f:form.textfield property="telephone" /><br />
+<label for="mobilephone">
+	<f:translate key="tx_jobs_domain_model_frontenduser.mobilephone" />
+</label><br />
+	<f:form.textfield property="mobilephone" /><br />
+
+
+
+
+
+<label for="corporate">
+	<f:translate key="tx_jobs_domain_model_frontenduser.corporate" />
+</label><br />
+	<h:form.upload property="corporate">
+		<f:if condition="{resource}">
+			<f:image image="{resource}" alt="" width="50"/>
+			<br /><br />
+		</f:if>
+	</h:form.upload>
+	<br />
+	<f:form.hidden property="step" value="2" />

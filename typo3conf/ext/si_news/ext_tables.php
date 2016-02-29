@@ -93,3 +93,7 @@ $GLOBALS['TCA']['tx_news_domain_model_news']['types']['Tx_SiNews_News']['showite
 $GLOBALS['TCA']['tx_news_domain_model_news']['types']['Tx_SiNews_News']['showitem'] .= 'id_adresse, id_author, hrsg, id_publisher, isbn, issn, edition, yearofpublicaition,';
 $GLOBALS['TCA']['tx_news_domain_model_news']['types']['Tx_SiNews_News']['showitem'] .= '--div--;LLL:EXT:si_news/Resources/Private/Language/locallang.xlf:tx_sinews_domain_model_news.tabspecification,';
 $GLOBALS['TCA']['tx_news_domain_model_news']['types']['Tx_SiNews_News']['showitem'] .= 'id_canton, id_category,date,keywords';
+
+
+
+

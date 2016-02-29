@@ -17,6 +17,18 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'Sozialinfo.' . $_EXTKEY,
+	'JobregistrationRegNoMember',
+	array(
+		'FrontendUser' => 'newRegNoMember, continueRegNoMember, createRegNoMember, previousRegNoMember, hydrateFromSessionRegNoMember, list, show, delete, edit, update, cancel',
+	),
+	// non-cacheable actions
+	array(
+		'FrontendUser' => 'newRegNoMember, continueRegNoMember, createRegNoMember, previousRegNoMember, hydrateFromSessionRegNoMember, list, show, delete, edit, update, cancel',
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Sozialinfo.' . $_EXTKEY,
 	'Jobuseradmin',
 	array(
 		'FrontendUser' => 'listUserSpecificData, edit, update, show',

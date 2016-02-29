@@ -1,0 +1,56 @@
+{namespace n=GeorgRinger\News\ViewHelpers}
+<f:layout name="General" />
+<!--
+	=====================
+		Templates/News/SearchForm.html
+-->
+
+<f:section name="content">
+    <div class="news-search-form">
+        <f:form object="{search}" name="search" pageUid="{settings.listPid}">
+            <fieldset>
+                <div class="form-group">
+                    <label for="news-subject"><f:translate key="search-subject" /></label>
+                    <f:form.textfield id="news-subject" property="subject" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <select class="form-control">
+                        <f:for each="{search.idInformationstype}" as="infotype">
+                                <option value="infotype.uid">{infotype.informationstype }</option>
+                        </f:for>
+                    </select>
+                </div>
+                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                    <f:for each="{search.idAreaofwork}" as="areas">
+                        <span class="col-md-6 col-lg-6"><input type="checkbox" value="areas.uid" />{areas.description}</span>
+                    </f:for>
+                </div>
+                <f:form.submit value="{f:translate(key:'search-start')}" class="btn btn-default"/>
+            </fieldset>
+        </f:form>
+    </div>
+
+    <f:if condition="{newssearch}">
+        <f:then>
+            <div class="news-search-result">
+                <f:if condition="{search}">
+                    <f:if condition="{news}">
+                        <f:then>
+                            <div class="count-msg">
+                                <f:translate key="search-text" arguments="{0:'{f:count(subject:news)}',1:search.subject}" />
+                            </div>
+                            <f:for each="{news}" as="newsItem">
+                                <f:render partial="List/Item" arguments="{newsItem: newsItem, settings:settings, className:className, view:'list'}" />
+                            </f:for>
+                        </f:then>
+                        <f:else>
+                            <div class="no-news-found">
+                                <f:translate key="search-noresult" />
+                            </div>
+                        </f:else>
+                    </f:if>
+                </f:if>
+            </div>
+        </f:then>
+    </f:if>
+</f:section>

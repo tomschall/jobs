@@ -1,0 +1,54 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+	<h1>New FrontendUser Registration No Member</h1>
+
+	<f:flashMessages />
+	<f:render partial="FormErrors" arguments="{object:FrontendUser}" />
+
+	<f:comment><f:debug title="FrontendUser">{frontendUser}</f:debug></f:comment>
+
+	<f:if condition="{frontendUser.processStep}==0">
+		<f:form action="continueRegNoMember" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
+			<f:render partial="FrontendUser/FormFieldsRegNoMember0" />
+			<f:form.submit value="Step 2" />
+		</f:form>
+		<f:link.action action="cancel">Abbrechen</f:link.action>	
+	</f:if>
+	
+	<f:if condition="{frontendUser.processStep}==1">
+		<f:form action="continueRegNoMember" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
+			<f:render partial="FrontendUser/FormFieldsRegNoMember1" />
+			<f:form.submit value="Step3" />
+		</f:form>
+		<f:link.action action="previousRegNoMember">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	
+	<f:if condition="{frontendUser.processStep}==2">
+		<f:form action="continueRegNoMember" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
+			<f:render partial="FrontendUser/FormFieldsRegNoMember2" arguments="{salutations:salutations,countries:countries}" />
+			<f:form.submit value="Speichern" />
+		</f:form>
+		<f:link.action action="previousRegNoMember">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+
+	<f:if condition="{frontendUser.processStep}==3">
+		<f:form action="continueRegNoMember" enctype="multipart/form-data" name="frontendUser" object="{frontendUser}">
+			<f:render partial="FrontendUser/FormFieldsRegNoMember3" />
+			<f:form.submit value="Weiter" />
+		</f:form>
+		<f:link.action action="previousRegNoMember">Zurück</f:link.action>		
+		<br /><br />
+		<f:link.action action="cancel">Abbrechen</f:link.action>
+		<br /><br />
+	</f:if>
+	
+	
+
+</f:section>

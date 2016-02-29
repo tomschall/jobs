@@ -92,9 +92,12 @@ $tmp_si_news_columns = array(
 		'exclude' => 0,
 		'label' => 'LLL:EXT:si_news/Resources/Private/Language/locallang_db.xlf:tx_sinews_domain_model_news.channels',
 		'config' => array(
-			'type' => 'input',
-			'size' => 4,
-			'eval' => 'int'
+			'type' => 'check',
+			'default' => 3,
+			'items' => array (
+				array('Newsletter', ''),
+				array('Newsletter für Member', ''),
+			),
 		)
 	),
 	'news' => array(
